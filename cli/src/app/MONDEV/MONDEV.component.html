@@ -1,0 +1,37 @@
+﻿<amexio-card [header] ="true" [footer] ="false">
+  <amexio-header>
+ <i class="fa " aria-hidden="True"></i> Устройство 
+  </amexio-header>
+  <amexio-body>
+	<amexio-tab-view  [closable]="false">
+		<amexio-tab  title="Описание"  [active]="true" >
+			<app-MONDEV_BDEVICES></app-MONDEV_BDEVICES>
+		</amexio-tab>
+		
+		<amexio-tab  title="Параметры соединения"  >
+			<app-MONDEV_CONNECT></app-MONDEV_CONNECT>
+		</amexio-tab>
+		
+		<amexio-tab  title="Договорные установки"  >
+			<app-MONDEV_CONTRACT></app-MONDEV_CONTRACT>
+		</amexio-tab>
+		
+		<amexio-tab  title="План опроса устройств"  >
+			<app-MONDEV_PLANCALL></app-MONDEV_PLANCALL>
+		</amexio-tab>
+		
+		<amexio-tab  title="Граничные значения"  >
+			<app-MONDEV_VALUEBOUNDS></app-MONDEV_VALUEBOUNDS>
+		</amexio-tab>
+		
+		<amexio-tab  title="Отчеты"  >
+			<app-MONDEV_REPORTS></app-MONDEV_REPORTS>
+		</amexio-tab>
+		
+		<amexio-tab  title="Параметры для вывода"  >
+			<app-MONDEV_MASK></app-MONDEV_MASK>
+		</amexio-tab>
+		
+	</amexio-tab-view>
+  </amexio-body>
+</amexio-card>

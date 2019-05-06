@@ -1,0 +1,160 @@
+﻿<!--Error dialogue-->
+<amexio-window [show-window]="errorFlag"
+               [header]="true"
+			   [footer]="true"
+			   [closable]="false"
+               >
+	<amexio-header>
+        <i class="fa fa-exclamation-triangle"></i> Ошибка
+      </amexio-header>
+	   <amexio-body>
+        <amexio-row>
+          <amexio-column [size]="11">
+		  <span style="color:red">{{errorMessage}}</span>
+		  </amexio-column>
+        </amexio-row>
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="11"> 
+     <amexio-button  [label]="'Ok'" (onClick)="errorFlag=false" [type]="'red'" [tooltip]="'Ok'" [icon]="'fa fa-exclamation-triangle'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window>
+<!-- edit row pane -->	 
+ <amexio-window [closable]="false" [vertical-position]="'top'"  [horizontal-position]="'right'" [body-height]="90" [show-window]="opened" [header]="true" [footer]="true" > 
+	  <amexio-header> 
+        {{formMsg}} Данные::Объемы 
+<amexio-box *ngIf="valid==false" border-color ="red" border="all" padding="true" background-color="yellow">
+	<amexio-label font-color="red"  border="bottom">Ошибка заполнения формы</amexio-label>
+</amexio-box>
+      </amexio-header> 
+     <amexio-body> 
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Объемный расход воды по каналу 1'" name ="V1" 
+                    [place-holder]="'Объемный расход воды по каналу 1'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_V.V1"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Объемный расход воды по каналу 2'" name ="V2" 
+                    [place-holder]="'Объемный расход воды по каналу 2'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_V.V2"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Объемный расход воды по каналу 3'" name ="V3" 
+                    [place-holder]="'Объемный расход воды по каналу 3'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_V.V3"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Объемный расход воды по каналу 4'" name ="V4" 
+                    [place-holder]="'Объемный расход воды по каналу 4'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_V.V4"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Объемный расход воды по каналу 5'" name ="V5" 
+                    [place-holder]="'Объемный расход воды по каналу 5'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_V.V5"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Объемный расход воды по каналу 6'" name ="V6" 
+                    [place-holder]="'Объемный расход воды по каналу 6'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_V.V6"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Разность объемов канал 1  (расход ГВС)'" name ="DV12" 
+                    [place-holder]="'Разность объемов канал 1  (расход ГВС)'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_V.DV12"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Разность объемов канал 2'" name ="DV45" 
+                    [place-holder]="'Разность объемов канал 2'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_V.DV45"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="12"> 
+     <amexio-button  [label]="'Отмена'" (onClick)="opened = false;  refreshDATA_V();" [type]="'secondary'" [tooltip]="'Отмена'" [icon]="'fa fa-times'"></amexio-button>
+     <amexio-button  [label]="'Сохранить'" (onClick)="save(currentDATA_V)" [type]="'success'" [tooltip]="'Сохранить'" [icon]="'fa fa-save'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window> 
+   
+<!-- list Of row pane --> 
+<amexio-card [show]="true" [header] ="true" [footer] ="false" > 
+    <amexio-header> 
+	<amexio-row> 
+		<amexio-column size="12" > 
+		<amexio-button [disabled]="AppService.LastDATA_RECORD.DATA_RECORDId==null" [label]="'Создать'" [type]="'secondary'" [tooltip]="'Создать новую запись'" [icon]="'fa fa-plus'" (onClick)="onNew()"></amexio-button>
+		<amexio-button [disabled]="currentDATA_V.DATA_VId==null" [label]="'Изменить'" (onClick)="onEdit(currentDATA_V)" [type]="'secondary'" [tooltip]="'Изменить запись'" [icon]="'fa fa-edit'"></amexio-button>
+     <amexio-button [disabled]="currentDATA_V.DATA_VId==null" [label]="'Удалить'" (onClick)="onDelete(currentDATA_V)" [type]="'secondary'" [tooltip]="'Удалить запись'" [icon]="'fa fa-trash'"></amexio-button>
+     <amexio-button  [label]="'Обновить'" (onClick)="refreshDATA_V()" [type]="'secondary'" [tooltip]="'Обновить данные'" [icon]="'fa fa-refresh'"></amexio-button>
+		</amexio-column>
+	</amexio-row> 
+	</amexio-header> 
+	<amexio-body> 
+		<amexio-datagrid 
+		  [title]="'Данные::Объемы'" 
+		  [page-size] = "10" 
+		  [enable-data-filter]="false" 
+		  [enable-checkbox]="false" 
+		  [data]="DATA_VArray" 
+		  (selectedRowData)="onSelect($event)" 
+		  (rowSelect)="onSelect($event)"> 
+		  <amexio-data-table-column [data-index]="'V1'" [data-type]="'number'" [hidden]="false" [text]="'Объемный расход воды по каналу 1'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'V2'" [data-type]="'number'" [hidden]="false" [text]="'Объемный расход воды по каналу 2'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'V3'" [data-type]="'number'" [hidden]="false" [text]="'Объемный расход воды по каналу 3'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'V4'" [data-type]="'number'" [hidden]="false" [text]="'Объемный расход воды по каналу 4'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'V5'" [data-type]="'number'" [hidden]="false" [text]="'Объемный расход воды по каналу 5'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'V6'" [data-type]="'number'" [hidden]="false" [text]="'Объемный расход воды по каналу 6'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'DV12'" [data-type]="'number'" [hidden]="false" [text]="'Разность объемов канал 1  (расход ГВС)'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'DV45'" [data-type]="'number'" [hidden]="false" [text]="'Разность объемов канал 2'"></amexio-data-table-column> 
+		</amexio-datagrid> 
+	</amexio-body> 
+</amexio-card> 
+ 
+<!-- confirm delete  dialog -->  
+<amexio-window  [(show-window)]="confirmOpened" [closable]="false" [header]="true" [footer]="true" >  
+     
+    <amexio-header>
+Удалить строку:  Данные::Объемы ?
+    </amexio-header> 
+    <amexio-body> 
+            Удалить запись: {{ ( (currentDATA_V.V1 +'; '+  currentDATA_V.V2||'').length >100 ? (currentDATA_V.V1 +'; '+  currentDATA_V.V2||'').substr(0,100)+'...' : (currentDATA_V.V1 +'; '+  currentDATA_V.V2||'')) | removehtmltag }}?  
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="12"> 
+     <amexio-button  [label]="'Отмена'" (onClick)="confirmOpened = false" [type]="'secondary'" [tooltip]="'Отмена'" [icon]="'fa fa-times'"></amexio-button>
+     <amexio-button  [label]="'Удалить'" (onClick)="onConfirmDeletion()" [type]="'danger'" [tooltip]="'Удалить'" [icon]="'fa fa-trash'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window> 
+ 

@@ -1,0 +1,71 @@
+﻿ { 
+  "data":[ 
+	{ 
+	"text": "Home", 
+	"icon" : "fa fa-home fa-fw fa-lg", 
+	"mdbIcon" : "home", 
+	"routerLink" : "/home", 
+	"selected":true 
+	} 
+	,{ 
+	  "text": "Данные", 
+	  "icon" : "fa  fa-fw", 
+	  "routerLink" : "/DATA" 
+	} 
+	,{ 
+	  "text": "Запрос на обработку", 
+	  "icon" : "fa  fa-fw", 
+	  "routerLink" : "/MONQ" 
+	} 
+	,{ 
+	  "text": "Интерфейс", 
+	  "icon" : "fa icon-application_side_tree fa-fw", 
+	  "routerLink" : "/MONFACE" 
+	} 
+	,{ 
+	  "text": "Настройка роли", 
+	  "icon" : "fa icon-folder_user fa-fw", 
+	  "routerLink" : "/MONRCFG" 
+	} 
+	,{ 
+	  "text": "Организация", 
+	  "icon" : "fa  fa-fw", 
+	  "routerLink" : "/moncli" 
+	} 
+	,{ 
+	  "text": "Роль сотрудника", 
+	  "icon" : "fa icon-chart_org_inverted fa-fw", 
+	  "routerLink" : "/MONROLE" 
+	} 
+	,{ 
+	  "text": "Сервер", 
+	  "icon" : "fa  fa-fw", 
+	  "routerLink" : "/MONSRV" 
+	} 
+	,{ 
+	  "text": "Сотрудник", 
+	  "icon" : "fa icon-user fa-fw", 
+	  "routerLink" : "/MONUSR" 
+	} 
+	,{ 
+	  "text": "Справочник", 
+	  "icon" : "fa  fa-fw", 
+	  "routerLink" : "/MOND" 
+	} 
+	,{ 
+	  "text": "Схема подключения", 
+	  "icon" : "fa  fa-fw", 
+	  "routerLink" : "/MONSCH" 
+	} 
+	,{ 
+	  "text": "Узел", 
+	  "icon" : "fa  fa-fw", 
+	  "routerLink" : "/MONNODE" 
+	} 
+	,{ 
+	  "text": "Устройство", 
+	  "icon" : "fa  fa-fw", 
+	  "routerLink" : "/MONDEV" 
+	} 
+	] 
+} 

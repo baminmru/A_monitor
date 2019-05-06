@@ -1,0 +1,160 @@
+﻿<!--Error dialogue-->
+<amexio-window [show-window]="errorFlag"
+               [header]="true"
+			   [footer]="true"
+			   [closable]="false"
+               >
+	<amexio-header>
+        <i class="fa fa-exclamation-triangle"></i> Ошибка
+      </amexio-header>
+	   <amexio-body>
+        <amexio-row>
+          <amexio-column [size]="11">
+		  <span style="color:red">{{errorMessage}}</span>
+		  </amexio-column>
+        </amexio-row>
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="11"> 
+     <amexio-button  [label]="'Ok'" (onClick)="errorFlag=false" [type]="'red'" [tooltip]="'Ok'" [icon]="'fa fa-exclamation-triangle'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window>
+<!-- edit row pane -->	 
+ <amexio-window [closable]="false" [vertical-position]="'top'"  [horizontal-position]="'right'" [body-height]="90" [show-window]="opened" [header]="true" [footer]="true" > 
+	  <amexio-header> 
+        {{formMsg}} Данные::Массы 
+<amexio-box *ngIf="valid==false" border-color ="red" border="all" padding="true" background-color="yellow">
+	<amexio-label font-color="red"  border="bottom">Ошибка заполнения формы</amexio-label>
+</amexio-box>
+      </amexio-header> 
+     <amexio-body> 
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Масса воды по каналу 1'" name ="M1" 
+                    [place-holder]="'Масса воды по каналу 1'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_M.M1"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Масса воды по каналу 2'" name ="M2" 
+                    [place-holder]="'Масса воды по каналу 2'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_M.M2"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Масса воды по каналу 3'" name ="M3" 
+                    [place-holder]="'Масса воды по каналу 3'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_M.M3"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Масса воды по каналу 4'" name ="M4" 
+                    [place-holder]="'Масса воды по каналу 4'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_M.M4"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Масса воды по каналу 5'" name ="M5" 
+                    [place-holder]="'Масса воды по каналу 5'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_M.M5"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Масса воды по каналу 6'" name ="M6" 
+                    [place-holder]="'Масса воды по каналу 6'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_M.M6"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Разность масс канал 2'" name ="DM45" 
+                    [place-holder]="'Разность масс канал 2'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_M.DM45"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Разность масс канал 1  (расход ГВС)'" name ="DM12" 
+                    [place-holder]="'Разность масс канал 1  (расход ГВС)'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_M.DM12"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="12"> 
+     <amexio-button  [label]="'Отмена'" (onClick)="opened = false;  refreshDATA_M();" [type]="'secondary'" [tooltip]="'Отмена'" [icon]="'fa fa-times'"></amexio-button>
+     <amexio-button  [label]="'Сохранить'" (onClick)="save(currentDATA_M)" [type]="'success'" [tooltip]="'Сохранить'" [icon]="'fa fa-save'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window> 
+   
+<!-- list Of row pane --> 
+<amexio-card [show]="true" [header] ="true" [footer] ="false" > 
+    <amexio-header> 
+	<amexio-row> 
+		<amexio-column size="12" > 
+		<amexio-button [disabled]="AppService.LastDATA_RECORD.DATA_RECORDId==null" [label]="'Создать'" [type]="'secondary'" [tooltip]="'Создать новую запись'" [icon]="'fa fa-plus'" (onClick)="onNew()"></amexio-button>
+		<amexio-button [disabled]="currentDATA_M.DATA_MId==null" [label]="'Изменить'" (onClick)="onEdit(currentDATA_M)" [type]="'secondary'" [tooltip]="'Изменить запись'" [icon]="'fa fa-edit'"></amexio-button>
+     <amexio-button [disabled]="currentDATA_M.DATA_MId==null" [label]="'Удалить'" (onClick)="onDelete(currentDATA_M)" [type]="'secondary'" [tooltip]="'Удалить запись'" [icon]="'fa fa-trash'"></amexio-button>
+     <amexio-button  [label]="'Обновить'" (onClick)="refreshDATA_M()" [type]="'secondary'" [tooltip]="'Обновить данные'" [icon]="'fa fa-refresh'"></amexio-button>
+		</amexio-column>
+	</amexio-row> 
+	</amexio-header> 
+	<amexio-body> 
+		<amexio-datagrid 
+		  [title]="'Данные::Массы'" 
+		  [page-size] = "10" 
+		  [enable-data-filter]="false" 
+		  [enable-checkbox]="false" 
+		  [data]="DATA_MArray" 
+		  (selectedRowData)="onSelect($event)" 
+		  (rowSelect)="onSelect($event)"> 
+		  <amexio-data-table-column [data-index]="'M1'" [data-type]="'number'" [hidden]="false" [text]="'Масса воды по каналу 1'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'M2'" [data-type]="'number'" [hidden]="false" [text]="'Масса воды по каналу 2'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'M3'" [data-type]="'number'" [hidden]="false" [text]="'Масса воды по каналу 3'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'M4'" [data-type]="'number'" [hidden]="false" [text]="'Масса воды по каналу 4'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'M5'" [data-type]="'number'" [hidden]="false" [text]="'Масса воды по каналу 5'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'M6'" [data-type]="'number'" [hidden]="false" [text]="'Масса воды по каналу 6'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'DM45'" [data-type]="'number'" [hidden]="false" [text]="'Разность масс канал 2'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'DM12'" [data-type]="'number'" [hidden]="false" [text]="'Разность масс канал 1  (расход ГВС)'"></amexio-data-table-column> 
+		</amexio-datagrid> 
+	</amexio-body> 
+</amexio-card> 
+ 
+<!-- confirm delete  dialog -->  
+<amexio-window  [(show-window)]="confirmOpened" [closable]="false" [header]="true" [footer]="true" >  
+     
+    <amexio-header>
+Удалить строку:  Данные::Массы ?
+    </amexio-header> 
+    <amexio-body> 
+            Удалить запись: {{ ( (currentDATA_M.M1 +'; '+  currentDATA_M.M2||'').length >100 ? (currentDATA_M.M1 +'; '+  currentDATA_M.M2||'').substr(0,100)+'...' : (currentDATA_M.M1 +'; '+  currentDATA_M.M2||'')) | removehtmltag }}?  
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="12"> 
+     <amexio-button  [label]="'Отмена'" (onClick)="confirmOpened = false" [type]="'secondary'" [tooltip]="'Отмена'" [icon]="'fa fa-times'"></amexio-button>
+     <amexio-button  [label]="'Удалить'" (onClick)="onConfirmDeletion()" [type]="'danger'" [tooltip]="'Удалить'" [icon]="'fa fa-trash'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window> 
+ 

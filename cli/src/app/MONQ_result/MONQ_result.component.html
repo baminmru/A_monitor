@@ -1,0 +1,157 @@
+﻿<!--Error dialogue-->
+<amexio-window [show-window]="errorFlag"
+               [header]="true"
+			   [footer]="true"
+			   [closable]="false"
+               >
+	<amexio-header>
+        <i class="fa fa-exclamation-triangle"></i> Ошибка
+      </amexio-header>
+	   <amexio-body>
+        <amexio-row>
+          <amexio-column [size]="11">
+		  <span style="color:red">{{errorMessage}}</span>
+		  </amexio-column>
+        </amexio-row>
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="11"> 
+     <amexio-button  [label]="'Ok'" (onClick)="errorFlag=false" [type]="'red'" [tooltip]="'Ok'" [icon]="'fa fa-exclamation-triangle'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window>
+<!-- edit row pane -->	 
+ <amexio-window [closable]="false" [vertical-position]="'top'"  [horizontal-position]="'right'" [body-height]="90" [show-window]="opened" [header]="true" [footer]="true" > 
+	  <amexio-header> 
+        {{formMsg}} Запрос на обработку::Результат обработки 
+<amexio-box *ngIf="valid==false" border-color ="red" border="all" padding="true" background-color="yellow">
+	<amexio-label font-color="red"  border="bottom">Ошибка заполнения формы</amexio-label>
+</amexio-box>
+      </amexio-header> 
+     <amexio-body> 
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Текстовый результат'" name ="TextResult"  
+                    [place-holder] = "'Текстовый результат'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONQ_result.TextResult" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+	 <amexio-dropdown 
+	 [place-holder] = "'Запись '"
+	 name ="RecArch"
+	 [field-label]= "'Запись '"
+            [allow-blank]="false" [error-msg] ="'Не задано: Запись '" 
+	 
+	 [display-field]="'name'"
+	 [value-field]="'id'"
+	 [data]="AppService.ComboDATA_RECORD"
+	 
+	 [(ngModel)]="currentMONQ_result.RecArch"
+	 >
+  </amexio-dropdown>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+<amexio-dropdown 
+	 [field-label]="'Обработан с ошибкой'" name ="IsError" 
+                    [place-holder]="'Обработан с ошибкой'" 
+	 [(ngModel)]="currentMONQ_result.IsError"
+            [allow-blank]="false" [error-msg] ="'Не задано: Обработан с ошибкой'" 
+	 [display-field]="'name'"
+	 [value-field]="'id'"
+	 [data]="AppService.enumBooleanCombo()"
+	 >
+</amexio-dropdown>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+<amexio-label>Протокол</amexio-label>
+<ngx-wig  
+ [(ngModel)]="currentMONQ_result.LogMessage"
+ [placeholder]="'Протокол'" 
+ [buttons]="'bold,italic,link,list1,list2'">
+</ngx-wig>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+  <amexio-date-time-picker   [field-label]="'Время начала обработки'" 
+        [time-picker]="true"  
+        [date-picker]="true"  
+        [(ngModel)]="currentMONQ_result.StartTime"> 
+ </amexio-date-time-picker> 
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+  <amexio-date-time-picker   [field-label]="'Время завершения обработки'" 
+        [time-picker]="true"  
+        [date-picker]="true"  
+        [(ngModel)]="currentMONQ_result.EndTime"> 
+ </amexio-date-time-picker> 
+     </amexio-column></amexio-row>
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="12"> 
+     <amexio-button  [label]="'Отмена'" (onClick)="opened = false;  refreshMONQ_result();" [type]="'secondary'" [tooltip]="'Отмена'" [icon]="'fa fa-times'"></amexio-button>
+     <amexio-button  [label]="'Сохранить'" (onClick)="save(currentMONQ_result)" [type]="'success'" [tooltip]="'Сохранить'" [icon]="'fa fa-save'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window> 
+   
+<!-- list Of row pane --> 
+<amexio-card [show]="true" [header] ="true" [footer] ="false" > 
+    <amexio-header> 
+	<amexio-row> 
+		<amexio-column size="12" > 
+		<amexio-button [disabled]="AppService.LastMONQ_DEF.MONQ_DEFId==null" [label]="'Создать'" [type]="'secondary'" [tooltip]="'Создать новую запись'" [icon]="'fa fa-plus'" (onClick)="onNew()"></amexio-button>
+		<amexio-button [disabled]="currentMONQ_result.MONQ_resultId==null" [label]="'Изменить'" (onClick)="onEdit(currentMONQ_result)" [type]="'secondary'" [tooltip]="'Изменить запись'" [icon]="'fa fa-edit'"></amexio-button>
+     <amexio-button [disabled]="currentMONQ_result.MONQ_resultId==null" [label]="'Удалить'" (onClick)="onDelete(currentMONQ_result)" [type]="'secondary'" [tooltip]="'Удалить запись'" [icon]="'fa fa-trash'"></amexio-button>
+     <amexio-button  [label]="'Обновить'" (onClick)="refreshMONQ_result()" [type]="'secondary'" [tooltip]="'Обновить данные'" [icon]="'fa fa-refresh'"></amexio-button>
+		</amexio-column>
+	</amexio-row> 
+	</amexio-header> 
+	<amexio-body> 
+		<amexio-datagrid 
+		  [title]="'Запрос на обработку::Результат обработки'" 
+		  [page-size] = "10" 
+		  [enable-data-filter]="false" 
+		  [enable-checkbox]="false" 
+		  [data]="MONQ_resultArray" 
+		  (selectedRowData)="onSelect($event)" 
+		  (rowSelect)="onSelect($event)"> 
+		  <amexio-data-table-column [data-index]="'TextResult'" [data-type]="'string'" [hidden]="false" [text]="'Текстовый результат'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.TextResult) ? ((row.TextResult.length>100) ? row.TextResult.substr(0,100)+'...' : row.TextResult ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'RecArch_name'" [data-type]="'string'" [hidden]="false" [text]="'Запись '"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'IsError_name'" [data-type]="'string'" [hidden]="false" [text]="'Обработан с ошибкой'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'LogMessage'" [data-type]="'string'" [hidden]="false" [text]="'Протокол'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.LogMessage) ? ((row.LogMessage.length>100) ? row.LogMessage.substr(0,100)+'...' : row.LogMessage ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'StartTime'" [data-type]="'string'" [hidden]="false" [text]="'Время начала обработки'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'EndTime'" [data-type]="'string'" [hidden]="false" [text]="'Время завершения обработки'"></amexio-data-table-column> 
+		</amexio-datagrid> 
+	</amexio-body> 
+</amexio-card> 
+ 
+<!-- confirm delete  dialog -->  
+<amexio-window  [(show-window)]="confirmOpened" [closable]="false" [header]="true" [footer]="true" >  
+     
+    <amexio-header>
+Удалить строку:  Запрос на обработку::Результат обработки ?
+    </amexio-header> 
+    <amexio-body> 
+            Удалить запись: {{ ( (currentMONQ_result.TextResult||'').length >100 ? (currentMONQ_result.TextResult||'').substr(0,100)+'...' : (currentMONQ_result.TextResult||'')) | removehtmltag }}?  
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="12"> 
+     <amexio-button  [label]="'Отмена'" (onClick)="confirmOpened = false" [type]="'secondary'" [tooltip]="'Отмена'" [icon]="'fa fa-times'"></amexio-button>
+     <amexio-button  [label]="'Удалить'" (onClick)="onConfirmDeletion()" [type]="'danger'" [tooltip]="'Удалить'" [icon]="'fa fa-trash'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window> 
+ 

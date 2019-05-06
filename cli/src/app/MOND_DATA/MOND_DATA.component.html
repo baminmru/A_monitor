@@ -1,0 +1,99 @@
+﻿<!--Error dialogue-->
+<amexio-window [show-window]="errorFlag"
+               [header]="true"
+			   [footer]="true"
+			   [closable]="false"
+               >
+	<amexio-header>
+        <i class="fa fa-exclamation-triangle"></i> Ошибка
+      </amexio-header>
+	   <amexio-body>
+        <amexio-row>
+          <amexio-column [size]="11">
+		  <span style="color:red">{{errorMessage}}</span>
+		  </amexio-column>
+        </amexio-row>
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="11"> 
+     <amexio-button  [label]="'Ok'" (onClick)="errorFlag=false" [type]="'red'" [tooltip]="'Ok'" [icon]="'fa fa-exclamation-triangle'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window>
+<!-- edit row pane -->	 
+ <amexio-window [closable]="false" [vertical-position]="'top'"  [horizontal-position]="'right'" [body-height]="90" [show-window]="opened" [header]="true" [footer]="true" > 
+	  <amexio-header> 
+        {{formMsg}} Справочник::Раздел данных 
+<amexio-box *ngIf="valid==false" border-color ="red" border="all" padding="true" background-color="yellow">
+	<amexio-label font-color="red"  border="bottom">Ошибка заполнения формы</amexio-label>
+</amexio-box>
+      </amexio-header> 
+     <amexio-body> 
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Название'" name ="name"  
+                    [place-holder] = "'Название'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMOND_DATA.name" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="12"> 
+     <amexio-button  [label]="'Отмена'" (onClick)="opened = false;  refreshMOND_DATA();" [type]="'secondary'" [tooltip]="'Отмена'" [icon]="'fa fa-times'"></amexio-button>
+     <amexio-button  [label]="'Сохранить'" (onClick)="save(currentMOND_DATA)" [type]="'success'" [tooltip]="'Сохранить'" [icon]="'fa fa-save'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window> 
+   
+<!-- list Of row pane --> 
+<amexio-card [show]="true" [header] ="true" [footer] ="false" > 
+    <amexio-header> 
+	<amexio-row> 
+		<amexio-column size="12" > 
+		<amexio-button [label]="'Создать'" [type]="'secondary'" [tooltip]="'Создать новую запись'" [icon]="'fa fa-plus'" (onClick)="onNew()"></amexio-button>
+		<amexio-button [disabled]="currentMOND_DATA.MOND_DATAId==null" [label]="'Изменить'" (onClick)="onEdit(currentMOND_DATA)" [type]="'secondary'" [tooltip]="'Изменить запись'" [icon]="'fa fa-edit'"></amexio-button>
+     <amexio-button [disabled]="currentMOND_DATA.MOND_DATAId==null" [label]="'Удалить'" (onClick)="onDelete(currentMOND_DATA)" [type]="'secondary'" [tooltip]="'Удалить запись'" [icon]="'fa fa-trash'"></amexio-button>
+     <amexio-button  [label]="'Обновить'" (onClick)="refreshMOND_DATA()" [type]="'secondary'" [tooltip]="'Обновить данные'" [icon]="'fa fa-refresh'"></amexio-button>
+		</amexio-column>
+	</amexio-row> 
+	</amexio-header> 
+	<amexio-body> 
+		<amexio-datagrid 
+		  [title]="'Справочник::Раздел данных'" 
+		  [page-size] = "10" 
+		  [enable-data-filter]="false" 
+		  [enable-checkbox]="false" 
+		  [data]="MOND_DATAArray" 
+		  (selectedRowData)="onSelect($event)" 
+		  (rowSelect)="onSelect($event)"> 
+		  <amexio-data-table-column [data-index]="'name'" [data-type]="'string'" [hidden]="false" [text]="'Название'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.name) ? ((row.name.length>100) ? row.name.substr(0,100)+'...' : row.name ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		</amexio-datagrid> 
+	</amexio-body> 
+</amexio-card> 
+ 
+<!-- confirm delete  dialog -->  
+<amexio-window  [(show-window)]="confirmOpened" [closable]="false" [header]="true" [footer]="true" >  
+     
+    <amexio-header>
+Удалить строку:  Справочник::Раздел данных ?
+    </amexio-header> 
+    <amexio-body> 
+            Удалить запись: {{ ( (currentMOND_DATA.name||'').length >100 ? (currentMOND_DATA.name||'').substr(0,100)+'...' : (currentMOND_DATA.name||'')) | removehtmltag }}?  
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="12"> 
+     <amexio-button  [label]="'Отмена'" (onClick)="confirmOpened = false" [type]="'secondary'" [tooltip]="'Отмена'" [icon]="'fa fa-times'"></amexio-button>
+     <amexio-button  [label]="'Удалить'" (onClick)="onConfirmDeletion()" [type]="'danger'" [tooltip]="'Удалить'" [icon]="'fa fa-trash'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window> 
+ 

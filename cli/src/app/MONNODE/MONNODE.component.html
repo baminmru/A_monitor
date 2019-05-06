@@ -1,0 +1,17 @@
+﻿<amexio-card [header] ="true" [footer] ="false">
+  <amexio-header>
+ <i class="fa " aria-hidden="True"></i> Узел 
+  </amexio-header>
+  <amexio-body>
+	<amexio-tab-view  [closable]="false">
+		<amexio-tab  title="Описание"  [active]="true" >
+			<app-MONN_DEF></app-MONN_DEF>
+		</amexio-tab>
+		
+		<amexio-tab  title="Координаты"  >
+			<app-MONN_LATLON></app-MONN_LATLON>
+		</amexio-tab>
+		
+	</amexio-tab-view>
+  </amexio-body>
+</amexio-card>

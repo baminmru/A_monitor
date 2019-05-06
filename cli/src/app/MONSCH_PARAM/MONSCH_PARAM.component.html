@@ -1,0 +1,164 @@
+﻿<!--Error dialogue-->
+<amexio-window [show-window]="errorFlag"
+               [header]="true"
+			   [footer]="true"
+			   [closable]="false"
+               >
+	<amexio-header>
+        <i class="fa fa-exclamation-triangle"></i> Ошибка
+      </amexio-header>
+	   <amexio-body>
+        <amexio-row>
+          <amexio-column [size]="11">
+		  <span style="color:red">{{errorMessage}}</span>
+		  </amexio-column>
+        </amexio-row>
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="11"> 
+     <amexio-button  [label]="'Ok'" (onClick)="errorFlag=false" [type]="'red'" [tooltip]="'Ok'" [icon]="'fa fa-exclamation-triangle'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window>
+<!-- edit row pane -->	 
+ <amexio-window [closable]="false" [vertical-position]="'top'"  [horizontal-position]="'right'" [body-height]="90" [show-window]="opened" [header]="true" [footer]="true" > 
+	  <amexio-header> 
+        {{formMsg}} Схема подключения::Параметры на схеме 
+<amexio-box *ngIf="valid==false" border-color ="red" border="all" padding="true" background-color="yellow">
+	<amexio-label font-color="red"  border="bottom">Ошибка заполнения формы</amexio-label>
+</amexio-box>
+      </amexio-header> 
+     <amexio-body> 
+     <amexio-row><amexio-column size="12" >
+	 <amexio-dropdown 
+	 [place-holder] = "'Тип архива'"
+	 name ="ArchType"
+	 [field-label]= "'Тип архива'"
+            [allow-blank]="false" [error-msg] ="'Не задано: Тип архива'" 
+	 
+	 [display-field]="'name'"
+	 [value-field]="'id'"
+	 [data]="AppService.ComboMOND_ATYPE"
+	 
+	 [(ngModel)]="currentMONSCH_PARAM.ArchType"
+	 >
+  </amexio-dropdown>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+	 <amexio-dropdown 
+	 [place-holder] = "'Параметр'"
+	 name ="Param"
+	 [field-label]= "'Параметр'"
+            [allow-blank]="false" [error-msg] ="'Не задано: Параметр'" 
+	 
+	 [display-field]="'name'"
+	 [value-field]="'id'"
+	 [data]="AppService.ComboMOND_PARAM"
+	 
+	 [(ngModel)]="currentMONSCH_PARAM.Param"
+	 >
+  </amexio-dropdown>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'X'" name ="POS_LEFT" 
+                    [place-holder]="'X'" 
+            [allow-blank]="false" [error-msg] ="'Не задано: X'" 
+	 [(ngModel)]="currentMONSCH_PARAM.POS_LEFT"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Y'" name ="POS_TOP" 
+                    [place-holder]="'Y'" 
+            [allow-blank]="false" [error-msg] ="'Не задано: Y'" 
+	 [(ngModel)]="currentMONSCH_PARAM.POS_TOP"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+<amexio-dropdown 
+	 [field-label]="'Скрыть'" name ="HIDEPARAM" 
+                    [place-holder]="'Скрыть'" 
+	 [(ngModel)]="currentMONSCH_PARAM.HIDEPARAM"
+            [allow-blank]="false" [error-msg] ="'Не задано: Скрыть'" 
+	 [display-field]="'name'"
+	 [value-field]="'id'"
+	 [data]="AppService.enumBooleanCombo()"
+	 >
+</amexio-dropdown>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+<amexio-dropdown 
+	 [field-label]="'Не отображать на схеме'" name ="HideOnSchema" 
+                    [place-holder]="'Не отображать на схеме'" 
+	 [(ngModel)]="currentMONSCH_PARAM.HideOnSchema"
+            [allow-blank]="false" [error-msg] ="'Не задано: Не отображать на схеме'" 
+	 [display-field]="'name'"
+	 [value-field]="'id'"
+	 [data]="AppService.enumBooleanCombo()"
+	 >
+</amexio-dropdown>
+     </amexio-column></amexio-row>
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="12"> 
+     <amexio-button  [label]="'Отмена'" (onClick)="opened = false;  refreshMONSCH_PARAM();" [type]="'secondary'" [tooltip]="'Отмена'" [icon]="'fa fa-times'"></amexio-button>
+     <amexio-button  [label]="'Сохранить'" (onClick)="save(currentMONSCH_PARAM)" [type]="'success'" [tooltip]="'Сохранить'" [icon]="'fa fa-save'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window> 
+   
+<!-- list Of row pane --> 
+<amexio-card [show]="true" [header] ="true" [footer] ="false" > 
+    <amexio-header> 
+	<amexio-row> 
+		<amexio-column size="12" > 
+		<amexio-button [disabled]="AppService.LastMONSCH_INFO.MONSCH_INFOId==null" [label]="'Создать'" [type]="'secondary'" [tooltip]="'Создать новую запись'" [icon]="'fa fa-plus'" (onClick)="onNew()"></amexio-button>
+		<amexio-button [disabled]="currentMONSCH_PARAM.MONSCH_PARAMId==null" [label]="'Изменить'" (onClick)="onEdit(currentMONSCH_PARAM)" [type]="'secondary'" [tooltip]="'Изменить запись'" [icon]="'fa fa-edit'"></amexio-button>
+     <amexio-button [disabled]="currentMONSCH_PARAM.MONSCH_PARAMId==null" [label]="'Удалить'" (onClick)="onDelete(currentMONSCH_PARAM)" [type]="'secondary'" [tooltip]="'Удалить запись'" [icon]="'fa fa-trash'"></amexio-button>
+     <amexio-button  [label]="'Обновить'" (onClick)="refreshMONSCH_PARAM()" [type]="'secondary'" [tooltip]="'Обновить данные'" [icon]="'fa fa-refresh'"></amexio-button>
+		</amexio-column>
+	</amexio-row> 
+	</amexio-header> 
+	<amexio-body> 
+		<amexio-datagrid 
+		  [title]="'Схема подключения::Параметры на схеме'" 
+		  [page-size] = "10" 
+		  [enable-data-filter]="false" 
+		  [enable-checkbox]="false" 
+		  [data]="MONSCH_PARAMArray" 
+		  (selectedRowData)="onSelect($event)" 
+		  (rowSelect)="onSelect($event)"> 
+		  <amexio-data-table-column [data-index]="'ArchType_name'" [data-type]="'string'" [hidden]="false" [text]="'Тип архива'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'Param_name'" [data-type]="'string'" [hidden]="false" [text]="'Параметр'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'POS_LEFT'" [data-type]="'number'" [hidden]="false" [text]="'X'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'POS_TOP'" [data-type]="'number'" [hidden]="false" [text]="'Y'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'HIDEPARAM_name'" [data-type]="'string'" [hidden]="false" [text]="'Скрыть'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'HideOnSchema_name'" [data-type]="'string'" [hidden]="false" [text]="'Не отображать на схеме'"></amexio-data-table-column> 
+		</amexio-datagrid> 
+	</amexio-body> 
+</amexio-card> 
+ 
+<!-- confirm delete  dialog -->  
+<amexio-window  [(show-window)]="confirmOpened" [closable]="false" [header]="true" [footer]="true" >  
+     
+    <amexio-header>
+Удалить строку:  Схема подключения::Параметры на схеме ?
+    </amexio-header> 
+    <amexio-body> 
+            Удалить запись: {{ ( (currentMONSCH_PARAM.Param_name||'').length >100 ? (currentMONSCH_PARAM.Param_name||'').substr(0,100)+'...' : (currentMONSCH_PARAM.Param_name||'')) | removehtmltag }}?  
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="12"> 
+     <amexio-button  [label]="'Отмена'" (onClick)="confirmOpened = false" [type]="'secondary'" [tooltip]="'Отмена'" [icon]="'fa fa-times'"></amexio-button>
+     <amexio-button  [label]="'Удалить'" (onClick)="onConfirmDeletion()" [type]="'danger'" [tooltip]="'Удалить'" [icon]="'fa fa-trash'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window> 
+ 

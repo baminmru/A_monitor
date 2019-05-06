@@ -1,0 +1,38 @@
+﻿<!-- list Of row pane --> 
+<amexio-card [show]="true" [header] ="true" [footer] ="false" > 
+	<amexio-header> 
+
+</amexio-header> 
+<amexio-body> 
+	<amexio-datagrid 
+		[title]="'Данные'" 
+		[page-size] = "10" 
+		[enable-data-filter]="false" 
+		[enable-checkbox]="false" 
+		[data]="this.disp_Service.CurrentArchive" 
+		(selectedRowData)="onSelect($event)" 
+		(rowSelect)="onSelect($event)"> 
+		<amexio-data-table-column [data-index]="'name'" [data-type]="'string'" [hidden]="false" [text]="'Тип архива'"></amexio-data-table-column> 
+		<amexio-data-table-column [data-index]="'DCOUNTER'" [data-type]="'string'" [hidden]="false" [text]="'Дата счетчика'"></amexio-data-table-column> 
+		<amexio-data-table-column [data-index]="'dstart'" [data-type]="'string'" [hidden]="false" [text]="'Начало интервала'"></amexio-data-table-column> 
+		<amexio-data-table-column [data-index]="'dend'" [data-type]="'string'" [hidden]="false" [text]="'Конец интервала'"></amexio-data-table-column> 
+		<amexio-data-table-column [data-index]="'I1'" [data-type]="'number'" [hidden]="false" [text]="'I1'"></amexio-data-table-column> 
+		<amexio-data-table-column [data-index]="'I2'" [data-type]="'number'" [hidden]="false" [text]="'I2'"></amexio-data-table-column> 
+		<amexio-data-table-column [data-index]="'I3'" [data-type]="'number'" [hidden]="false" [text]="'I3'"></amexio-data-table-column> 
+		<amexio-data-table-column [data-index]="'U1'" [data-type]="'number'" [hidden]="false" [text]="'U1'"></amexio-data-table-column> 
+		<amexio-data-table-column [data-index]="'U2'" [data-type]="'number'" [hidden]="false" [text]="'U2'"></amexio-data-table-column> 
+		<amexio-data-table-column [data-index]="'U3'" [data-type]="'number'" [hidden]="false" [text]="'U3'"></amexio-data-table-column> 
+		<amexio-data-table-column [data-index]="'EP1'" [data-type]="'number'" [hidden]="false" [text]="'P1'"></amexio-data-table-column> 
+		<amexio-data-table-column [data-index]="'EP2'" [data-type]="'number'" [hidden]="false" [text]="'P2'"></amexio-data-table-column> 
+		<amexio-data-table-column [data-index]="'EP3'" [data-type]="'number'" [hidden]="false" [text]="'P3'"></amexio-data-table-column> 
+		<amexio-data-table-column [data-index]="'E1'" [data-type]="'number'" [hidden]="false" [text]="'T1'"></amexio-data-table-column> 
+		<amexio-data-table-column [data-index]="'E2'" [data-type]="'number'" [hidden]="false" [text]="'T2'"></amexio-data-table-column> 
+		<amexio-data-table-column [data-index]="'E3'" [data-type]="'number'" [hidden]="false" [text]="'T3'"></amexio-data-table-column> 
+		<amexio-data-table-column [data-index]="'AP'" [data-type]="'number'" [hidden]="false" [text]="'A+'"></amexio-data-table-column> 
+		<amexio-data-table-column [data-index]="'AM'" [data-type]="'number'" [hidden]="false" [text]="'A-'"></amexio-data-table-column> 
+		<amexio-data-table-column [data-index]="'RP'" [data-type]="'number'" [hidden]="false" [text]="'R+'"></amexio-data-table-column> 
+		<amexio-data-table-column [data-index]="'RM'" [data-type]="'number'" [hidden]="false" [text]="'R-'"></amexio-data-table-column> 
+
+	</amexio-datagrid> 
+</amexio-body> 
+</amexio-card> 

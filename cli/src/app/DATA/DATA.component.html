@@ -1,0 +1,57 @@
+﻿<amexio-card [header] ="true" [footer] ="false">
+  <amexio-header>
+ <i class="fa " aria-hidden="True"></i> Данные 
+  </amexio-header>
+  <amexio-body>
+	<amexio-tab-view  [closable]="false">
+		<amexio-tab  title="Запись"  [active]="true" >
+			<app-DATA_RECORD></app-DATA_RECORD>
+		</amexio-tab>
+		
+		<amexio-tab  title="Объемы"  >
+			<app-DATA_V></app-DATA_V>
+		</amexio-tab>
+		
+		<amexio-tab  title="Массы"  >
+			<app-DATA_M></app-DATA_M>
+		</amexio-tab>
+		
+		<amexio-tab  title="Температуры"  >
+			<app-DATA_T></app-DATA_T>
+		</amexio-tab>
+		
+		<amexio-tab  title="Давления"  >
+			<app-DATA_P></app-DATA_P>
+		</amexio-tab>
+		
+		<amexio-tab  title="Энергия"  >
+			<app-DATA_Q></app-DATA_Q>
+		</amexio-tab>
+		
+		<amexio-tab  title="Мощность"  >
+			<app-DATA_EP></app-DATA_EP>
+		</amexio-tab>
+		
+		<amexio-tab  title="Напряжение"  >
+			<app-DATA_U></app-DATA_U>
+		</amexio-tab>
+		
+		<amexio-tab  title="Ток"  >
+			<app-DATA_I></app-DATA_I>
+		</amexio-tab>
+		
+		<amexio-tab  title="Эл. Энергия"  >
+			<app-DATA_EQ></app-DATA_EQ>
+		</amexio-tab>
+		
+		<amexio-tab  title="Сообщения"  >
+			<app-DATA_MSG></app-DATA_MSG>
+		</amexio-tab>
+		
+		<amexio-tab  title="Времена"  >
+			<app-DATA_TIME></app-DATA_TIME>
+		</amexio-tab>
+		
+	</amexio-tab-view>
+  </amexio-body>
+</amexio-card>

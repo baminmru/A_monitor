@@ -1,0 +1,990 @@
+﻿<!--Error dialogue-->
+<amexio-window [show-window]="errorFlag"
+               [header]="true"
+			   [footer]="true"
+			   [closable]="false"
+               >
+	<amexio-header>
+        <i class="fa fa-exclamation-triangle"></i> Ошибка
+      </amexio-header>
+	   <amexio-body>
+        <amexio-row>
+          <amexio-column [size]="11">
+		  <span style="color:red">{{errorMessage}}</span>
+		  </amexio-column>
+        </amexio-row>
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="11"> 
+     <amexio-button  [label]="'Ok'" (onClick)="errorFlag=false" [type]="'red'" [tooltip]="'Ok'" [icon]="'fa fa-exclamation-triangle'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window>
+<!-- edit row pane -->	 
+ <amexio-window [closable]="false" [vertical-position]="'top'"  [horizontal-position]="'right'" [body-height]="90" [show-window]="opened" [header]="true" [footer]="true" > 
+	  <amexio-header> 
+        {{formMsg}} Устройство::Договорные установки 
+<amexio-box *ngIf="valid==false" border-color ="red" border="all" padding="true" background-color="yellow">
+	<amexio-label font-color="red"  border="bottom">Ошибка заполнения формы</amexio-label>
+</amexio-box>
+      </amexio-header> 
+     <amexio-body> 
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'№ прибора'" name ="FLD12"  
+                    [place-holder] = "'№ прибора'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD12" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'№ключа'" name ="FLD13"  
+                    [place-holder] = "'№ключа'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD13" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'D20ОБ'" name ="FLD14"  
+                    [place-holder] = "'D20ОБ'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD14" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'D20ПР'" name ="FLD15"  
+                    [place-holder] = "'D20ПР'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD15" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'DyГВС'" name ="FLD16"  
+                    [place-holder] = "'DyГВС'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD16" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'DyОБР'" name ="FLD17"  
+                    [place-holder] = "'DyОБР'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD17" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'DyПР'" name ="FLD18"  
+                    [place-holder] = "'DyПР'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD18" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'dРпрОБ'" name ="FLD19"  
+                    [place-holder] = "'dРпрОБ'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD19" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'dРпрПР'" name ="FLD20"  
+                    [place-holder] = "'dРпрПР'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD20" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'G(гвс)ПР'" name ="FLD21"  
+                    [place-holder] = "'G(гвс)ПР'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD21" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Gгвс'" name ="FLD22"  
+                    [place-holder] = "'Gгвс'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD22" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Gоб(гвс min)'" name ="FLD23"  
+                    [place-holder] = "'Gоб(гвс min)'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD23" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Gов'" name ="FLD24"  
+                    [place-holder] = "'Gов'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD24" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Gпр(гвс min)'" name ="FLD25"  
+                    [place-holder] = "'Gпр(гвс min)'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD25" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Gпр_minОБ'" name ="FLD26"  
+                    [place-holder] = "'Gпр_minОБ'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD26" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Gпр_minПР'" name ="FLD27"  
+                    [place-holder] = "'Gпр_minПР'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD27" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'GпрОБ'" name ="FLD28"  
+                    [place-holder] = "'GпрОБ'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD28" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'GпрПР'" name ="FLD29"  
+                    [place-holder] = "'GпрПР'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD29" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Gут'" name ="FLD30"  
+                    [place-holder] = "'Gут'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD30" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'д20ОБ'" name ="FLD31"  
+                    [place-holder] = "'д20ОБ'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD31" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'д20ПР'" name ="FLD32"  
+                    [place-holder] = "'д20ПР'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD32" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Договор'" name ="FLD33"  
+                    [place-holder] = "'Договор'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD33" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Договор G2'" name ="FLD34"  
+                    [place-holder] = "'Договор G2'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD34" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Договор G1'" name ="FLD35"  
+                    [place-holder] = "'Договор G1'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD35" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Источник'" name ="FLD36"  
+                    [place-holder] = "'Источник'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD36" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Магистраль'" name ="FLD37"  
+                    [place-holder] = "'Магистраль'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD37" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Расходомер'" name ="FLD40"  
+                    [place-holder] = "'Расходомер'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD40" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Расходомер ГВС'" name ="FLD41"  
+                    [place-holder] = "'Расходомер ГВС'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD41" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Робр'" name ="FLD42"  
+                    [place-holder] = "'Робр'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD42" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Рпр'" name ="FLD43"  
+                    [place-holder] = "'Рпр'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD43" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Способ отбора'" name ="FLD45"  
+                    [place-holder] = "'Способ отбора'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD45" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Т_график'" name ="FLD46"  
+                    [place-holder] = "'Т_график'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD46" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Теп_камера'" name ="FLD47"  
+                    [place-holder] = "'Теп_камера'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD47" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Тип расходомера'" name ="FLD48"  
+                    [place-holder] = "'Тип расходомера'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD48" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'тип термометра'" name ="FLD49"  
+                    [place-holder] = "'тип термометра'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD49" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Формула'" name ="FLD50"  
+                    [place-holder] = "'Формула'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD50" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Наименование счетчика'" name ="FLD51"  
+                    [place-holder] = "'Наименование счетчика'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD51" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Схема'" name ="FLD52"  
+                    [place-holder] = "'Схема'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD52" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Qот'" name ="FLD53"  
+                    [place-holder] = "'Qот'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD53" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Qв'" name ="FLD54"  
+                    [place-holder] = "'Qв'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD54" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Qгвс'" name ="FLD55"  
+                    [place-holder] = "'Qгвс'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD55" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Qну'" name ="FLD56"  
+                    [place-holder] = "'Qну'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD56" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Gот'" name ="FLD57"  
+                    [place-holder] = "'Gот'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD57" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Gв'" name ="FLD58"  
+                    [place-holder] = "'Gв'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD58" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Gну'" name ="FLD59"  
+                    [place-holder] = "'Gну'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD59" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Часов_архив'" name ="FLD60"  
+                    [place-holder] = "'Часов_архив'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD60" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Сут_архив'" name ="FLD61"  
+                    [place-holder] = "'Сут_архив'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD61" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Термопреобр ГВС'" name ="FLD62"  
+                    [place-holder] = "'Термопреобр ГВС'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD62" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Т1'" name ="FLD63"  
+                    [place-holder] = "'Т1'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD63" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Т2'" name ="FLD64"  
+                    [place-holder] = "'Т2'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD64" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Т3'" name ="FLD65"  
+                    [place-holder] = "'Т3'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD65" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Т4'" name ="FLD66"  
+                    [place-holder] = "'Т4'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD66" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Gтех'" name ="FLD67"  
+                    [place-holder] = "'Gтех'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD67" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Gтех_гвс'" name ="FLD68"  
+                    [place-holder] = "'Gтех_гвс'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD68" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Gгвс_м'" name ="FLD69"  
+                    [place-holder] = "'Gгвс_м'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD69" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Qтех'" name ="FLD70"  
+                    [place-holder] = "'Qтех'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD70" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Qвент'" name ="FLD71"  
+                    [place-holder] = "'Qвент'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD71" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Тхв'" name ="FLD72"  
+                    [place-holder] = "'Тхв'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD72" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Расходомер ГВСц'" name ="FLD73"  
+                    [place-holder] = "'Расходомер ГВСц'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD73" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Формула2'" name ="FLD81"  
+                    [place-holder] = "'Формула2'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD81" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Термопреобр'" name ="FLD82"  
+                    [place-holder] = "'Термопреобр'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD82" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Gвент'" name ="FLD83"  
+                    [place-holder] = "'Gвент'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD83" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Код УУТЭ'" name ="FLD84"  
+                    [place-holder] = "'Код УУТЭ'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD84" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Сист_теплопотребления'" name ="FLD85"  
+                    [place-holder] = "'Сист_теплопотребления'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD85" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Qтех_гвс'" name ="FLD86"  
+                    [place-holder] = "'Qтех_гвс'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD86" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Qтех_гвс ср'" name ="FLD87"  
+                    [place-holder] = "'Qтех_гвс ср'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD87" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Qгвс ср'" name ="FLD88"  
+                    [place-holder] = "'Qгвс ср'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD88" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Дата поверки'" name ="FLD89"  
+                    [place-holder] = "'Дата поверки'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD89" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Фамилия'" name ="FLD90"  
+                    [place-holder] = "'Фамилия'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD90" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Узел учета'" name ="FLD92"  
+                    [place-holder] = "'Узел учета'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD92" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Стр.адрес'" name ="FLD93"  
+                    [place-holder] = "'Стр.адрес'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD93" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'G(гвс)ОБР'" name ="FLD94"  
+                    [place-holder] = "'G(гвс)ОБР'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD94" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'DyГВСц'" name ="FLD95"  
+                    [place-holder] = "'DyГВСц'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD95" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Цена_имп_M1'" name ="FLD96"  
+                    [place-holder] = "'Цена_имп_M1'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD96" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Цена_имп_M2'" name ="FLD97"  
+                    [place-holder] = "'Цена_имп_M2'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD97" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Цена_имп_M1гв'" name ="FLD98"  
+                    [place-holder] = "'Цена_имп_M1гв'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD98" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Цена_имп_M2гв'" name ="FLD99"  
+                    [place-holder] = "'Цена_имп_M2гв'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD99" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Доп_погр_изм_M1%'" name ="FLD100"  
+                    [place-holder] = "'Доп_погр_изм_M1%'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD100" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Доп_погр_изм_M2%'" name ="FLD101"  
+                    [place-holder] = "'Доп_погр_изм_M2%'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD101" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Доп_погр_изм_M1гв%'" name ="FLD102"  
+                    [place-holder] = "'Доп_погр_изм_M1гв%'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD102" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Доп_погр_изм_M2гв%'" name ="FLD103"  
+                    [place-holder] = "'Доп_погр_изм_M2гв%'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD103" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Расходомер M2'" name ="FLD104"  
+                    [place-holder] = "'Расходомер M2'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONTRACT.FLD104" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="12"> 
+     <amexio-button  [label]="'Отмена'" (onClick)="opened = false;  refreshMONDEV_CONTRACT();" [type]="'secondary'" [tooltip]="'Отмена'" [icon]="'fa fa-times'"></amexio-button>
+     <amexio-button  [label]="'Сохранить'" (onClick)="save(currentMONDEV_CONTRACT)" [type]="'success'" [tooltip]="'Сохранить'" [icon]="'fa fa-save'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window> 
+   
+<!-- list Of row pane --> 
+<amexio-card [show]="true" [header] ="true" [footer] ="false" > 
+    <amexio-header> 
+	<amexio-row> 
+		<amexio-column size="12" > 
+		<amexio-button [disabled]="AppService.LastMONDEV_BDEVICES.MONDEV_BDEVICESId==null" [label]="'Создать'" [type]="'secondary'" [tooltip]="'Создать новую запись'" [icon]="'fa fa-plus'" (onClick)="onNew()"></amexio-button>
+		<amexio-button [disabled]="currentMONDEV_CONTRACT.MONDEV_CONTRACTId==null" [label]="'Изменить'" (onClick)="onEdit(currentMONDEV_CONTRACT)" [type]="'secondary'" [tooltip]="'Изменить запись'" [icon]="'fa fa-edit'"></amexio-button>
+     <amexio-button [disabled]="currentMONDEV_CONTRACT.MONDEV_CONTRACTId==null" [label]="'Удалить'" (onClick)="onDelete(currentMONDEV_CONTRACT)" [type]="'secondary'" [tooltip]="'Удалить запись'" [icon]="'fa fa-trash'"></amexio-button>
+     <amexio-button  [label]="'Обновить'" (onClick)="refreshMONDEV_CONTRACT()" [type]="'secondary'" [tooltip]="'Обновить данные'" [icon]="'fa fa-refresh'"></amexio-button>
+		</amexio-column>
+	</amexio-row> 
+	</amexio-header> 
+	<amexio-body> 
+		<amexio-datagrid 
+		  [title]="'Устройство::Договорные установки'" 
+		  [page-size] = "10" 
+		  [enable-data-filter]="false" 
+		  [enable-checkbox]="false" 
+		  [data]="MONDEV_CONTRACTArray" 
+		  (selectedRowData)="onSelect($event)" 
+		  (rowSelect)="onSelect($event)"> 
+		  <amexio-data-table-column [data-index]="'FLD12'" [data-type]="'string'" [hidden]="false" [text]="'№ прибора'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD12) ? ((row.FLD12.length>100) ? row.FLD12.substr(0,100)+'...' : row.FLD12 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD13'" [data-type]="'string'" [hidden]="false" [text]="'№ключа'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD13) ? ((row.FLD13.length>100) ? row.FLD13.substr(0,100)+'...' : row.FLD13 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD14'" [data-type]="'string'" [hidden]="false" [text]="'D20ОБ'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD14) ? ((row.FLD14.length>100) ? row.FLD14.substr(0,100)+'...' : row.FLD14 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD15'" [data-type]="'string'" [hidden]="false" [text]="'D20ПР'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD15) ? ((row.FLD15.length>100) ? row.FLD15.substr(0,100)+'...' : row.FLD15 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD16'" [data-type]="'string'" [hidden]="false" [text]="'DyГВС'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD16) ? ((row.FLD16.length>100) ? row.FLD16.substr(0,100)+'...' : row.FLD16 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD17'" [data-type]="'string'" [hidden]="false" [text]="'DyОБР'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD17) ? ((row.FLD17.length>100) ? row.FLD17.substr(0,100)+'...' : row.FLD17 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD18'" [data-type]="'string'" [hidden]="false" [text]="'DyПР'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD18) ? ((row.FLD18.length>100) ? row.FLD18.substr(0,100)+'...' : row.FLD18 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD19'" [data-type]="'string'" [hidden]="false" [text]="'dРпрОБ'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD19) ? ((row.FLD19.length>100) ? row.FLD19.substr(0,100)+'...' : row.FLD19 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD20'" [data-type]="'string'" [hidden]="false" [text]="'dРпрПР'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD20) ? ((row.FLD20.length>100) ? row.FLD20.substr(0,100)+'...' : row.FLD20 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD21'" [data-type]="'string'" [hidden]="false" [text]="'G(гвс)ПР'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD21) ? ((row.FLD21.length>100) ? row.FLD21.substr(0,100)+'...' : row.FLD21 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD22'" [data-type]="'string'" [hidden]="false" [text]="'Gгвс'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD22) ? ((row.FLD22.length>100) ? row.FLD22.substr(0,100)+'...' : row.FLD22 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD23'" [data-type]="'string'" [hidden]="false" [text]="'Gоб(гвс min)'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD23) ? ((row.FLD23.length>100) ? row.FLD23.substr(0,100)+'...' : row.FLD23 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD24'" [data-type]="'string'" [hidden]="false" [text]="'Gов'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD24) ? ((row.FLD24.length>100) ? row.FLD24.substr(0,100)+'...' : row.FLD24 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD25'" [data-type]="'string'" [hidden]="false" [text]="'Gпр(гвс min)'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD25) ? ((row.FLD25.length>100) ? row.FLD25.substr(0,100)+'...' : row.FLD25 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD26'" [data-type]="'string'" [hidden]="false" [text]="'Gпр_minОБ'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD26) ? ((row.FLD26.length>100) ? row.FLD26.substr(0,100)+'...' : row.FLD26 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD27'" [data-type]="'string'" [hidden]="false" [text]="'Gпр_minПР'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD27) ? ((row.FLD27.length>100) ? row.FLD27.substr(0,100)+'...' : row.FLD27 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD28'" [data-type]="'string'" [hidden]="false" [text]="'GпрОБ'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD28) ? ((row.FLD28.length>100) ? row.FLD28.substr(0,100)+'...' : row.FLD28 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD29'" [data-type]="'string'" [hidden]="false" [text]="'GпрПР'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD29) ? ((row.FLD29.length>100) ? row.FLD29.substr(0,100)+'...' : row.FLD29 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD30'" [data-type]="'string'" [hidden]="false" [text]="'Gут'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD30) ? ((row.FLD30.length>100) ? row.FLD30.substr(0,100)+'...' : row.FLD30 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD31'" [data-type]="'string'" [hidden]="false" [text]="'д20ОБ'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD31) ? ((row.FLD31.length>100) ? row.FLD31.substr(0,100)+'...' : row.FLD31 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD32'" [data-type]="'string'" [hidden]="false" [text]="'д20ПР'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD32) ? ((row.FLD32.length>100) ? row.FLD32.substr(0,100)+'...' : row.FLD32 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD33'" [data-type]="'string'" [hidden]="false" [text]="'Договор'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD33) ? ((row.FLD33.length>100) ? row.FLD33.substr(0,100)+'...' : row.FLD33 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD34'" [data-type]="'string'" [hidden]="false" [text]="'Договор G2'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD34) ? ((row.FLD34.length>100) ? row.FLD34.substr(0,100)+'...' : row.FLD34 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD35'" [data-type]="'string'" [hidden]="false" [text]="'Договор G1'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD35) ? ((row.FLD35.length>100) ? row.FLD35.substr(0,100)+'...' : row.FLD35 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD36'" [data-type]="'string'" [hidden]="false" [text]="'Источник'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD36) ? ((row.FLD36.length>100) ? row.FLD36.substr(0,100)+'...' : row.FLD36 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD37'" [data-type]="'string'" [hidden]="false" [text]="'Магистраль'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD37) ? ((row.FLD37.length>100) ? row.FLD37.substr(0,100)+'...' : row.FLD37 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD40'" [data-type]="'string'" [hidden]="false" [text]="'Расходомер'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD40) ? ((row.FLD40.length>100) ? row.FLD40.substr(0,100)+'...' : row.FLD40 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD41'" [data-type]="'string'" [hidden]="false" [text]="'Расходомер ГВС'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD41) ? ((row.FLD41.length>100) ? row.FLD41.substr(0,100)+'...' : row.FLD41 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD42'" [data-type]="'string'" [hidden]="false" [text]="'Робр'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD42) ? ((row.FLD42.length>100) ? row.FLD42.substr(0,100)+'...' : row.FLD42 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD43'" [data-type]="'string'" [hidden]="false" [text]="'Рпр'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD43) ? ((row.FLD43.length>100) ? row.FLD43.substr(0,100)+'...' : row.FLD43 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD45'" [data-type]="'string'" [hidden]="false" [text]="'Способ отбора'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD45) ? ((row.FLD45.length>100) ? row.FLD45.substr(0,100)+'...' : row.FLD45 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD46'" [data-type]="'string'" [hidden]="false" [text]="'Т_график'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD46) ? ((row.FLD46.length>100) ? row.FLD46.substr(0,100)+'...' : row.FLD46 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD47'" [data-type]="'string'" [hidden]="false" [text]="'Теп_камера'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD47) ? ((row.FLD47.length>100) ? row.FLD47.substr(0,100)+'...' : row.FLD47 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD48'" [data-type]="'string'" [hidden]="false" [text]="'Тип расходомера'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD48) ? ((row.FLD48.length>100) ? row.FLD48.substr(0,100)+'...' : row.FLD48 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD49'" [data-type]="'string'" [hidden]="false" [text]="'тип термометра'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD49) ? ((row.FLD49.length>100) ? row.FLD49.substr(0,100)+'...' : row.FLD49 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD50'" [data-type]="'string'" [hidden]="false" [text]="'Формула'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD50) ? ((row.FLD50.length>100) ? row.FLD50.substr(0,100)+'...' : row.FLD50 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD51'" [data-type]="'string'" [hidden]="false" [text]="'Наименование счетчика'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD51) ? ((row.FLD51.length>100) ? row.FLD51.substr(0,100)+'...' : row.FLD51 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD52'" [data-type]="'string'" [hidden]="false" [text]="'Схема'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD52) ? ((row.FLD52.length>100) ? row.FLD52.substr(0,100)+'...' : row.FLD52 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD53'" [data-type]="'string'" [hidden]="false" [text]="'Qот'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD53) ? ((row.FLD53.length>100) ? row.FLD53.substr(0,100)+'...' : row.FLD53 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD54'" [data-type]="'string'" [hidden]="false" [text]="'Qв'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD54) ? ((row.FLD54.length>100) ? row.FLD54.substr(0,100)+'...' : row.FLD54 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD55'" [data-type]="'string'" [hidden]="false" [text]="'Qгвс'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD55) ? ((row.FLD55.length>100) ? row.FLD55.substr(0,100)+'...' : row.FLD55 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD56'" [data-type]="'string'" [hidden]="false" [text]="'Qну'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD56) ? ((row.FLD56.length>100) ? row.FLD56.substr(0,100)+'...' : row.FLD56 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD57'" [data-type]="'string'" [hidden]="false" [text]="'Gот'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD57) ? ((row.FLD57.length>100) ? row.FLD57.substr(0,100)+'...' : row.FLD57 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD58'" [data-type]="'string'" [hidden]="false" [text]="'Gв'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD58) ? ((row.FLD58.length>100) ? row.FLD58.substr(0,100)+'...' : row.FLD58 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD59'" [data-type]="'string'" [hidden]="false" [text]="'Gну'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD59) ? ((row.FLD59.length>100) ? row.FLD59.substr(0,100)+'...' : row.FLD59 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD60'" [data-type]="'string'" [hidden]="false" [text]="'Часов_архив'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD60) ? ((row.FLD60.length>100) ? row.FLD60.substr(0,100)+'...' : row.FLD60 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD61'" [data-type]="'string'" [hidden]="false" [text]="'Сут_архив'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD61) ? ((row.FLD61.length>100) ? row.FLD61.substr(0,100)+'...' : row.FLD61 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD62'" [data-type]="'string'" [hidden]="false" [text]="'Термопреобр ГВС'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD62) ? ((row.FLD62.length>100) ? row.FLD62.substr(0,100)+'...' : row.FLD62 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD63'" [data-type]="'string'" [hidden]="false" [text]="'Т1'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD63) ? ((row.FLD63.length>100) ? row.FLD63.substr(0,100)+'...' : row.FLD63 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD64'" [data-type]="'string'" [hidden]="false" [text]="'Т2'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD64) ? ((row.FLD64.length>100) ? row.FLD64.substr(0,100)+'...' : row.FLD64 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD65'" [data-type]="'string'" [hidden]="false" [text]="'Т3'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD65) ? ((row.FLD65.length>100) ? row.FLD65.substr(0,100)+'...' : row.FLD65 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD66'" [data-type]="'string'" [hidden]="false" [text]="'Т4'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD66) ? ((row.FLD66.length>100) ? row.FLD66.substr(0,100)+'...' : row.FLD66 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD67'" [data-type]="'string'" [hidden]="false" [text]="'Gтех'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD67) ? ((row.FLD67.length>100) ? row.FLD67.substr(0,100)+'...' : row.FLD67 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD68'" [data-type]="'string'" [hidden]="false" [text]="'Gтех_гвс'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD68) ? ((row.FLD68.length>100) ? row.FLD68.substr(0,100)+'...' : row.FLD68 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD69'" [data-type]="'string'" [hidden]="false" [text]="'Gгвс_м'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD69) ? ((row.FLD69.length>100) ? row.FLD69.substr(0,100)+'...' : row.FLD69 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD70'" [data-type]="'string'" [hidden]="false" [text]="'Qтех'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD70) ? ((row.FLD70.length>100) ? row.FLD70.substr(0,100)+'...' : row.FLD70 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD71'" [data-type]="'string'" [hidden]="false" [text]="'Qвент'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD71) ? ((row.FLD71.length>100) ? row.FLD71.substr(0,100)+'...' : row.FLD71 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD72'" [data-type]="'string'" [hidden]="false" [text]="'Тхв'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD72) ? ((row.FLD72.length>100) ? row.FLD72.substr(0,100)+'...' : row.FLD72 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD73'" [data-type]="'string'" [hidden]="false" [text]="'Расходомер ГВСц'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD73) ? ((row.FLD73.length>100) ? row.FLD73.substr(0,100)+'...' : row.FLD73 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD81'" [data-type]="'string'" [hidden]="false" [text]="'Формула2'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD81) ? ((row.FLD81.length>100) ? row.FLD81.substr(0,100)+'...' : row.FLD81 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD82'" [data-type]="'string'" [hidden]="false" [text]="'Термопреобр'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD82) ? ((row.FLD82.length>100) ? row.FLD82.substr(0,100)+'...' : row.FLD82 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD83'" [data-type]="'string'" [hidden]="false" [text]="'Gвент'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD83) ? ((row.FLD83.length>100) ? row.FLD83.substr(0,100)+'...' : row.FLD83 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD84'" [data-type]="'string'" [hidden]="false" [text]="'Код УУТЭ'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD84) ? ((row.FLD84.length>100) ? row.FLD84.substr(0,100)+'...' : row.FLD84 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD85'" [data-type]="'string'" [hidden]="false" [text]="'Сист_теплопотребления'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD85) ? ((row.FLD85.length>100) ? row.FLD85.substr(0,100)+'...' : row.FLD85 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD86'" [data-type]="'string'" [hidden]="false" [text]="'Qтех_гвс'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD86) ? ((row.FLD86.length>100) ? row.FLD86.substr(0,100)+'...' : row.FLD86 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD87'" [data-type]="'string'" [hidden]="false" [text]="'Qтех_гвс ср'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD87) ? ((row.FLD87.length>100) ? row.FLD87.substr(0,100)+'...' : row.FLD87 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD88'" [data-type]="'string'" [hidden]="false" [text]="'Qгвс ср'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD88) ? ((row.FLD88.length>100) ? row.FLD88.substr(0,100)+'...' : row.FLD88 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD89'" [data-type]="'string'" [hidden]="false" [text]="'Дата поверки'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD89) ? ((row.FLD89.length>100) ? row.FLD89.substr(0,100)+'...' : row.FLD89 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD90'" [data-type]="'string'" [hidden]="false" [text]="'Фамилия'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD90) ? ((row.FLD90.length>100) ? row.FLD90.substr(0,100)+'...' : row.FLD90 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD92'" [data-type]="'string'" [hidden]="false" [text]="'Узел учета'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD92) ? ((row.FLD92.length>100) ? row.FLD92.substr(0,100)+'...' : row.FLD92 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD93'" [data-type]="'string'" [hidden]="false" [text]="'Стр.адрес'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD93) ? ((row.FLD93.length>100) ? row.FLD93.substr(0,100)+'...' : row.FLD93 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD94'" [data-type]="'string'" [hidden]="false" [text]="'G(гвс)ОБР'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD94) ? ((row.FLD94.length>100) ? row.FLD94.substr(0,100)+'...' : row.FLD94 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD95'" [data-type]="'string'" [hidden]="false" [text]="'DyГВСц'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD95) ? ((row.FLD95.length>100) ? row.FLD95.substr(0,100)+'...' : row.FLD95 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD96'" [data-type]="'string'" [hidden]="false" [text]="'Цена_имп_M1'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD96) ? ((row.FLD96.length>100) ? row.FLD96.substr(0,100)+'...' : row.FLD96 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD97'" [data-type]="'string'" [hidden]="false" [text]="'Цена_имп_M2'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD97) ? ((row.FLD97.length>100) ? row.FLD97.substr(0,100)+'...' : row.FLD97 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD98'" [data-type]="'string'" [hidden]="false" [text]="'Цена_имп_M1гв'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD98) ? ((row.FLD98.length>100) ? row.FLD98.substr(0,100)+'...' : row.FLD98 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD99'" [data-type]="'string'" [hidden]="false" [text]="'Цена_имп_M2гв'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD99) ? ((row.FLD99.length>100) ? row.FLD99.substr(0,100)+'...' : row.FLD99 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD100'" [data-type]="'string'" [hidden]="false" [text]="'Доп_погр_изм_M1%'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD100) ? ((row.FLD100.length>100) ? row.FLD100.substr(0,100)+'...' : row.FLD100 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD101'" [data-type]="'string'" [hidden]="false" [text]="'Доп_погр_изм_M2%'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD101) ? ((row.FLD101.length>100) ? row.FLD101.substr(0,100)+'...' : row.FLD101 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD102'" [data-type]="'string'" [hidden]="false" [text]="'Доп_погр_изм_M1гв%'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD102) ? ((row.FLD102.length>100) ? row.FLD102.substr(0,100)+'...' : row.FLD102 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD103'" [data-type]="'string'" [hidden]="false" [text]="'Доп_погр_изм_M2гв%'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD103) ? ((row.FLD103.length>100) ? row.FLD103.substr(0,100)+'...' : row.FLD103 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FLD104'" [data-type]="'string'" [hidden]="false" [text]="'Расходомер M2'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FLD104) ? ((row.FLD104.length>100) ? row.FLD104.substr(0,100)+'...' : row.FLD104 ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		</amexio-datagrid> 
+	</amexio-body> 
+</amexio-card> 
+ 
+<!-- confirm delete  dialog -->  
+<amexio-window  [(show-window)]="confirmOpened" [closable]="false" [header]="true" [footer]="true" >  
+     
+    <amexio-header>
+Удалить строку:  Устройство::Договорные установки ?
+    </amexio-header> 
+    <amexio-body> 
+            Удалить запись: {{ ( (currentMONDEV_CONTRACT.FLD12||'').length >100 ? (currentMONDEV_CONTRACT.FLD12||'').substr(0,100)+'...' : (currentMONDEV_CONTRACT.FLD12||'')) | removehtmltag }}?  
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="12"> 
+     <amexio-button  [label]="'Отмена'" (onClick)="confirmOpened = false" [type]="'secondary'" [tooltip]="'Отмена'" [icon]="'fa fa-times'"></amexio-button>
+     <amexio-button  [label]="'Удалить'" (onClick)="onConfirmDeletion()" [type]="'danger'" [tooltip]="'Удалить'" [icon]="'fa fa-trash'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window> 
+ 

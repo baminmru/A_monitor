@@ -1,0 +1,12 @@
+<app-topnav></app-topnav>
+<amexio-row *ngIf="Role()!='Класс'">
+ <amexio-column size="12">
+ <br/>
+ <br/>
+  </amexio-column>
+</amexio-row>
+<amexio-row>
+ <amexio-column size="12">
+    <router-outlet></router-outlet>
+  </amexio-column>
+</amexio-row>

@@ -1,0 +1,176 @@
+﻿<!--Error dialogue-->
+<amexio-window [show-window]="errorFlag"
+               [header]="true"
+			   [footer]="true"
+			   [closable]="false"
+               >
+	<amexio-header>
+        <i class="fa fa-exclamation-triangle"></i> Ошибка
+      </amexio-header>
+	   <amexio-body>
+        <amexio-row>
+          <amexio-column [size]="11">
+		  <span style="color:red">{{errorMessage}}</span>
+		  </amexio-column>
+        </amexio-row>
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="11"> 
+     <amexio-button  [label]="'Ok'" (onClick)="errorFlag=false" [type]="'red'" [tooltip]="'Ok'" [icon]="'fa fa-exclamation-triangle'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window>
+<!-- edit row pane -->	 
+ <amexio-window [closable]="false" [vertical-position]="'top'"  [horizontal-position]="'right'" [body-height]="90" [show-window]="opened" [header]="true" [footer]="true" > 
+	  <amexio-header> 
+        {{formMsg}} Узел::Описание 
+<amexio-box *ngIf="valid==false" border-color ="red" border="all" padding="true" background-color="yellow">
+	<amexio-label font-color="red"  border="bottom">Ошибка заполнения формы</amexio-label>
+</amexio-box>
+      </amexio-header> 
+     <amexio-body> 
+     <amexio-row><amexio-column size="12" >
+ <amexio-textarea-input [enable-popover]="false"  [field-label]="'Адрес'" name ="Addr" 
+             [place-holder]="'Адрес'" 
+            [allow-blank]="true" 
+	            [(ngModel)]="currentMONN_DEF.Addr"
+             [icon-feedback]="true" [rows]="'5'" [columns]="'12'" 
+              > 
+</amexio-textarea-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Телефон'" name ="ThePhone"  
+                    [place-holder] = "'Телефон'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONN_DEF.ThePhone" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+	 <amexio-dropdown 
+	 [place-holder] = "'Филиал'"
+	 name ="OrgUnit"
+	 [field-label]= "'Филиал'"
+            [allow-blank]="false" [error-msg] ="'Не задано: Филиал'" 
+	 
+	 [display-field]="'name'"
+	 [value-field]="'id'"
+	 [data]="AppService.ComboMOND_F"
+	 
+	 [(ngModel)]="currentMONN_DEF.OrgUnit"
+	 >
+  </amexio-dropdown>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+<amexio-dropdown 
+	 [field-label]="'Мобильный узел'" name ="isMovable" 
+                    [place-holder]="'Мобильный узел'" 
+	 [(ngModel)]="currentMONN_DEF.isMovable"
+            [allow-blank]="false" [error-msg] ="'Не задано: Мобильный узел'" 
+	 [display-field]="'name'"
+	 [value-field]="'id'"
+	 [data]="AppService.enumBooleanCombo()"
+	 >
+</amexio-dropdown>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Широта'" name ="Latitude" 
+                    [place-holder]="'Широта'" 
+            [allow-blank]="false" [error-msg] ="'Не задано: Широта'" 
+	 [(ngModel)]="currentMONN_DEF.Latitude"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Долгота'" name ="Longitude" 
+                    [place-holder]="'Долгота'" 
+            [allow-blank]="false" [error-msg] ="'Не задано: Долгота'" 
+	 [(ngModel)]="currentMONN_DEF.Longitude"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+	 <amexio-dropdown 
+	 [place-holder] = "'Клиент'"
+	 name ="theClient"
+	 [field-label]= "'Клиент'"
+            [allow-blank]="false" [error-msg] ="'Не задано: Клиент'" 
+	 
+	 [display-field]="'name'"
+	 [value-field]="'id'"
+	 [data]="AppService.Combomoncli_info"
+	 
+	 [(ngModel)]="currentMONN_DEF.theClient"
+	 >
+  </amexio-dropdown>
+     </amexio-column></amexio-row>
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="12"> 
+     <amexio-button  [label]="'Отмена'" (onClick)="opened = false;  refreshMONN_DEF();" [type]="'secondary'" [tooltip]="'Отмена'" [icon]="'fa fa-times'"></amexio-button>
+     <amexio-button  [label]="'Сохранить'" (onClick)="save(currentMONN_DEF)" [type]="'success'" [tooltip]="'Сохранить'" [icon]="'fa fa-save'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window> 
+   
+<!-- list Of row pane --> 
+<amexio-card [show]="true" [header] ="true" [footer] ="false" > 
+    <amexio-header> 
+	<amexio-row> 
+		<amexio-column size="12" > 
+		<amexio-button [label]="'Создать'" [type]="'secondary'" [tooltip]="'Создать новую запись'" [icon]="'fa fa-plus'" (onClick)="onNew()"></amexio-button>
+		<amexio-button [disabled]="currentMONN_DEF.MONN_DEFId==null" [label]="'Изменить'" (onClick)="onEdit(currentMONN_DEF)" [type]="'secondary'" [tooltip]="'Изменить запись'" [icon]="'fa fa-edit'"></amexio-button>
+     <amexio-button [disabled]="currentMONN_DEF.MONN_DEFId==null" [label]="'Удалить'" (onClick)="onDelete(currentMONN_DEF)" [type]="'secondary'" [tooltip]="'Удалить запись'" [icon]="'fa fa-trash'"></amexio-button>
+     <amexio-button  [label]="'Обновить'" (onClick)="refreshMONN_DEF()" [type]="'secondary'" [tooltip]="'Обновить данные'" [icon]="'fa fa-refresh'"></amexio-button>
+		</amexio-column>
+	</amexio-row> 
+	</amexio-header> 
+	<amexio-body> 
+		<amexio-datagrid 
+		  [title]="'Узел::Описание'" 
+		  [page-size] = "10" 
+		  [enable-data-filter]="false" 
+		  [enable-checkbox]="false" 
+		  [data]="MONN_DEFArray" 
+		  (selectedRowData)="onSelect($event)" 
+		  (rowSelect)="onSelect($event)"> 
+		  <amexio-data-table-column [data-index]="'Addr'" [data-type]="'string'" [hidden]="false" [text]="'Адрес'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.Addr) ? ((row.Addr.length>100) ? row.Addr.substr(0,100)+'...' : row.Addr ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'ThePhone'" [data-type]="'string'" [hidden]="false" [text]="'Телефон'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.ThePhone) ? ((row.ThePhone.length>100) ? row.ThePhone.substr(0,100)+'...' : row.ThePhone ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'OrgUnit_name'" [data-type]="'string'" [hidden]="false" [text]="'Филиал'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'isMovable_name'" [data-type]="'string'" [hidden]="false" [text]="'Мобильный узел'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'Latitude'" [data-type]="'number'" [hidden]="false" [text]="'Широта'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'Longitude'" [data-type]="'number'" [hidden]="false" [text]="'Долгота'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'theClient_name'" [data-type]="'string'" [hidden]="false" [text]="'Клиент'"></amexio-data-table-column> 
+		</amexio-datagrid> 
+	</amexio-body> 
+</amexio-card> 
+ 
+<!-- confirm delete  dialog -->  
+<amexio-window  [(show-window)]="confirmOpened" [closable]="false" [header]="true" [footer]="true" >  
+     
+    <amexio-header>
+Удалить строку:  Узел::Описание ?
+    </amexio-header> 
+    <amexio-body> 
+            Удалить запись: {{ ( (currentMONN_DEF.Addr +'; '+  currentMONN_DEF.OrgUnit_name||'').length >100 ? (currentMONN_DEF.Addr +'; '+  currentMONN_DEF.OrgUnit_name||'').substr(0,100)+'...' : (currentMONN_DEF.Addr +'; '+  currentMONN_DEF.OrgUnit_name||'')) | removehtmltag }}?  
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="12"> 
+     <amexio-button  [label]="'Отмена'" (onClick)="confirmOpened = false" [type]="'secondary'" [tooltip]="'Отмена'" [icon]="'fa fa-times'"></amexio-button>
+     <amexio-button  [label]="'Удалить'" (onClick)="onConfirmDeletion()" [type]="'danger'" [tooltip]="'Удалить'" [icon]="'fa fa-trash'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window> 
+ 

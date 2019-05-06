@@ -1,0 +1,21 @@
+﻿<amexio-card [header] ="true" [footer] ="false">
+  <amexio-header>
+ <i class="fa " aria-hidden="True"></i> Сервер 
+  </amexio-header>
+  <amexio-body>
+	<amexio-tab-view  [closable]="false">
+		<amexio-tab  title="Описание сервера"  [active]="true" >
+			<app-MONSRV_INFO></app-MONSRV_INFO>
+		</amexio-tab>
+		
+		<amexio-tab  title="Модемы"  >
+			<app-MONSRV_MODEMS></app-MONSRV_MODEMS>
+		</amexio-tab>
+		
+		<amexio-tab  title="Ком порты"  >
+			<app-MONSRV_PORTS></app-MONSRV_PORTS>
+		</amexio-tab>
+		
+	</amexio-tab-view>
+  </amexio-body>
+</amexio-card>

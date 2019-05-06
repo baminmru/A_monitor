@@ -1,0 +1,138 @@
+﻿<!-- <amexio-homepage-ce [type]="'1'">
+
+<amexio-homepage-northpanel>
+<amexio-panel [header]="true" [border]="true" [title]="'ПАНЕЛЬ ФИЛЬТРА'" [expanded]="true">
+			<DISPATCHER_FILTER></DISPATCHER_FILTER>
+        </amexio-panel>
+</amexio-homepage-northpanel>
+
+ <amexio-homepage-westpanel  [title]="'Узлы и устройства'" >
+        <amexio-treeview 
+			
+			[data]="NodeList()"
+			
+			 >
+			</amexio-treeview>
+ </amexio-homepage-westpanel>
+ <amexio-homepage-centerpanel >
+        
+            	<amexio-tab-view  [closable]="false">
+				<amexio-tab  title="Данные"  [active]="true" >
+					<DISPATCHER_DATA></DISPATCHER_DATA>
+				</amexio-tab>
+				
+				<amexio-tab  title="Графики"  >
+					<DISPATCHER_CHART></DISPATCHER_CHART>
+				</amexio-tab>
+				
+				<amexio-tab  title="Сообщения"  >
+					<DISPATCHER_MSG></DISPATCHER_MSG>
+				</amexio-tab>
+
+			</amexio-tab-view>
+      
+     </amexio-homepage-centerpanel>
+	
+	
+</amexio-homepage-ce>
+-->
+
+
+<amexio-layout-grid [layout]="'LayoutSample1'">
+		<amexio-grid-item style="border: 1px dashed black; " [name]="'gridheader'">
+				Диспетчер
+		</amexio-grid-item>
+		<amexio-grid-item style="border: 1px dashed black; " [name]="'gridfilter'">
+				<DISPATCHER_FILTER></DISPATCHER_FILTER>
+		</amexio-grid-item>
+		<amexio-grid-item style="border: 1px dashed black" [name]="'gridmenu'">
+			<amexio-datagrid name="nodegrid"
+					[title]="'Устройства'"
+					[page-size] = "10"
+					[global-filter]="true"
+					[data]="NodeArray" 
+					(selectedRowData)="onNodeSelect($event)"
+					(rowSelect)="onNodeSelect($event)">
+				
+					<amexio-data-table-column [data-index]="'NodeName'"
+					[data-type]="'string'"
+					[hidden]="false"
+					>
+</amexio-data-table-column>
+				
+					<amexio-data-table-column [data-index]="'DeviceName'"
+																		[data-type]="'string'"
+																		[hidden]="false"
+																		>
+					</amexio-data-table-column>
+				
+				</amexio-datagrid>
+
+
+		</amexio-grid-item>
+		<amexio-grid-item style="border: 1px dashed black" [name]="'gridmain'">
+			<amexio-tab-view  [closable]="false">
+				<amexio-tab  title="Данные"  [active]="true" >
+					<DISPATCHER_DATA></DISPATCHER_DATA>
+				</amexio-tab>
+				
+				<amexio-tab  title="Графики"  >
+					<DISPATCHER_CHART></DISPATCHER_CHART>
+				</amexio-tab>
+				
+				<!-- <amexio-tab  title="Сообщения"  >
+					<DISPATCHER_MSG></DISPATCHER_MSG>
+				</amexio-tab>
+				-->
+
+			</amexio-tab-view> 
+		
+		</amexio-grid-item>
+       
+        <amexio-grid-item style="border: 1px dashed black" [name]="'gridfooter'">(c) 2019</amexio-grid-item>
+</amexio-layout-grid>
+
+
+<!--
+<amexio-card [header] ="true" [footer] ="false">
+  <amexio-header>
+ <i class="fa " aria-hidden="True"></i>Диспетчер 
+  </amexio-header>
+  <amexio-body>
+	<amexio-row>
+		<amexio-column [size]="12" [fit]="true">
+			<DISPATCHER_FILTER></DISPATCHER_FILTER>
+		</amexio-column>
+	</amexio-row>
+    <amexio-row>
+	   <amexio-column [size]="2" [fit]="true">
+			<amexio-treeview 
+			[data]="NodeList()"
+			 >
+			</amexio-treeview>
+	  
+	   </amexio-column>
+	   <amexio-column [size]="10" [fit]="true">
+			<amexio-tab-view  [closable]="false">
+					<amexio-tab  title="Данные"  [active]="true" >
+						<DISPATCHER_DATA></DISPATCHER_DATA>
+					</amexio-tab>
+					
+					<amexio-tab  title="Графики"  >
+						<DISPATCHER_CHART></DISPATCHER_CHART>
+					</amexio-tab>
+					
+					<amexio-tab  title="Сообщения"  >
+						<DISPATCHER_MSG></DISPATCHER_MSG>
+					</amexio-tab>
+	
+				</amexio-tab-view>
+		  
+	   
+	   </amexio-column>
+   </amexio-row>
+
+  </amexio-body>
+</amexio-card>
+
+-->

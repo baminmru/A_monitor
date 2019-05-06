@@ -1,0 +1,17 @@
+﻿<amexio-card [header] ="true" [footer] ="false">
+  <amexio-header>
+ <i class="fa " aria-hidden="True"></i> Схема подключения 
+  </amexio-header>
+  <amexio-body>
+	<amexio-tab-view  [closable]="false">
+		<amexio-tab  title="Схема подключения"  [active]="true" >
+			<app-MONSCH_INFO></app-MONSCH_INFO>
+		</amexio-tab>
+		
+		<amexio-tab  title="Параметры на схеме"  >
+			<app-MONSCH_PARAM></app-MONSCH_PARAM>
+		</amexio-tab>
+		
+	</amexio-tab-view>
+  </amexio-body>
+</amexio-card>

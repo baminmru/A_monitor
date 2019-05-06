@@ -1,0 +1,122 @@
+﻿<!--Error dialogue-->
+<amexio-window [show-window]="errorFlag"
+               [header]="true"
+			   [footer]="true"
+			   [closable]="false"
+               >
+	<amexio-header>
+        <i class="fa fa-exclamation-triangle"></i> Ошибка
+      </amexio-header>
+	   <amexio-body>
+        <amexio-row>
+          <amexio-column [size]="11">
+		  <span style="color:red">{{errorMessage}}</span>
+		  </amexio-column>
+        </amexio-row>
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="11"> 
+     <amexio-button  [label]="'Ok'" (onClick)="errorFlag=false" [type]="'red'" [tooltip]="'Ok'" [icon]="'fa fa-exclamation-triangle'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window>
+<!-- edit row pane -->	 
+ <amexio-window [closable]="false" [vertical-position]="'top'"  [horizontal-position]="'right'" [body-height]="90" [show-window]="opened" [header]="true" [footer]="true" > 
+	  <amexio-header> 
+        {{formMsg}} Устройство::Отчеты 
+<amexio-box *ngIf="valid==false" border-color ="red" border="all" padding="true" background-color="yellow">
+	<amexio-label font-color="red"  border="bottom">Ошибка заполнения формы</amexio-label>
+</amexio-box>
+      </amexio-header> 
+     <amexio-body> 
+     <amexio-row><amexio-column size="12" >
+	 <amexio-dropdown 
+	 [place-holder] = "'Данные'"
+	 name ="repType"
+	 [field-label]= "'Данные'"
+            [allow-blank]="false" [error-msg] ="'Не задано: Данные'" 
+	 
+	 [display-field]="'name'"
+	 [value-field]="'id'"
+	 [data]="AppService.ComboMOND_ATYPE"
+	 
+	 [(ngModel)]="currentMONDEV_REPORTS.repType"
+	 >
+  </amexio-dropdown>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Название'" name ="Name"  
+                    [place-holder] = "'Название'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_REPORTS.Name" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Файл'" name ="theFile"  
+                    [place-holder] = "'Файл'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_REPORTS.theFile" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="12"> 
+     <amexio-button  [label]="'Отмена'" (onClick)="opened = false;  refreshMONDEV_REPORTS();" [type]="'secondary'" [tooltip]="'Отмена'" [icon]="'fa fa-times'"></amexio-button>
+     <amexio-button  [label]="'Сохранить'" (onClick)="save(currentMONDEV_REPORTS)" [type]="'success'" [tooltip]="'Сохранить'" [icon]="'fa fa-save'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window> 
+   
+<!-- list Of row pane --> 
+<amexio-card [show]="true" [header] ="true" [footer] ="false" > 
+    <amexio-header> 
+	<amexio-row> 
+		<amexio-column size="12" > 
+		<amexio-button [disabled]="AppService.LastMONDEV_BDEVICES.MONDEV_BDEVICESId==null" [label]="'Создать'" [type]="'secondary'" [tooltip]="'Создать новую запись'" [icon]="'fa fa-plus'" (onClick)="onNew()"></amexio-button>
+		<amexio-button [disabled]="currentMONDEV_REPORTS.MONDEV_REPORTSId==null" [label]="'Изменить'" (onClick)="onEdit(currentMONDEV_REPORTS)" [type]="'secondary'" [tooltip]="'Изменить запись'" [icon]="'fa fa-edit'"></amexio-button>
+     <amexio-button [disabled]="currentMONDEV_REPORTS.MONDEV_REPORTSId==null" [label]="'Удалить'" (onClick)="onDelete(currentMONDEV_REPORTS)" [type]="'secondary'" [tooltip]="'Удалить запись'" [icon]="'fa fa-trash'"></amexio-button>
+     <amexio-button  [label]="'Обновить'" (onClick)="refreshMONDEV_REPORTS()" [type]="'secondary'" [tooltip]="'Обновить данные'" [icon]="'fa fa-refresh'"></amexio-button>
+		</amexio-column>
+	</amexio-row> 
+	</amexio-header> 
+	<amexio-body> 
+		<amexio-datagrid 
+		  [title]="'Устройство::Отчеты'" 
+		  [page-size] = "10" 
+		  [enable-data-filter]="false" 
+		  [enable-checkbox]="false" 
+		  [data]="MONDEV_REPORTSArray" 
+		  (selectedRowData)="onSelect($event)" 
+		  (rowSelect)="onSelect($event)"> 
+		  <amexio-data-table-column [data-index]="'repType_name'" [data-type]="'string'" [hidden]="false" [text]="'Данные'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'Name'" [data-type]="'string'" [hidden]="false" [text]="'Название'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.Name) ? ((row.Name.length>100) ? row.Name.substr(0,100)+'...' : row.Name ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'theFile'" [data-type]="'string'" [hidden]="false" [text]="'Файл'"></amexio-data-table-column> 
+		</amexio-datagrid> 
+	</amexio-body> 
+</amexio-card> 
+ 
+<!-- confirm delete  dialog -->  
+<amexio-window  [(show-window)]="confirmOpened" [closable]="false" [header]="true" [footer]="true" >  
+     
+    <amexio-header>
+Удалить строку:  Устройство::Отчеты ?
+    </amexio-header> 
+    <amexio-body> 
+            Удалить запись: {{ ( (currentMONDEV_REPORTS.repType_name +'; '+  currentMONDEV_REPORTS.Name||'').length >100 ? (currentMONDEV_REPORTS.repType_name +'; '+  currentMONDEV_REPORTS.Name||'').substr(0,100)+'...' : (currentMONDEV_REPORTS.repType_name +'; '+  currentMONDEV_REPORTS.Name||'')) | removehtmltag }}?  
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="12"> 
+     <amexio-button  [label]="'Отмена'" (onClick)="confirmOpened = false" [type]="'secondary'" [tooltip]="'Отмена'" [icon]="'fa fa-times'"></amexio-button>
+     <amexio-button  [label]="'Удалить'" (onClick)="onConfirmDeletion()" [type]="'danger'" [tooltip]="'Удалить'" [icon]="'fa fa-trash'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window> 
+ 

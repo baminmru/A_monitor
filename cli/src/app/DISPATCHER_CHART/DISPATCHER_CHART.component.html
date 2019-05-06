@@ -1,0 +1,74 @@
+            <amexio-row>
+                    <amexio-column [size]="12">
+                        <amexio-row>
+                            <amexio-column [size]="6" [fit]="true">
+                                <amexio-card [header]="false" [show]="'true'">
+                                     <amexio-body>
+                                        <amexio-d3-chart-line 
+                                                 (onChartClick)="onUserDefineChartClick($event)" 
+                                                 [label]="true" 
+                                                 (onLegendClick)="onUserDefineLegendClick($event)"
+                                                 [title]="'Напряжение по фазам'"
+                                                [data] = "disp_Service.CurrentChart_U"
+                                                >
+                                             </amexio-d3-chart-line>
+                                    </amexio-body>
+                                </amexio-card>
+                            </amexio-column>
+                                  <amexio-column [size]="6" [fit]="true">
+                                        <amexio-card [header]="false" [show]="'true'">
+                                          
+                                            <amexio-body>
+                                                <amexio-d3-chart-line 
+                                                (onChartClick)="onDefaultChartClick($event)"
+                                                (onLegendClick)="onDefaultLegendClick($event)"
+                                                [title]="'Токи по фазам'"
+                                                [label]="true"
+                                                [data] = "disp_Service.CurrentChart_I">
+                                             </amexio-d3-chart-line>
+                                            </amexio-body>
+                                        </amexio-card>
+                                    </amexio-column>
+
+                        </amexio-row>
+
+                      
+                                <amexio-row>
+                                    <amexio-column [size]="6" [fit]="true">
+                                        <amexio-card [header]="false" [show]="'true'">
+                                           
+                                            <amexio-body>
+                                                <amexio-d3-chart-line 
+                                                        (onChartClick)="onLineChartClick($event)" 
+                                                        [label]="true" 
+                                                        (onLegendClick)="onLineLegendClick($event)"
+                                                        [title]="'Мощность по  фазам'"
+                                                        [data] = "disp_Service.CurrentChart_P"
+                                                        [label-color] = "'brown'"
+                                                        [yaxis-interval] = "1"
+                                                        >
+                                                     </amexio-d3-chart-line>
+                                            </amexio-body>
+                                        </amexio-card>
+                                    </amexio-column>
+                                 
+									<amexio-column [size]="6" [fit]="true">
+                                        <amexio-card [header]="false" [show]="'true'">
+                                           
+                                            <amexio-body>
+                                                <amexio-d3-chart-line 
+                                                        (onChartClick)="onLineChartClick($event)" 
+                                                        [label]="true" 
+                                                        (onLegendClick)="onLineLegendClick($event)"
+                                                        [title]="'Энергия по тарифам'"
+                                                        [data] = "disp_Service.CurrentChart_T"
+                                                        [label-color] = "'brown'"
+                                                        [yaxis-interval] = "1"
+                                                        >
+                                                     </amexio-d3-chart-line>
+                                            </amexio-body>
+                                        </amexio-card>
+                                    </amexio-column>
+                                </amexio-row>
+                    </amexio-column>
+                </amexio-row>

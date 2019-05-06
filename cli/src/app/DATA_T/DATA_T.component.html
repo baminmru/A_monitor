@@ -1,0 +1,214 @@
+﻿<!--Error dialogue-->
+<amexio-window [show-window]="errorFlag"
+               [header]="true"
+			   [footer]="true"
+			   [closable]="false"
+               >
+	<amexio-header>
+        <i class="fa fa-exclamation-triangle"></i> Ошибка
+      </amexio-header>
+	   <amexio-body>
+        <amexio-row>
+          <amexio-column [size]="11">
+		  <span style="color:red">{{errorMessage}}</span>
+		  </amexio-column>
+        </amexio-row>
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="11"> 
+     <amexio-button  [label]="'Ok'" (onClick)="errorFlag=false" [type]="'red'" [tooltip]="'Ok'" [icon]="'fa fa-exclamation-triangle'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window>
+<!-- edit row pane -->	 
+ <amexio-window [closable]="false" [vertical-position]="'top'"  [horizontal-position]="'right'" [body-height]="90" [show-window]="opened" [header]="true" [footer]="true" > 
+	  <amexio-header> 
+        {{formMsg}} Данные::Температуры 
+<amexio-box *ngIf="valid==false" border-color ="red" border="all" padding="true" background-color="yellow">
+	<amexio-label font-color="red"  border="bottom">Ошибка заполнения формы</amexio-label>
+</amexio-box>
+      </amexio-header> 
+     <amexio-body> 
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Температура по каналу 1'" name ="T1" 
+                    [place-holder]="'Температура по каналу 1'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_T.T1"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Температура по каналу 2'" name ="T2" 
+                    [place-holder]="'Температура по каналу 2'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_T.T2"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Температура по каналу 3'" name ="T3" 
+                    [place-holder]="'Температура по каналу 3'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_T.T3"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Температура по каналу 4'" name ="T4" 
+                    [place-holder]="'Температура по каналу 4'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_T.T4"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Температура по каналу 5'" name ="T5" 
+                    [place-holder]="'Температура по каналу 5'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_T.T5"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Температура по каналу 6'" name ="T6" 
+                    [place-holder]="'Температура по каналу 6'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_T.T6"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Разность Температур по каналу 1 и 2'" name ="DT12" 
+                    [place-holder]="'Разность Температур по каналу 1 и 2'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_T.DT12"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Разность Температур по каналу 4 и 5'" name ="DT45" 
+                    [place-holder]="'Разность Температур по каналу 4 и 5'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_T.DT45"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Температура горячей воды'" name ="THOT" 
+                    [place-holder]="'Температура горячей воды'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_T.THOT"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Температура холодной воды'" name ="TCOOL" 
+                    [place-holder]="'Температура холодной воды'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_T.TCOOL"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Температура холодного конца канал 1'" name ="TCE1" 
+                    [place-holder]="'Температура холодного конца канал 1'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_T.TCE1"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Температура холодного конца канал 2'" name ="TCE2" 
+                    [place-holder]="'Температура холодного конца канал 2'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_T.TCE2"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Температура воздуха канал 1'" name ="TAIR1" 
+                    [place-holder]="'Температура воздуха канал 1'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_T.TAIR1"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Температура воздуха канал 2'" name ="TAIR2" 
+                    [place-holder]="'Температура воздуха канал 2'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_T.TAIR2"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="12"> 
+     <amexio-button  [label]="'Отмена'" (onClick)="opened = false;  refreshDATA_T();" [type]="'secondary'" [tooltip]="'Отмена'" [icon]="'fa fa-times'"></amexio-button>
+     <amexio-button  [label]="'Сохранить'" (onClick)="save(currentDATA_T)" [type]="'success'" [tooltip]="'Сохранить'" [icon]="'fa fa-save'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window> 
+   
+<!-- list Of row pane --> 
+<amexio-card [show]="true" [header] ="true" [footer] ="false" > 
+    <amexio-header> 
+	<amexio-row> 
+		<amexio-column size="12" > 
+		<amexio-button [disabled]="AppService.LastDATA_RECORD.DATA_RECORDId==null" [label]="'Создать'" [type]="'secondary'" [tooltip]="'Создать новую запись'" [icon]="'fa fa-plus'" (onClick)="onNew()"></amexio-button>
+		<amexio-button [disabled]="currentDATA_T.DATA_TId==null" [label]="'Изменить'" (onClick)="onEdit(currentDATA_T)" [type]="'secondary'" [tooltip]="'Изменить запись'" [icon]="'fa fa-edit'"></amexio-button>
+     <amexio-button [disabled]="currentDATA_T.DATA_TId==null" [label]="'Удалить'" (onClick)="onDelete(currentDATA_T)" [type]="'secondary'" [tooltip]="'Удалить запись'" [icon]="'fa fa-trash'"></amexio-button>
+     <amexio-button  [label]="'Обновить'" (onClick)="refreshDATA_T()" [type]="'secondary'" [tooltip]="'Обновить данные'" [icon]="'fa fa-refresh'"></amexio-button>
+		</amexio-column>
+	</amexio-row> 
+	</amexio-header> 
+	<amexio-body> 
+		<amexio-datagrid 
+		  [title]="'Данные::Температуры'" 
+		  [page-size] = "10" 
+		  [enable-data-filter]="false" 
+		  [enable-checkbox]="false" 
+		  [data]="DATA_TArray" 
+		  (selectedRowData)="onSelect($event)" 
+		  (rowSelect)="onSelect($event)"> 
+		  <amexio-data-table-column [data-index]="'T1'" [data-type]="'number'" [hidden]="false" [text]="'Температура по каналу 1'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'T2'" [data-type]="'number'" [hidden]="false" [text]="'Температура по каналу 2'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'T3'" [data-type]="'number'" [hidden]="false" [text]="'Температура по каналу 3'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'T4'" [data-type]="'number'" [hidden]="false" [text]="'Температура по каналу 4'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'T5'" [data-type]="'number'" [hidden]="false" [text]="'Температура по каналу 5'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'T6'" [data-type]="'number'" [hidden]="false" [text]="'Температура по каналу 6'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'DT12'" [data-type]="'number'" [hidden]="false" [text]="'Разность Температур по каналу 1 и 2'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'DT45'" [data-type]="'number'" [hidden]="false" [text]="'Разность Температур по каналу 4 и 5'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'THOT'" [data-type]="'number'" [hidden]="false" [text]="'Температура горячей воды'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'TCOOL'" [data-type]="'number'" [hidden]="false" [text]="'Температура холодной воды'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'TCE1'" [data-type]="'number'" [hidden]="false" [text]="'Температура холодного конца канал 1'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'TCE2'" [data-type]="'number'" [hidden]="false" [text]="'Температура холодного конца канал 2'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'TAIR1'" [data-type]="'number'" [hidden]="false" [text]="'Температура воздуха канал 1'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'TAIR2'" [data-type]="'number'" [hidden]="false" [text]="'Температура воздуха канал 2'"></amexio-data-table-column> 
+		</amexio-datagrid> 
+	</amexio-body> 
+</amexio-card> 
+ 
+<!-- confirm delete  dialog -->  
+<amexio-window  [(show-window)]="confirmOpened" [closable]="false" [header]="true" [footer]="true" >  
+     
+    <amexio-header>
+Удалить строку:  Данные::Температуры ?
+    </amexio-header> 
+    <amexio-body> 
+            Удалить запись: {{ ( (currentDATA_T.T1 +'; '+  currentDATA_T.T2||'').length >100 ? (currentDATA_T.T1 +'; '+  currentDATA_T.T2||'').substr(0,100)+'...' : (currentDATA_T.T1 +'; '+  currentDATA_T.T2||'')) | removehtmltag }}?  
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="12"> 
+     <amexio-button  [label]="'Отмена'" (onClick)="confirmOpened = false" [type]="'secondary'" [tooltip]="'Отмена'" [icon]="'fa fa-times'"></amexio-button>
+     <amexio-button  [label]="'Удалить'" (onClick)="onConfirmDeletion()" [type]="'danger'" [tooltip]="'Удалить'" [icon]="'fa fa-trash'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window> 
+ 

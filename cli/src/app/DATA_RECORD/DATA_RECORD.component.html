@@ -1,0 +1,161 @@
+﻿<!--Error dialogue-->
+<amexio-window [show-window]="errorFlag"
+               [header]="true"
+			   [footer]="true"
+			   [closable]="false"
+               >
+	<amexio-header>
+        <i class="fa fa-exclamation-triangle"></i> Ошибка
+      </amexio-header>
+	   <amexio-body>
+        <amexio-row>
+          <amexio-column [size]="11">
+		  <span style="color:red">{{errorMessage}}</span>
+		  </amexio-column>
+        </amexio-row>
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="11"> 
+     <amexio-button  [label]="'Ok'" (onClick)="errorFlag=false" [type]="'red'" [tooltip]="'Ok'" [icon]="'fa fa-exclamation-triangle'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window>
+<!-- edit row pane -->	 
+ <amexio-window [closable]="false" [vertical-position]="'top'"  [horizontal-position]="'right'" [body-height]="90" [show-window]="opened" [header]="true" [footer]="true" > 
+	  <amexio-header> 
+        {{formMsg}} Данные::Запись 
+<amexio-box *ngIf="valid==false" border-color ="red" border="all" padding="true" background-color="yellow">
+	<amexio-label font-color="red"  border="bottom">Ошибка заполнения формы</amexio-label>
+</amexio-box>
+      </amexio-header> 
+     <amexio-body> 
+     <amexio-row><amexio-column size="12" >
+	 <amexio-dropdown 
+	 [place-holder] = "'Устройство'"
+	 name ="ID_BD"
+	 [field-label]= "'Устройство'"
+            [allow-blank]="false" [error-msg] ="'Не задано: Устройство'" 
+	 
+	 [display-field]="'name'"
+	 [value-field]="'id'"
+	 [data]="AppService.ComboMONDEV_BDEVICES"
+	 
+	 [(ngModel)]="currentDATA_RECORD.ID_BD"
+	 >
+  </amexio-dropdown>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+  <amexio-date-time-picker   [field-label]="'Дата опроса'" 
+        [time-picker]="true"  
+        [date-picker]="true"  
+        [(ngModel)]="currentDATA_RECORD.DCALL"> 
+ </amexio-date-time-picker> 
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+	 <amexio-dropdown 
+	 [place-holder] = "'Тип архива'"
+	 name ="AType"
+	 [field-label]= "'Тип архива'"
+            [allow-blank]="false" [error-msg] ="'Не задано: Тип архива'" 
+	 
+	 [display-field]="'name'"
+	 [value-field]="'id'"
+	 [data]="AppService.ComboMOND_ATYPE"
+	 
+	 [(ngModel)]="currentDATA_RECORD.AType"
+	 >
+  </amexio-dropdown>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Проверка архивных данных на НС (0 - не производилась, 1 - произведена)'" name ="CHECK_A" 
+                    [place-holder]="'Проверка архивных данных на НС (0 - не производилась, 1 - произведена)'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentDATA_RECORD.CHECK_A"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+  <amexio-date-time-picker   [field-label]="'Дата счетчика'" 
+        [time-picker]="true"  
+        [date-picker]="true"  
+        [(ngModel)]="currentDATA_RECORD.DCOUNTER"> 
+ </amexio-date-time-picker> 
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+  <amexio-date-time-picker   [field-label]="'Начало интервала'" 
+        [time-picker]="true"  
+        [date-picker]="true"  
+        [(ngModel)]="currentDATA_RECORD.dstart"> 
+ </amexio-date-time-picker> 
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+  <amexio-date-time-picker   [field-label]="'Конец интервала'" 
+        [time-picker]="true"  
+        [date-picker]="true"  
+        [(ngModel)]="currentDATA_RECORD.dend"> 
+ </amexio-date-time-picker> 
+     </amexio-column></amexio-row>
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="12"> 
+     <amexio-button  [label]="'Отмена'" (onClick)="opened = false;  refreshDATA_RECORD();" [type]="'secondary'" [tooltip]="'Отмена'" [icon]="'fa fa-times'"></amexio-button>
+     <amexio-button  [label]="'Сохранить'" (onClick)="save(currentDATA_RECORD)" [type]="'success'" [tooltip]="'Сохранить'" [icon]="'fa fa-save'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window> 
+   
+<!-- list Of row pane --> 
+<amexio-card [show]="true" [header] ="true" [footer] ="false" > 
+    <amexio-header> 
+	<amexio-row> 
+		<amexio-column size="12" > 
+		<amexio-button [label]="'Создать'" [type]="'secondary'" [tooltip]="'Создать новую запись'" [icon]="'fa fa-plus'" (onClick)="onNew()"></amexio-button>
+		<amexio-button [disabled]="currentDATA_RECORD.DATA_RECORDId==null" [label]="'Изменить'" (onClick)="onEdit(currentDATA_RECORD)" [type]="'secondary'" [tooltip]="'Изменить запись'" [icon]="'fa fa-edit'"></amexio-button>
+     <amexio-button [disabled]="currentDATA_RECORD.DATA_RECORDId==null" [label]="'Удалить'" (onClick)="onDelete(currentDATA_RECORD)" [type]="'secondary'" [tooltip]="'Удалить запись'" [icon]="'fa fa-trash'"></amexio-button>
+     <amexio-button  [label]="'Обновить'" (onClick)="refreshDATA_RECORD()" [type]="'secondary'" [tooltip]="'Обновить данные'" [icon]="'fa fa-refresh'"></amexio-button>
+		</amexio-column>
+	</amexio-row> 
+	</amexio-header> 
+	<amexio-body> 
+		<amexio-datagrid 
+		  [title]="'Данные::Запись'" 
+		  [page-size] = "10" 
+		  [enable-data-filter]="false" 
+		  [enable-checkbox]="false" 
+		  [data]="DATA_RECORDArray" 
+		  (selectedRowData)="onSelect($event)" 
+		  (rowSelect)="onSelect($event)"> 
+		  <amexio-data-table-column [data-index]="'ID_BD_name'" [data-type]="'string'" [hidden]="false" [text]="'Устройство'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'DCALL'" [data-type]="'string'" [hidden]="false" [text]="'Дата опроса'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'AType_name'" [data-type]="'string'" [hidden]="false" [text]="'Тип архива'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'CHECK_A'" [data-type]="'number'" [hidden]="false" [text]="'Проверка архивных данных на НС (0 - не производилась, 1 - произведена)'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'DCOUNTER'" [data-type]="'string'" [hidden]="false" [text]="'Дата счетчика'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'dstart'" [data-type]="'string'" [hidden]="false" [text]="'Начало интервала'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'dend'" [data-type]="'string'" [hidden]="false" [text]="'Конец интервала'"></amexio-data-table-column> 
+		</amexio-datagrid> 
+	</amexio-body> 
+</amexio-card> 
+ 
+<!-- confirm delete  dialog -->  
+<amexio-window  [(show-window)]="confirmOpened" [closable]="false" [header]="true" [footer]="true" >  
+     
+    <amexio-header>
+Удалить строку:  Данные::Запись ?
+    </amexio-header> 
+    <amexio-body> 
+            Удалить запись: {{ ( (currentDATA_RECORD.ID_BD_name +'; '+  currentDATA_RECORD.DCALL +'; '+  currentDATA_RECORD.AType_name||'').length >100 ? (currentDATA_RECORD.ID_BD_name +'; '+  currentDATA_RECORD.DCALL +'; '+  currentDATA_RECORD.AType_name||'').substr(0,100)+'...' : (currentDATA_RECORD.ID_BD_name +'; '+  currentDATA_RECORD.DCALL +'; '+  currentDATA_RECORD.AType_name||'')) | removehtmltag }}?  
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="12"> 
+     <amexio-button  [label]="'Отмена'" (onClick)="confirmOpened = false" [type]="'secondary'" [tooltip]="'Отмена'" [icon]="'fa fa-times'"></amexio-button>
+     <amexio-button  [label]="'Удалить'" (onClick)="onConfirmDeletion()" [type]="'danger'" [tooltip]="'Удалить'" [icon]="'fa fa-trash'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window> 
+ 

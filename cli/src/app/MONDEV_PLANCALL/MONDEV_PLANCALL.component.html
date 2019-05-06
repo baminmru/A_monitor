@@ -1,0 +1,319 @@
+﻿<!--Error dialogue-->
+<amexio-window [show-window]="errorFlag"
+               [header]="true"
+			   [footer]="true"
+			   [closable]="false"
+               >
+	<amexio-header>
+        <i class="fa fa-exclamation-triangle"></i> Ошибка
+      </amexio-header>
+	   <amexio-body>
+        <amexio-row>
+          <amexio-column [size]="11">
+		  <span style="color:red">{{errorMessage}}</span>
+		  </amexio-column>
+        </amexio-row>
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="11"> 
+     <amexio-button  [label]="'Ok'" (onClick)="errorFlag=false" [type]="'red'" [tooltip]="'Ok'" [icon]="'fa fa-exclamation-triangle'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window>
+<!-- edit row pane -->	 
+ <amexio-window [closable]="false" [vertical-position]="'top'"  [horizontal-position]="'right'" [body-height]="90" [show-window]="opened" [header]="true" [footer]="true" > 
+	  <amexio-header> 
+        {{formMsg}} Устройство::План опроса устройств 
+<amexio-box *ngIf="valid==false" border-color ="red" border="all" padding="true" background-color="yellow">
+	<amexio-label font-color="red"  border="bottom">Ошибка заполнения формы</amexio-label>
+</amexio-box>
+      </amexio-header> 
+     <amexio-body> 
+     <amexio-row><amexio-column size="12" >
+<amexio-dropdown 
+	 [field-label]="'Исключить из опроса'" name ="CSTATUS" 
+                    [place-holder]="'Исключить из опроса'" 
+	 [(ngModel)]="currentMONDEV_PLANCALL.CSTATUS"
+            [allow-blank]="false" [error-msg] ="'Не задано: Исключить из опроса'" 
+	 [display-field]="'name'"
+	 [value-field]="'id'"
+	 [data]="AppService.enumBooleanCombo()"
+	 >
+</amexio-dropdown>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Max число попыток дозвона'" name ="NMAXCALL" 
+                    [place-holder]="'Max число попыток дозвона'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentMONDEV_PLANCALL.NMAXCALL"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Повторить через (минут)'" name ="MINREPEAT" 
+                    [place-holder]="'Повторить через (минут)'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentMONDEV_PLANCALL.MINREPEAT"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+  <amexio-date-time-picker   [field-label]="'Когда заблокирован'" 
+        [time-picker]="true"  
+        [date-picker]="true"  
+        [(ngModel)]="currentMONDEV_PLANCALL.DLOCK"> 
+ </amexio-date-time-picker> 
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+  <amexio-date-time-picker   [field-label]="'Последний опрос'" 
+        [time-picker]="true"  
+        [date-picker]="true"  
+        [(ngModel)]="currentMONDEV_PLANCALL.DLASTCALL"> 
+ </amexio-date-time-picker> 
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+<amexio-dropdown 
+	 [field-label]="'Опрашивать текущие'" name ="CCURR" 
+                    [place-holder]="'Опрашивать текущие'" 
+	 [(ngModel)]="currentMONDEV_PLANCALL.CCURR"
+            [allow-blank]="false" [error-msg] ="'Не задано: Опрашивать текущие'" 
+	 [display-field]="'name'"
+	 [value-field]="'id'"
+	 [data]="AppService.enumBooleanCombo()"
+	 >
+</amexio-dropdown>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Интервал (минут) '" name ="ICALLCURR" 
+                    [place-holder]="'Интервал (минут) '" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentMONDEV_PLANCALL.ICALLCURR"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+  <amexio-date-time-picker   [field-label]="'Следующий опрос'" 
+        [time-picker]="true"  
+        [date-picker]="true"  
+        [(ngModel)]="currentMONDEV_PLANCALL.DNEXTCURR"> 
+ </amexio-date-time-picker> 
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+<amexio-dropdown 
+	 [field-label]="'Опрашивать ч.'" name ="CHOUR" 
+                    [place-holder]="'Опрашивать ч.'" 
+	 [(ngModel)]="currentMONDEV_PLANCALL.CHOUR"
+            [allow-blank]="false" [error-msg] ="'Не задано: Опрашивать ч.'" 
+	 [display-field]="'name'"
+	 [value-field]="'id'"
+	 [data]="AppService.enumBooleanCombo()"
+	 >
+</amexio-dropdown>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Интервал опроса (минут)'" name ="ICALL" 
+                    [place-holder]="'Интервал опроса (минут)'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentMONDEV_PLANCALL.ICALL"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'За сколько часов'" name ="NUMHOUR" 
+                    [place-holder]="'За сколько часов'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentMONDEV_PLANCALL.NUMHOUR"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+  <amexio-date-time-picker   [field-label]="'Следующий опрос'" 
+        [time-picker]="true"  
+        [date-picker]="true"  
+        [(ngModel)]="currentMONDEV_PLANCALL.DNEXTHOUR"> 
+ </amexio-date-time-picker> 
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+  <amexio-date-time-picker   [field-label]="'Последний опрос'" 
+        [time-picker]="true"  
+        [date-picker]="true"  
+        [(ngModel)]="currentMONDEV_PLANCALL.DLASTHOUR"> 
+ </amexio-date-time-picker> 
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+<amexio-dropdown 
+	 [field-label]="'Опрашивать С.'" name ="C24" 
+                    [place-holder]="'Опрашивать С.'" 
+	 [(ngModel)]="currentMONDEV_PLANCALL.C24"
+            [allow-blank]="false" [error-msg] ="'Не задано: Опрашивать С.'" 
+	 [display-field]="'name'"
+	 [value-field]="'id'"
+	 [data]="AppService.enumBooleanCombo()"
+	 >
+</amexio-dropdown>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Интервал (часов)'" name ="ICALL24" 
+                    [place-holder]="'Интервал (часов)'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentMONDEV_PLANCALL.ICALL24"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'За сколько суток'" name ="NUM24" 
+                    [place-holder]="'За сколько суток'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentMONDEV_PLANCALL.NUM24"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+  <amexio-date-time-picker   [field-label]="'Следующий опрос'" 
+        [time-picker]="true"  
+        [date-picker]="true"  
+        [(ngModel)]="currentMONDEV_PLANCALL.DNEXT24"> 
+ </amexio-date-time-picker> 
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+  <amexio-date-time-picker   [field-label]="'Последний опрос'" 
+        [time-picker]="true"  
+        [date-picker]="true"  
+        [(ngModel)]="currentMONDEV_PLANCALL.DLASTDAY"> 
+ </amexio-date-time-picker> 
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+<amexio-dropdown 
+	 [field-label]="'Опрашивать Ит.'" name ="CSUM" 
+                    [place-holder]="'Опрашивать Ит.'" 
+	 [(ngModel)]="currentMONDEV_PLANCALL.CSUM"
+            [allow-blank]="false" [error-msg] ="'Не задано: Опрашивать Ит.'" 
+	 [display-field]="'name'"
+	 [value-field]="'id'"
+	 [data]="AppService.enumBooleanCombo()"
+	 >
+</amexio-dropdown>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Интервал  (минут) '" name ="ICALLSUM" 
+                    [place-holder]="'Интервал  (минут) '" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentMONDEV_PLANCALL.ICALLSUM"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+  <amexio-date-time-picker   [field-label]="'Следующий опрос'" 
+        [time-picker]="true"  
+        [date-picker]="true"  
+        [(ngModel)]="currentMONDEV_PLANCALL.DNEXTSUM"> 
+ </amexio-date-time-picker> 
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+<amexio-dropdown 
+	 [field-label]="'Опрашивать Эл.'" name ="CEL" 
+                    [place-holder]="'Опрашивать Эл.'" 
+	 [(ngModel)]="currentMONDEV_PLANCALL.CEL"
+            [allow-blank]="false" [error-msg] ="'Не задано: Опрашивать Эл.'" 
+	 [display-field]="'name'"
+	 [value-field]="'id'"
+	 [data]="AppService.enumBooleanCombo()"
+	 >
+</amexio-dropdown>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Интервал (мин.)'" name ="IEL" 
+                    [place-holder]="'Интервал (мин.)'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentMONDEV_PLANCALL.IEL"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+  <amexio-date-time-picker   [field-label]="'Дата следующего опроса'" 
+        [time-picker]="false"  
+        [date-picker]="true"  
+        [(ngModel)]="currentMONDEV_PLANCALL.DNEXTEL"> 
+ </amexio-date-time-picker> 
+     </amexio-column></amexio-row>
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="12"> 
+     <amexio-button  [label]="'Отмена'" (onClick)="opened = false;  refreshMONDEV_PLANCALL();" [type]="'secondary'" [tooltip]="'Отмена'" [icon]="'fa fa-times'"></amexio-button>
+     <amexio-button  [label]="'Сохранить'" (onClick)="save(currentMONDEV_PLANCALL)" [type]="'success'" [tooltip]="'Сохранить'" [icon]="'fa fa-save'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window> 
+   
+<!-- list Of row pane --> 
+<amexio-card [show]="true" [header] ="true" [footer] ="false" > 
+    <amexio-header> 
+	<amexio-row> 
+		<amexio-column size="12" > 
+		<amexio-button [disabled]="AppService.LastMONDEV_BDEVICES.MONDEV_BDEVICESId==null" [label]="'Создать'" [type]="'secondary'" [tooltip]="'Создать новую запись'" [icon]="'fa fa-plus'" (onClick)="onNew()"></amexio-button>
+		<amexio-button [disabled]="currentMONDEV_PLANCALL.MONDEV_PLANCALLId==null" [label]="'Изменить'" (onClick)="onEdit(currentMONDEV_PLANCALL)" [type]="'secondary'" [tooltip]="'Изменить запись'" [icon]="'fa fa-edit'"></amexio-button>
+     <amexio-button [disabled]="currentMONDEV_PLANCALL.MONDEV_PLANCALLId==null" [label]="'Удалить'" (onClick)="onDelete(currentMONDEV_PLANCALL)" [type]="'secondary'" [tooltip]="'Удалить запись'" [icon]="'fa fa-trash'"></amexio-button>
+     <amexio-button  [label]="'Обновить'" (onClick)="refreshMONDEV_PLANCALL()" [type]="'secondary'" [tooltip]="'Обновить данные'" [icon]="'fa fa-refresh'"></amexio-button>
+		</amexio-column>
+	</amexio-row> 
+	</amexio-header> 
+	<amexio-body> 
+		<amexio-datagrid 
+		  [title]="'Устройство::План опроса устройств'" 
+		  [page-size] = "10" 
+		  [enable-data-filter]="false" 
+		  [enable-checkbox]="false" 
+		  [data]="MONDEV_PLANCALLArray" 
+		  (selectedRowData)="onSelect($event)" 
+		  (rowSelect)="onSelect($event)"> 
+		  <amexio-data-table-column [data-index]="'CSTATUS_name'" [data-type]="'string'" [hidden]="false" [text]="'Исключить из опроса'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'NMAXCALL'" [data-type]="'number'" [hidden]="false" [text]="'Max число попыток дозвона'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'MINREPEAT'" [data-type]="'number'" [hidden]="false" [text]="'Повторить через (минут)'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'DLOCK'" [data-type]="'string'" [hidden]="false" [text]="'Когда заблокирован'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'DLASTCALL'" [data-type]="'string'" [hidden]="false" [text]="'Последний опрос'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'CCURR_name'" [data-type]="'string'" [hidden]="false" [text]="'Опрашивать текущие'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'ICALLCURR'" [data-type]="'number'" [hidden]="false" [text]="'Интервал (минут) '"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'DNEXTCURR'" [data-type]="'string'" [hidden]="false" [text]="'Следующий опрос'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'CHOUR_name'" [data-type]="'string'" [hidden]="false" [text]="'Опрашивать ч.'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'ICALL'" [data-type]="'number'" [hidden]="false" [text]="'Интервал опроса (минут)'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'NUMHOUR'" [data-type]="'number'" [hidden]="false" [text]="'За сколько часов'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'DNEXTHOUR'" [data-type]="'string'" [hidden]="false" [text]="'Следующий опрос'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'DLASTHOUR'" [data-type]="'string'" [hidden]="false" [text]="'Последний опрос'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'C24_name'" [data-type]="'string'" [hidden]="false" [text]="'Опрашивать С.'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'ICALL24'" [data-type]="'number'" [hidden]="false" [text]="'Интервал (часов)'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'NUM24'" [data-type]="'number'" [hidden]="false" [text]="'За сколько суток'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'DNEXT24'" [data-type]="'string'" [hidden]="false" [text]="'Следующий опрос'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'DLASTDAY'" [data-type]="'string'" [hidden]="false" [text]="'Последний опрос'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'CSUM_name'" [data-type]="'string'" [hidden]="false" [text]="'Опрашивать Ит.'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'ICALLSUM'" [data-type]="'number'" [hidden]="false" [text]="'Интервал  (минут) '"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'DNEXTSUM'" [data-type]="'string'" [hidden]="false" [text]="'Следующий опрос'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'CEL_name'" [data-type]="'string'" [hidden]="false" [text]="'Опрашивать Эл.'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'IEL'" [data-type]="'number'" [hidden]="false" [text]="'Интервал (мин.)'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'DNEXTEL'" [data-type]="'string'" [hidden]="false" [text]="'Дата следующего опроса'"></amexio-data-table-column> 
+		</amexio-datagrid> 
+	</amexio-body> 
+</amexio-card> 
+ 
+<!-- confirm delete  dialog -->  
+<amexio-window  [(show-window)]="confirmOpened" [closable]="false" [header]="true" [footer]="true" >  
+     
+    <amexio-header>
+Удалить строку:  Устройство::План опроса устройств ?
+    </amexio-header> 
+    <amexio-body> 
+            Удалить запись: {{   (currentMONDEV_PLANCALL.ICALL||'') | removehtmltag }}?  
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="12"> 
+     <amexio-button  [label]="'Отмена'" (onClick)="confirmOpened = false" [type]="'secondary'" [tooltip]="'Отмена'" [icon]="'fa fa-times'"></amexio-button>
+     <amexio-button  [label]="'Удалить'" (onClick)="onConfirmDeletion()" [type]="'danger'" [tooltip]="'Удалить'" [icon]="'fa fa-trash'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window> 
+ 

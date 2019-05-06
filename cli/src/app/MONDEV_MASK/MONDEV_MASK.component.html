@@ -1,0 +1,162 @@
+﻿<!--Error dialogue-->
+<amexio-window [show-window]="errorFlag"
+               [header]="true"
+			   [footer]="true"
+			   [closable]="false"
+               >
+	<amexio-header>
+        <i class="fa fa-exclamation-triangle"></i> Ошибка
+      </amexio-header>
+	   <amexio-body>
+        <amexio-row>
+          <amexio-column [size]="11">
+		  <span style="color:red">{{errorMessage}}</span>
+		  </amexio-column>
+        </amexio-row>
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="11"> 
+     <amexio-button  [label]="'Ok'" (onClick)="errorFlag=false" [type]="'red'" [tooltip]="'Ok'" [icon]="'fa fa-exclamation-triangle'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window>
+<!-- edit row pane -->	 
+ <amexio-window [closable]="false" [vertical-position]="'top'"  [horizontal-position]="'right'" [body-height]="90" [show-window]="opened" [header]="true" [footer]="true" > 
+	  <amexio-header> 
+        {{formMsg}} Устройство::Параметры для вывода 
+<amexio-box *ngIf="valid==false" border-color ="red" border="all" padding="true" background-color="yellow">
+	<amexio-label font-color="red"  border="bottom">Ошибка заполнения формы</amexio-label>
+</amexio-box>
+      </amexio-header> 
+     <amexio-body> 
+     <amexio-row><amexio-column size="12" >
+	 <amexio-dropdown 
+	 [place-holder] = "'Тип архива'"
+	 name ="PTYPE"
+	 [field-label]= "'Тип архива'"
+            [allow-blank]="false" [error-msg] ="'Не задано: Тип архива'" 
+	 
+	 [display-field]="'name'"
+	 [value-field]="'id'"
+	 [data]="AppService.ComboMOND_ATYPE"
+	 
+	 [(ngModel)]="currentMONDEV_MASK.PTYPE"
+	 >
+  </amexio-dropdown>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Порядок вывода'" name ="sequence" 
+                    [place-holder]="'Порядок вывода'" 
+            [allow-blank]="false" [error-msg] ="'Не задано: Порядок вывода'" 
+	 [(ngModel)]="currentMONDEV_MASK.sequence"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+	 <amexio-dropdown 
+	 [place-holder] = "'Параметр'"
+	 name ="PNAME"
+	 [field-label]= "'Параметр'"
+            [allow-blank]="false" [error-msg] ="'Не задано: Параметр'" 
+	 
+	 [display-field]="'name'"
+	 [value-field]="'id'"
+	 [data]="AppService.ComboMOND_PARAM"
+	 
+	 [(ngModel)]="currentMONDEV_MASK.PNAME"
+	 >
+  </amexio-dropdown>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Формат'" name ="paramFormat"  
+                    [place-holder] = "'Формат'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_MASK.paramFormat" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Ширина'" name ="colWidth" 
+                    [place-holder]="'Ширина'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentMONDEV_MASK.colWidth"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+<amexio-dropdown 
+	 [field-label]="'Скрыть'" name ="phide" 
+                    [place-holder]="'Скрыть'" 
+	 [(ngModel)]="currentMONDEV_MASK.phide"
+            [allow-blank]="false" [error-msg] ="'Не задано: Скрыть'" 
+	 [display-field]="'name'"
+	 [value-field]="'id'"
+	 [data]="AppService.enumBooleanCombo()"
+	 >
+</amexio-dropdown>
+     </amexio-column></amexio-row>
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="12"> 
+     <amexio-button  [label]="'Отмена'" (onClick)="opened = false;  refreshMONDEV_MASK();" [type]="'secondary'" [tooltip]="'Отмена'" [icon]="'fa fa-times'"></amexio-button>
+     <amexio-button  [label]="'Сохранить'" (onClick)="save(currentMONDEV_MASK)" [type]="'success'" [tooltip]="'Сохранить'" [icon]="'fa fa-save'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window> 
+   
+<!-- list Of row pane --> 
+<amexio-card [show]="true" [header] ="true" [footer] ="false" > 
+    <amexio-header> 
+	<amexio-row> 
+		<amexio-column size="12" > 
+		<amexio-button [disabled]="AppService.LastMONDEV_BDEVICES.MONDEV_BDEVICESId==null" [label]="'Создать'" [type]="'secondary'" [tooltip]="'Создать новую запись'" [icon]="'fa fa-plus'" (onClick)="onNew()"></amexio-button>
+		<amexio-button [disabled]="currentMONDEV_MASK.MONDEV_MASKId==null" [label]="'Изменить'" (onClick)="onEdit(currentMONDEV_MASK)" [type]="'secondary'" [tooltip]="'Изменить запись'" [icon]="'fa fa-edit'"></amexio-button>
+     <amexio-button [disabled]="currentMONDEV_MASK.MONDEV_MASKId==null" [label]="'Удалить'" (onClick)="onDelete(currentMONDEV_MASK)" [type]="'secondary'" [tooltip]="'Удалить запись'" [icon]="'fa fa-trash'"></amexio-button>
+     <amexio-button  [label]="'Обновить'" (onClick)="refreshMONDEV_MASK()" [type]="'secondary'" [tooltip]="'Обновить данные'" [icon]="'fa fa-refresh'"></amexio-button>
+		</amexio-column>
+	</amexio-row> 
+	</amexio-header> 
+	<amexio-body> 
+		<amexio-datagrid 
+		  [title]="'Устройство::Параметры для вывода'" 
+		  [page-size] = "10" 
+		  [enable-data-filter]="false" 
+		  [enable-checkbox]="false" 
+		  [data]="MONDEV_MASKArray" 
+		  (selectedRowData)="onSelect($event)" 
+		  (rowSelect)="onSelect($event)"> 
+		  <amexio-data-table-column [data-index]="'PTYPE_name'" [data-type]="'string'" [hidden]="false" [text]="'Тип архива'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'sequence'" [data-type]="'number'" [hidden]="false" [text]="'Порядок вывода'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'PNAME_name'" [data-type]="'string'" [hidden]="false" [text]="'Параметр'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'paramFormat'" [data-type]="'string'" [hidden]="false" [text]="'Формат'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.paramFormat) ? ((row.paramFormat.length>100) ? row.paramFormat.substr(0,100)+'...' : row.paramFormat ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'colWidth'" [data-type]="'number'" [hidden]="false" [text]="'Ширина'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'phide_name'" [data-type]="'string'" [hidden]="false" [text]="'Скрыть'"></amexio-data-table-column> 
+		</amexio-datagrid> 
+	</amexio-body> 
+</amexio-card> 
+ 
+<!-- confirm delete  dialog -->  
+<amexio-window  [(show-window)]="confirmOpened" [closable]="false" [header]="true" [footer]="true" >  
+     
+    <amexio-header>
+Удалить строку:  Устройство::Параметры для вывода ?
+    </amexio-header> 
+    <amexio-body> 
+            Удалить запись: {{ ( (currentMONDEV_MASK.PTYPE_name +'; '+  currentMONDEV_MASK.PNAME_name||'').length >100 ? (currentMONDEV_MASK.PTYPE_name +'; '+  currentMONDEV_MASK.PNAME_name||'').substr(0,100)+'...' : (currentMONDEV_MASK.PTYPE_name +'; '+  currentMONDEV_MASK.PNAME_name||'')) | removehtmltag }}?  
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="12"> 
+     <amexio-button  [label]="'Отмена'" (onClick)="confirmOpened = false" [type]="'secondary'" [tooltip]="'Отмена'" [icon]="'fa fa-times'"></amexio-button>
+     <amexio-button  [label]="'Удалить'" (onClick)="onConfirmDeletion()" [type]="'danger'" [tooltip]="'Удалить'" [icon]="'fa fa-trash'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window> 
+ 

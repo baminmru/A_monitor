@@ -1,0 +1,45 @@
+﻿<amexio-card [header] ="true" [footer] ="false">
+  <amexio-header>
+ <i class="fa " aria-hidden="True"></i> Справочник 
+  </amexio-header>
+  <amexio-body>
+	<amexio-tab-view  [closable]="false">
+		<amexio-tab  title="Параметры"  [active]="true" >
+			<app-MOND_PARAM></app-MOND_PARAM>
+		</amexio-tab>
+		
+		<amexio-tab  title="Тип подключения"  >
+			<app-MOND_CONNECTTYPE></app-MOND_CONNECTTYPE>
+		</amexio-tab>
+		
+		<amexio-tab  title="Класс устройства"  >
+			<app-MOND_DEVCLASS></app-MOND_DEVCLASS>
+		</amexio-tab>
+		
+		<amexio-tab  title="Тип устройства"  >
+			<app-MOND_DEVTYPE></app-MOND_DEVTYPE>
+		</amexio-tab>
+		
+		<amexio-tab  title="Тип архива"  >
+			<app-MOND_ATYPE></app-MOND_ATYPE>
+		</amexio-tab>
+		
+		<amexio-tab  title="Поставщик"  >
+			<app-MOND_SNABTOP></app-MOND_SNABTOP>
+		</amexio-tab>
+		
+		<amexio-tab  title="Снабжающая организация"  >
+			<app-MOND_SNAB></app-MOND_SNAB>
+		</amexio-tab>
+		
+		<amexio-tab  title="Роли"  >
+			<app-MOND_ROLE></app-MOND_ROLE>
+		</amexio-tab>
+		
+		<amexio-tab  title="Раздел данных"  >
+			<app-MOND_DATA></app-MOND_DATA>
+		</amexio-tab>
+		
+	</amexio-tab-view>
+  </amexio-body>
+</amexio-card>

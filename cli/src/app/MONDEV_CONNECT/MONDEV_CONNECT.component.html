@@ -1,0 +1,305 @@
+﻿<!--Error dialogue-->
+<amexio-window [show-window]="errorFlag"
+               [header]="true"
+			   [footer]="true"
+			   [closable]="false"
+               >
+	<amexio-header>
+        <i class="fa fa-exclamation-triangle"></i> Ошибка
+      </amexio-header>
+	   <amexio-body>
+        <amexio-row>
+          <amexio-column [size]="11">
+		  <span style="color:red">{{errorMessage}}</span>
+		  </amexio-column>
+        </amexio-row>
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="11"> 
+     <amexio-button  [label]="'Ok'" (onClick)="errorFlag=false" [type]="'red'" [tooltip]="'Ok'" [icon]="'fa fa-exclamation-triangle'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window>
+<!-- edit row pane -->	 
+ <amexio-window [closable]="false" [vertical-position]="'top'"  [horizontal-position]="'right'" [body-height]="90" [show-window]="opened" [header]="true" [footer]="true" > 
+	  <amexio-header> 
+        {{formMsg}} Устройство::Параметры соединения 
+<amexio-box *ngIf="valid==false" border-color ="red" border="all" padding="true" background-color="yellow">
+	<amexio-label font-color="red"  border="bottom">Ошибка заполнения формы</amexio-label>
+</amexio-box>
+      </amexio-header> 
+     <amexio-body> 
+     <amexio-row><amexio-column size="12" >
+<amexio-dropdown 
+	 [field-label]="'Подключение разрешено'" name ="ConnectionEnabled" 
+                    [place-holder]="'Подключение разрешено'" 
+	 [(ngModel)]="currentMONDEV_CONNECT.ConnectionEnabled"
+            [allow-blank]="false" [error-msg] ="'Не задано: Подключение разрешено'" 
+	 [display-field]="'name'"
+	 [value-field]="'id'"
+	 [data]="AppService.enumBooleanCombo()"
+	 >
+</amexio-dropdown>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+	 <amexio-dropdown 
+	 [place-holder] = "'Тип подключения'"
+	 name ="ConnectType"
+	 [field-label]= "'Тип подключения'"
+            [allow-blank]="false" [error-msg] ="'Не задано: Тип подключения'" 
+	 
+	 [display-field]="'name'"
+	 [value-field]="'id'"
+	 [data]="AppService.ComboMOND_CONNECTTYPE"
+	 
+	 [(ngModel)]="currentMONDEV_CONNECT.ConnectType"
+	 >
+  </amexio-dropdown>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Время на соединение'" name ="CONNECTLIMIT" 
+                    [place-holder]="'Время на соединение'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentMONDEV_CONNECT.CONNECTLIMIT"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+	 <amexio-dropdown 
+	 [place-holder] = "'Сервер опроса'"
+	 name ="TheServer"
+	 [field-label]= "'Сервер опроса'"
+            [allow-blank]="false" [error-msg] ="'Не задано: Сервер опроса'" 
+	 
+	 [display-field]="'name'"
+	 [value-field]="'id'"
+	 [data]="AppService.ComboMONSRV_INFO"
+	 
+	 [(ngModel)]="currentMONDEV_CONNECT.TheServer"
+	 >
+  </amexio-dropdown>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Сетевой адрес'" name ="netaddr" 
+                    [place-holder]="'Сетевой адрес'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentMONDEV_CONNECT.netaddr"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Скорость бод'" name ="CSPEED"  
+                    [place-holder] = "'Скорость бод'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONNECT.CSPEED" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Биты данных'" name ="CDATABIT"  
+                    [place-holder] = "'Биты данных'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONNECT.CDATABIT" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+<amexio-dropdown 
+	 [field-label]="'Четность'" name ="CPARITY" 
+                    [place-holder]="'Четность'" 
+	 [(ngModel)]="currentMONDEV_CONNECT.CPARITY"
+            [allow-blank]="false" [error-msg] ="'Не задано: Четность'" 
+	 [display-field]="'name'"
+	 [value-field]="'id'"
+	 [data]="AppService.enumParityTypeCombo()"
+	 >
+</amexio-dropdown>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Стоповые биты'" name ="CSTOPBITS" 
+                    [place-holder]="'Стоповые биты'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentMONDEV_CONNECT.CSTOPBITS"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'FlowControl'" name ="FlowControl"  
+                    [place-holder] = "'FlowControl'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONNECT.FlowControl" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Com Port'" name ="ComPortNum"  
+                    [place-holder] = "'Com Port'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONNECT.ComPortNum" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'IP адрес'" name ="IPAddr"  
+                    [place-holder] = "'IP адрес'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONNECT.IPAddr" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'TCP Порт'" name ="PortNum" 
+                    [place-holder]="'TCP Порт'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentMONDEV_CONNECT.PortNum"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Пользователь'" name ="UserName"  
+                    [place-holder] = "'Пользователь'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONNECT.UserName" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Пароль'" name ="Password"  
+                    [place-holder] = "'Пароль'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONNECT.Password" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Код города'" name ="CTOWNCODE"  
+                    [place-holder] = "'Код города'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONNECT.CTOWNCODE" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Телефон'" name ="CPHONE"  
+                    [place-holder] = "'Телефон'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONNECT.CPHONE" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+<amexio-label>AT команда</amexio-label>
+<ngx-wig  
+ [(ngModel)]="currentMONDEV_CONNECT.ATCommand"
+ [placeholder]="'AT команда'" 
+ [buttons]="'bold,italic,link,list1,list2'">
+</ngx-wig>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Идентификатор промеж. устройства'" name ="callerID"  
+                    [place-holder] = "'Идентификатор промеж. устройства'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONDEV_CONNECT.callerID" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="12"> 
+     <amexio-button  [label]="'Отмена'" (onClick)="opened = false;  refreshMONDEV_CONNECT();" [type]="'secondary'" [tooltip]="'Отмена'" [icon]="'fa fa-times'"></amexio-button>
+     <amexio-button  [label]="'Сохранить'" (onClick)="save(currentMONDEV_CONNECT)" [type]="'success'" [tooltip]="'Сохранить'" [icon]="'fa fa-save'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window> 
+   
+<!-- list Of row pane --> 
+<amexio-card [show]="true" [header] ="true" [footer] ="false" > 
+    <amexio-header> 
+	<amexio-row> 
+		<amexio-column size="12" > 
+		<amexio-button [disabled]="AppService.LastMONDEV_BDEVICES.MONDEV_BDEVICESId==null" [label]="'Создать'" [type]="'secondary'" [tooltip]="'Создать новую запись'" [icon]="'fa fa-plus'" (onClick)="onNew()"></amexio-button>
+		<amexio-button [disabled]="currentMONDEV_CONNECT.MONDEV_CONNECTId==null" [label]="'Изменить'" (onClick)="onEdit(currentMONDEV_CONNECT)" [type]="'secondary'" [tooltip]="'Изменить запись'" [icon]="'fa fa-edit'"></amexio-button>
+     <amexio-button [disabled]="currentMONDEV_CONNECT.MONDEV_CONNECTId==null" [label]="'Удалить'" (onClick)="onDelete(currentMONDEV_CONNECT)" [type]="'secondary'" [tooltip]="'Удалить запись'" [icon]="'fa fa-trash'"></amexio-button>
+     <amexio-button  [label]="'Обновить'" (onClick)="refreshMONDEV_CONNECT()" [type]="'secondary'" [tooltip]="'Обновить данные'" [icon]="'fa fa-refresh'"></amexio-button>
+		</amexio-column>
+	</amexio-row> 
+	</amexio-header> 
+	<amexio-body> 
+		<amexio-datagrid 
+		  [title]="'Устройство::Параметры соединения'" 
+		  [page-size] = "10" 
+		  [enable-data-filter]="false" 
+		  [enable-checkbox]="false" 
+		  [data]="MONDEV_CONNECTArray" 
+		  (selectedRowData)="onSelect($event)" 
+		  (rowSelect)="onSelect($event)"> 
+		  <amexio-data-table-column [data-index]="'ConnectionEnabled_name'" [data-type]="'string'" [hidden]="false" [text]="'Подключение разрешено'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'ConnectType_name'" [data-type]="'string'" [hidden]="false" [text]="'Тип подключения'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'CONNECTLIMIT'" [data-type]="'number'" [hidden]="false" [text]="'Время на соединение'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'TheServer_name'" [data-type]="'string'" [hidden]="false" [text]="'Сервер опроса'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'netaddr'" [data-type]="'number'" [hidden]="false" [text]="'Сетевой адрес'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'CSPEED'" [data-type]="'string'" [hidden]="false" [text]="'Скорость бод'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.CSPEED) ? ((row.CSPEED.length>100) ? row.CSPEED.substr(0,100)+'...' : row.CSPEED ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'CDATABIT'" [data-type]="'string'" [hidden]="false" [text]="'Биты данных'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.CDATABIT) ? ((row.CDATABIT.length>100) ? row.CDATABIT.substr(0,100)+'...' : row.CDATABIT ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'CPARITY_name'" [data-type]="'string'" [hidden]="false" [text]="'Четность'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'CSTOPBITS'" [data-type]="'number'" [hidden]="false" [text]="'Стоповые биты'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'FlowControl'" [data-type]="'string'" [hidden]="false" [text]="'FlowControl'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.FlowControl) ? ((row.FlowControl.length>100) ? row.FlowControl.substr(0,100)+'...' : row.FlowControl ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'ComPortNum'" [data-type]="'string'" [hidden]="false" [text]="'Com Port'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.ComPortNum) ? ((row.ComPortNum.length>100) ? row.ComPortNum.substr(0,100)+'...' : row.ComPortNum ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'IPAddr'" [data-type]="'string'" [hidden]="false" [text]="'IP адрес'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.IPAddr) ? ((row.IPAddr.length>100) ? row.IPAddr.substr(0,100)+'...' : row.IPAddr ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'PortNum'" [data-type]="'number'" [hidden]="false" [text]="'TCP Порт'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'UserName'" [data-type]="'string'" [hidden]="false" [text]="'Пользователь'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.UserName) ? ((row.UserName.length>100) ? row.UserName.substr(0,100)+'...' : row.UserName ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'Password'" [data-type]="'string'" [hidden]="false" [text]="'Пароль'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.Password) ? ((row.Password.length>100) ? row.Password.substr(0,100)+'...' : row.Password ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'CTOWNCODE'" [data-type]="'string'" [hidden]="false" [text]="'Код города'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.CTOWNCODE) ? ((row.CTOWNCODE.length>100) ? row.CTOWNCODE.substr(0,100)+'...' : row.CTOWNCODE ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'CPHONE'" [data-type]="'string'" [hidden]="false" [text]="'Телефон'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.CPHONE) ? ((row.CPHONE.length>100) ? row.CPHONE.substr(0,100)+'...' : row.CPHONE ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'ATCommand'" [data-type]="'string'" [hidden]="false" [text]="'AT команда'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.ATCommand) ? ((row.ATCommand.length>100) ? row.ATCommand.substr(0,100)+'...' : row.ATCommand ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'callerID'" [data-type]="'string'" [hidden]="false" [text]="'Идентификатор промеж. устройства'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.callerID) ? ((row.callerID.length>100) ? row.callerID.substr(0,100)+'...' : row.callerID ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		</amexio-datagrid> 
+	</amexio-body> 
+</amexio-card> 
+ 
+<!-- confirm delete  dialog -->  
+<amexio-window  [(show-window)]="confirmOpened" [closable]="false" [header]="true" [footer]="true" >  
+     
+    <amexio-header>
+Удалить строку:  Устройство::Параметры соединения ?
+    </amexio-header> 
+    <amexio-body> 
+            Удалить запись: {{ ( (currentMONDEV_CONNECT.ConnectType_name +'; '+  currentMONDEV_CONNECT.CSPEED||'').length >100 ? (currentMONDEV_CONNECT.ConnectType_name +'; '+  currentMONDEV_CONNECT.CSPEED||'').substr(0,100)+'...' : (currentMONDEV_CONNECT.ConnectType_name +'; '+  currentMONDEV_CONNECT.CSPEED||'')) | removehtmltag }}?  
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="12"> 
+     <amexio-button  [label]="'Отмена'" (onClick)="confirmOpened = false" [type]="'secondary'" [tooltip]="'Отмена'" [icon]="'fa fa-times'"></amexio-button>
+     <amexio-button  [label]="'Удалить'" (onClick)="onConfirmDeletion()" [type]="'danger'" [tooltip]="'Удалить'" [icon]="'fa fa-trash'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window> 
+ 
