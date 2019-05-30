@@ -7,16 +7,34 @@
 </amexio-homepage-northpanel>
 
  <amexio-homepage-westpanel  [title]="'Узлы и устройства'" >
-        <amexio-treeview 
-			
-			[data]="NodeList()"
-			
-			 >
-			</amexio-treeview>
+       	<amexio-datagrid name="nodegrid"
+					[title]="'Устройства'"
+					[page-size] = "10"
+					[global-filter]="true"
+					[data]="NodeArray" 
+					[groupby]="true"
+					[groupby-data-index]="'NodeName'"
+					
+					(selectedRowData)="onNodeSelect($event)"
+					(rowSelect)="onNodeSelect($event)">
+				
+					<amexio-data-table-column [data-index]="'NodeName'"
+					[data-type]="'string'"
+					[hidden]="false"
+					>
+</amexio-data-table-column>
+				
+					<amexio-data-table-column [data-index]="'DeviceName'"
+																		[data-type]="'string'"
+																		[hidden]="false"
+																		>
+					</amexio-data-table-column>
+				
+				</amexio-datagrid>
  </amexio-homepage-westpanel>
  <amexio-homepage-centerpanel >
         
-            	<amexio-tab-view  [closable]="false">
+         <amexio-tab-view  [closable]="false">
 				<amexio-tab  title="Данные"  [active]="true" >
 					<DISPATCHER_DATA></DISPATCHER_DATA>
 				</amexio-tab>
@@ -25,11 +43,9 @@
 					<DISPATCHER_CHART></DISPATCHER_CHART>
 				</amexio-tab>
 				
-				<amexio-tab  title="Сообщения"  >
-					<DISPATCHER_MSG></DISPATCHER_MSG>
-				</amexio-tab>
+	
 
-			</amexio-tab-view>
+			</amexio-tab-view> 
       
      </amexio-homepage-centerpanel>
 	
@@ -51,6 +67,9 @@
 					[page-size] = "10"
 					[global-filter]="true"
 					[data]="NodeArray" 
+					[groupby]="false"
+					[groupby-data-index]="'NodeName'"
+					
 					(selectedRowData)="onNodeSelect($event)"
 					(rowSelect)="onNodeSelect($event)">
 				
@@ -80,10 +99,7 @@
 					<DISPATCHER_CHART></DISPATCHER_CHART>
 				</amexio-tab>
 				
-				<!-- <amexio-tab  title="Сообщения"  >
-					<DISPATCHER_MSG></DISPATCHER_MSG>
-				</amexio-tab>
-				-->
+	
 
 			</amexio-tab-view> 
 		

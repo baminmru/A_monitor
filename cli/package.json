@@ -1,5 +1,5 @@
 {
-  "name": "amexio-cli",
+  "name": "ability_monitor",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -22,14 +22,14 @@
     "@angular/platform-browser": "6.1.9",
     "@angular/platform-browser-dynamic": "6.1.9",
     "@angular/router": "6.1.9",
-    "@types/knockout": "^3.4.65",
-    "amexio-chart-d3": "^0.1.5",
-    "amexio-ng-extensions": "5.9.0",
+    "@types/knockout": "^3.4.66",
+    "amexio-chart-d3": "0.1.6",
+    "amexio-ng-extensions": "5.9.1",
     "angular": "^1.7.8",
     "angular-font-awesome": "^3.1.2",
     "chart.js": "^2.8.0",
     "classlist.js": "^1.1.20150312",
-    "core-js": "^2.6.5",
+    "core-js": "^2.6.9",
     "d3": "^5.9.2",
     "font-awesome": "^4.7.0",
     "install": "^0.12.2",
@@ -39,7 +39,7 @@
     "npm": "^6.9.0",
     "popper": "^1.0.1",
     "recordrtc": "^5.5.4",
-    "rxjs": "^6.5.1",
+    "rxjs": "^6.5.2",
     "saas": "^1.0.0",
     "tether": "^1.4.6",
     "zone.js": "^0.8.29"
@@ -73,8 +73,8 @@
     "typescript": "2.9.2",
     "typings": "^1.4.0",
     "webdriver-manager": "^12.1.4",
-    "webpack": "^4.30.0",
+    "webpack": "^4.32.2",
     "webpack-dev-middleware": "3.4.0",
-    "webpack-dev-server": "^3.3.1"
+    "webpack-dev-server": "^3.4.1"
   }
 }

@@ -22,7 +22,16 @@ export class DISPATCHER_CHARTComponent implements OnInit {
 
   
   
+  sdate():string{
+    if(this.disp_Service.CurretCondition.dstart !=''){
+    var d:Date;
 
+    d=new Date(this.disp_Service.CurretCondition.dstart);
+    return (d.getDate() + "/" + ((d.getMonth() + 1)) + "/" +d.getFullYear() ) ;
+    }else{
+      return '?';
+    }
+  }
 
 
 

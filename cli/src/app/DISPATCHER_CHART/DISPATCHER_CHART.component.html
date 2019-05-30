@@ -4,14 +4,24 @@
                             <amexio-column [size]="6" [fit]="true">
                                 <amexio-card [header]="false" [show]="'true'">
                                      <amexio-body>
-                                        <amexio-d3-chart-line 
+                                       <amexio-d3-chart-line 
                                                  (onChartClick)="onUserDefineChartClick($event)" 
-                                                 [label]="true" 
+                                                 [label]="false" 
+                                                 [horizontal-scale]="false"
+                                                 [vertical-scale]="false"
+                                                 [yaxis-interval]=10
+                                                 [xaxis-interval]=20
                                                  (onLegendClick)="onUserDefineLegendClick($event)"
-                                                 [title]="'Напряжение по фазам'"
+                                                 [title]="'Напряжение по фазам: ' + sdate()"
                                                 [data] = "disp_Service.CurrentChart_U"
                                                 >
-                                             </amexio-d3-chart-line>
+                                             </amexio-d3-chart-line> 
+                                            <!-- <amexio-chart-line 
+                                                [data] = "disp_Service.CurrentChart_U"
+                                                >
+                                                <amexio-chart-legend [position]="'top'">
+                                                </amexio-chart-legend>
+                                             </amexio-chart-line> -->
                                     </amexio-body>
                                 </amexio-card>
                             </amexio-column>
@@ -19,13 +29,19 @@
                                         <amexio-card [header]="false" [show]="'true'">
                                           
                                             <amexio-body>
-                                                <amexio-d3-chart-line 
+
+                                                 <amexio-d3-chart-line 
                                                 (onChartClick)="onDefaultChartClick($event)"
                                                 (onLegendClick)="onDefaultLegendClick($event)"
-                                                [title]="'Токи по фазам'"
-                                                [label]="true"
+                                                [title]="'Токи по фазам: ' + sdate()"
+                                                [label]="false" 
+                                                 [horizontal-scale]="false"
+                                                 [vertical-scale]="false"
+                                                 [yaxis-interval]=10
+                                                 [xaxis-interval]=20
                                                 [data] = "disp_Service.CurrentChart_I">
-                                             </amexio-d3-chart-line>
+                                             </amexio-d3-chart-line> -->
+                                             
                                             </amexio-body>
                                         </amexio-card>
                                     </amexio-column>
@@ -38,16 +54,21 @@
                                         <amexio-card [header]="false" [show]="'true'">
                                            
                                             <amexio-body>
-                                                <amexio-d3-chart-line 
+                                                 <amexio-d3-chart-line 
                                                         (onChartClick)="onLineChartClick($event)" 
-                                                        [label]="true" 
+                                                        [label]="false" 
+                                                        [horizontal-scale]="false"
+                                                        [vertical-scale]="false"
+                                                        [yaxis-interval]=10
+                                                        [xaxis-interval]=20
                                                         (onLegendClick)="onLineLegendClick($event)"
-                                                        [title]="'Мощность по  фазам'"
+                                                        [title]="'Мощность по  фазам: ' + sdate()"
                                                         [data] = "disp_Service.CurrentChart_P"
                                                         [label-color] = "'brown'"
-                                                        [yaxis-interval] = "1"
+                                                       
                                                         >
                                                      </amexio-d3-chart-line>
+                                                
                                             </amexio-body>
                                         </amexio-card>
                                     </amexio-column>
@@ -56,16 +77,20 @@
                                         <amexio-card [header]="false" [show]="'true'">
                                            
                                             <amexio-body>
-                                                <amexio-d3-chart-line 
+                                                 <amexio-d3-chart-line
                                                         (onChartClick)="onLineChartClick($event)" 
-                                                        [label]="true" 
+                                                        [label]="false" 
+                                                 [horizontal-scale]="false"
+                                                 [vertical-scale]="false"
+                                                 [yaxis-interval]=10
+                                                
                                                         (onLegendClick)="onLineLegendClick($event)"
-                                                        [title]="'Энергия по тарифам'"
+                                                        [title]="'Энергия по тарифам: ' + sdate()"
                                                         [data] = "disp_Service.CurrentChart_T"
                                                         [label-color] = "'brown'"
                                                         [yaxis-interval] = "1"
                                                         >
-                                                     </amexio-d3-chart-line>
+                                                     </amexio-d3-chart-line> 
                                             </amexio-body>
                                         </amexio-card>
                                     </amexio-column>
