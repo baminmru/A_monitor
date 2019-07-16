@@ -27,14 +27,14 @@ namespace a_srv.Controllers
 
         // GET: api/DATA_TIME
         [HttpGet]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public IActionResult GetDATA_TIME()
         {
             return Json (_context.DATA_TIME, _context.serializerSettings());
         }
 
         [HttpGet("combo")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public List<Dictionary<string, object>> GetCombo()
         {
             //var uid = User.GetUserId();
@@ -47,7 +47,7 @@ namespace a_srv.Controllers
         }
         
         [HttpGet("byparent/{id}")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public List<Dictionary<string, object>> GetByBarent([FromRoute] Guid id)
         {
             //var uid = User.GetUserId();
@@ -58,7 +58,7 @@ namespace a_srv.Controllers
         
         // GET: api/DATA_TIME/5
         [HttpGet("{id}")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<IActionResult> GetDATA_TIME([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
@@ -78,7 +78,7 @@ namespace a_srv.Controllers
 
         // PUT: api/DATA_TIME/5
         [HttpPut("{id}")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<IActionResult> PutDATA_TIME([FromRoute] Guid id, [FromBody] DATA_TIME varDATA_TIME)
         {
             if (!ModelState.IsValid)
@@ -114,7 +114,7 @@ namespace a_srv.Controllers
 
         // POST: api/DATA_TIME
         [HttpPost]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<IActionResult> PostDATA_TIME([FromBody] DATA_TIME varDATA_TIME)
         {
             if (!ModelState.IsValid)
@@ -130,7 +130,7 @@ namespace a_srv.Controllers
 
         // DELETE: api/DATA_TIME/5
         [HttpDelete("{id}")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<IActionResult> DeleteDATA_TIME([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)

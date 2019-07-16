@@ -27,14 +27,14 @@ namespace a_srv.Controllers
 
         // GET: api/MONSRV_INFO
         [HttpGet]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public IActionResult GetMONSRV_INFO()
         {
             return Json (_context.MONSRV_INFO, _context.serializerSettings());
         }
 
         [HttpGet("combo")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public List<Dictionary<string, object>> GetCombo()
         {
             //var uid = User.GetUserId();
@@ -47,7 +47,7 @@ namespace a_srv.Controllers
         }
         
         [HttpGet("view")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public List<Dictionary<string, object>> GetView()
         {
             //var uid = User.GetUserId();
@@ -58,7 +58,7 @@ namespace a_srv.Controllers
         
         // GET: api/MONSRV_INFO/5
         [HttpGet("{id}")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<IActionResult> GetMONSRV_INFO([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
@@ -78,7 +78,7 @@ namespace a_srv.Controllers
 
         // PUT: api/MONSRV_INFO/5
         [HttpPut("{id}")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<IActionResult> PutMONSRV_INFO([FromRoute] Guid id, [FromBody] MONSRV_INFO varMONSRV_INFO)
         {
             if (!ModelState.IsValid)
@@ -114,7 +114,7 @@ namespace a_srv.Controllers
 
         // POST: api/MONSRV_INFO
         [HttpPost]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<IActionResult> PostMONSRV_INFO([FromBody] MONSRV_INFO varMONSRV_INFO)
         {
             if (!ModelState.IsValid)
@@ -130,7 +130,7 @@ namespace a_srv.Controllers
 
         // DELETE: api/MONSRV_INFO/5
         [HttpDelete("{id}")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<IActionResult> DeleteMONSRV_INFO([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)

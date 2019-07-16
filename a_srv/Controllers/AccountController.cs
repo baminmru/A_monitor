@@ -454,6 +454,111 @@ namespace survey_api.Controllers
             return Content("ОК");
         }
 
+
+        [HttpGet("AddTestUsers")]
+        [AllowAnonymous]
+        public async Task<IActionResult> AddTestUsers()
+        {
+
+            await _roleManager.CreateAsync(new MyIdentityRole
+            {
+                Name = MyIdentityRole.ROLE_DISPATCHER,
+                Id = new Guid("E52734D3-3545-427A-A5D6-830358E0FCDF")
+            });
+
+            NewUserInfo newUser   = new NewUserInfo()
+            {
+                email = "admin@test.ru",
+                password = "admin_Password",
+                role = MyIdentityRole.ROLE_ADMIN,
+                lastName ="TestUser",
+                firstName="Admin"
+            };
+
+            try
+            {
+                System.Diagnostics.Debug.Print(newUser.email);
+                var email = newUser.email;
+                var user = new ApplicationUser
+                {
+                    Id = Guid.NewGuid(),
+                    Email = email,
+                    EmailConfirmed = true,
+                    UserName = email
+                };
+
+                System.Diagnostics.Debug.Print(newUser.password);
+                await _userManager.CreateAsync(user, newUser.password);
+
+                await _userManager.AddToRoleAsync(user, newUser.role);
+
+                _context.Add(new MON_USR
+                {
+                    email = email,
+                    name = newUser.lastName,
+                    lastname = newUser.firstName,
+                    login = user.Id.ToString(),
+                    MON_USRId = user.Id
+                });
+
+                await _context.SaveChangesAsync();
+            }
+            catch (System.Exception ex)
+            {
+                System.Diagnostics.Debug.Print("\r\n\r\n");
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print("\r\n\r\n");
+            } 
+
+            newUser = new NewUserInfo()
+            {
+                email = "disp@test.ru",
+                password = "disp_Password",
+                role = MyIdentityRole.ROLE_DISPATCHER,
+                lastName = "TestUser",
+                firstName = "Dispatcher"
+            };
+
+            try
+            {
+                System.Diagnostics.Debug.Print(newUser.email);
+                var email = newUser.email;
+                var user = new ApplicationUser
+                {
+                    Id = Guid.NewGuid(),
+                    Email = email,
+                    EmailConfirmed = true,
+                    UserName = email
+                };
+
+                System.Diagnostics.Debug.Print(newUser.password);
+                await _userManager.CreateAsync(user, newUser.password);
+
+                await _userManager.AddToRoleAsync(user, newUser.role);
+
+                _context.Add(new MON_USR
+                {
+                    email = email,
+                    name = newUser.lastName,
+                    lastname = newUser.firstName,
+                    login = user.Id.ToString(),
+                    MON_USRId = user.Id
+                });
+
+                await _context.SaveChangesAsync();
+            }
+            catch (System.Exception ex)
+            {
+                System.Diagnostics.Debug.Print("\r\n\r\n");
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print("\r\n\r\n");
+            }
+
+
+            return Content("ОК");
+        }
+
+
         [HttpGet("InitUsers")]
         [AllowAnonymous]
         public async Task<IActionResult> InitUsers()
@@ -468,7 +573,13 @@ namespace survey_api.Controllers
                 Name = MyIdentityRole.ROLE_CLIENT,
                 Id = new Guid("EA275962-49D0-4A0A-658B-08D5AF855020")
             });
-            
+
+            await _roleManager.CreateAsync(new MyIdentityRole
+            {
+                Name = MyIdentityRole.ROLE_DISPATCHER,
+                Id = new Guid("E52734D3-3545-427A-A5D6-830358E0FCDF")
+            });
+
             var email = "developer.bami@gmail.com";
             var user = new ApplicationUser
             {
@@ -498,6 +609,10 @@ namespace survey_api.Controllers
 
             return Content("User created");
         }
+
+
+
+
 
         [HttpGet("AccessDenied")]
         [AllowAnonymous]

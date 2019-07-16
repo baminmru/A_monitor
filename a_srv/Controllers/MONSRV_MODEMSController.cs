@@ -27,14 +27,14 @@ namespace a_srv.Controllers
 
         // GET: api/MONSRV_MODEMS
         [HttpGet]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public IActionResult GetMONSRV_MODEMS()
         {
             return Json (_context.MONSRV_MODEMS, _context.serializerSettings());
         }
 
         [HttpGet("combo")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public List<Dictionary<string, object>> GetCombo()
         {
             //var uid = User.GetUserId();
@@ -47,7 +47,7 @@ namespace a_srv.Controllers
         }
         
         [HttpGet("byparent/{id}")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public List<Dictionary<string, object>> GetByBarent([FromRoute] Guid id)
         {
             //var uid = User.GetUserId();
@@ -58,7 +58,7 @@ namespace a_srv.Controllers
         
         // GET: api/MONSRV_MODEMS/5
         [HttpGet("{id}")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<IActionResult> GetMONSRV_MODEMS([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
@@ -78,7 +78,7 @@ namespace a_srv.Controllers
 
         // PUT: api/MONSRV_MODEMS/5
         [HttpPut("{id}")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<IActionResult> PutMONSRV_MODEMS([FromRoute] Guid id, [FromBody] MONSRV_MODEMS varMONSRV_MODEMS)
         {
             if (!ModelState.IsValid)
@@ -114,7 +114,7 @@ namespace a_srv.Controllers
 
         // POST: api/MONSRV_MODEMS
         [HttpPost]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<IActionResult> PostMONSRV_MODEMS([FromBody] MONSRV_MODEMS varMONSRV_MODEMS)
         {
             if (!ModelState.IsValid)
@@ -130,7 +130,7 @@ namespace a_srv.Controllers
 
         // DELETE: api/MONSRV_MODEMS/5
         [HttpDelete("{id}")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<IActionResult> DeleteMONSRV_MODEMS([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)

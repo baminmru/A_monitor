@@ -27,14 +27,14 @@ namespace a_srv.Controllers
 
         // GET: api/moncli_info
         [HttpGet]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public IActionResult Getmoncli_info()
         {
             return Json (_context.moncli_info, _context.serializerSettings());
         }
 
         [HttpGet("combo")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public List<Dictionary<string, object>> GetCombo()
         {
             //var uid = User.GetUserId();
@@ -47,7 +47,7 @@ namespace a_srv.Controllers
         }
         
         [HttpGet("view")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public List<Dictionary<string, object>> GetView()
         {
             //var uid = User.GetUserId();
@@ -58,7 +58,7 @@ namespace a_srv.Controllers
         
         // GET: api/moncli_info/5
         [HttpGet("{id}")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<IActionResult> Getmoncli_info([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
@@ -78,7 +78,7 @@ namespace a_srv.Controllers
 
         // PUT: api/moncli_info/5
         [HttpPut("{id}")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<IActionResult> Putmoncli_info([FromRoute] Guid id, [FromBody] moncli_info varmoncli_info)
         {
             if (!ModelState.IsValid)
@@ -114,7 +114,7 @@ namespace a_srv.Controllers
 
         // POST: api/moncli_info
         [HttpPost]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<IActionResult> Postmoncli_info([FromBody] moncli_info varmoncli_info)
         {
             if (!ModelState.IsValid)
@@ -130,7 +130,7 @@ namespace a_srv.Controllers
 
         // DELETE: api/moncli_info/5
         [HttpDelete("{id}")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<IActionResult> Deletemoncli_info([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)

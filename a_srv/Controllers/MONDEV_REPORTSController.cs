@@ -27,14 +27,14 @@ namespace a_srv.Controllers
 
         // GET: api/MONDEV_REPORTS
         [HttpGet]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public IActionResult GetMONDEV_REPORTS()
         {
             return Json (_context.MONDEV_REPORTS, _context.serializerSettings());
         }
 
         [HttpGet("combo")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public List<Dictionary<string, object>> GetCombo()
         {
             //var uid = User.GetUserId();
@@ -47,7 +47,7 @@ namespace a_srv.Controllers
         }
         
         [HttpGet("byparent/{id}")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public List<Dictionary<string, object>> GetByBarent([FromRoute] Guid id)
         {
             //var uid = User.GetUserId();
@@ -58,7 +58,7 @@ namespace a_srv.Controllers
         
         // GET: api/MONDEV_REPORTS/5
         [HttpGet("{id}")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<IActionResult> GetMONDEV_REPORTS([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
@@ -78,7 +78,7 @@ namespace a_srv.Controllers
 
         // PUT: api/MONDEV_REPORTS/5
         [HttpPut("{id}")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<IActionResult> PutMONDEV_REPORTS([FromRoute] Guid id, [FromBody] MONDEV_REPORTS varMONDEV_REPORTS)
         {
             if (!ModelState.IsValid)
@@ -114,7 +114,7 @@ namespace a_srv.Controllers
 
         // POST: api/MONDEV_REPORTS
         [HttpPost]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<IActionResult> PostMONDEV_REPORTS([FromBody] MONDEV_REPORTS varMONDEV_REPORTS)
         {
             if (!ModelState.IsValid)
@@ -130,7 +130,7 @@ namespace a_srv.Controllers
 
         // DELETE: api/MONDEV_REPORTS/5
         [HttpDelete("{id}")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<IActionResult> DeleteMONDEV_REPORTS([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)

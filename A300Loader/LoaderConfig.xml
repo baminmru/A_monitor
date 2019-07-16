@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<config db1="Server=localhost;Database=a3;User Id=sa;Password=P@ssw0rd;MultipleActiveResultSets=true"   
+        db="Server=localhost\sqlexpress;Database=a3;Trusted_Connection=True;MultipleActiveResultSets=true">
+</config>

@@ -24,66 +24,196 @@ export class DISPATCHER_Service {
 	dend:string = '';
 	PageSize:number=10;
 	PageUrl:string='';
+	DispatcherTab:string="Данные";
+	ChartTab:string="Мгновенные";
 	CurrentDevice:DISPATCHER.NodeItem = {"DeviceID":"null"} as DISPATCHER.NodeItem;
 	CurretCondition:DISPATCHER.FILTER = {"AType":"null"} as DISPATCHER.FILTER;
-	CurrentArchive:Array<DISPATCHER.ElectroRecord>=[];
+	CurrentArchiveM:Array<DISPATCHER.ElectroRecord>=[];
+	CurrentArchiveT:Array<DISPATCHER.ElectroRecord>=[];
+	CurrentArchiveHH:Array<DISPATCHER.ElectroRecord>=[];
 	CurrentChart_I:Array<any>=[
-		[{"datatype":"number" ,"label":'Info'},{"datatype":"number" ,"label":'?'}],
+		[{"datatype":"string" ,"label":'Время'},{"datatype":"number" ,"label":'?'}],
 		[1,0],	[2,0] ];
 	CurrentChart_U:Array<any>=[
-		[{"datatype":"number" ,"label":'Info'},{"datatype":"number" ,"label":'?'}],
+		[{"datatype":"string" ,"label":'Время'},{"datatype":"number" ,"label":'?'}],
 		[1,0],	[2,0] ];
 	CurrentChart_P:Array<any>=[
-		[{"datatype":"number" ,"label":'Info'},{"datatype":"number" ,"label":'?'}],
+		[{"datatype":"string" ,"label":'Время'},{"datatype":"number" ,"label":'?'}],
 		[1,0],	[2,0] ];
 	CurrentChart_T:Array<any>=[
-		[{"datatype":"number" ,"label":'Info'},{"datatype":"number" ,"label":'?'}],
+		[{"datatype":"string" ,"label":'Время'},{"datatype":"number" ,"label":'?'}],
 		[1,0],	[2,0] ];
 
-	
+		DayChart_P:Array<any>=[
+			[{"datatype":"string" ,"label":'Дата'},{"datatype":"number" ,"label":'?'}],
+			[1,0],	[2,0] ];
+		DayChart_T:Array<any>=[
+			[{"datatype":"string" ,"label":'Дата'},{"datatype":"number" ,"label":'?'}],
+			[1,0],	[2,0] ];
+
+			WeekChart_P:Array<any>=[
+				[{"datatype":"string" ,"label":'Неделя'},{"datatype":"number" ,"label":'?'}],
+				[1,0],	[2,0] ];
+			WeekChart_T:Array<any>=[
+				[{"datatype":"string" ,"label":'Неделя'},{"datatype":"number" ,"label":'?'}],
+				[1,0],	[2,0] ];
 	
 	getNodes(): Observable<DISPATCHER.NodeItem[]> {
 		let cpHeaders = new HttpHeaders({ 'Content-Type': 'application/json','Authorization': 'Bearer '+ sessionStorage.getItem('auth_token') });
 		return this.http.get<DISPATCHER.NodeItem[]>(this.serviceURL + '/DISPATCHER/nodes', { headers: cpHeaders })
     }
 
-	getCurrentElectro(): Observable<DISPATCHER.ElectroRecord[]>{
-			if(this.CurrentDevice.DeviceID !="null" &&  this.CurretCondition.AType !="null")
+	getCurrentElectroHH(): Observable<DISPATCHER.ElectroRecord[]>{
+			if(this.CurrentDevice.DeviceID !="null" ){
+				this.CurretCondition.AType ='868BCF44-FB91-47B2-D3DA-08D6D1323977';	
 				return this.getElectro(this.CurrentDevice.DeviceID,this.CurretCondition);
-			else
+			}else
+				return null;	
+	}
+	
+	getCurrentElectroM(): Observable<DISPATCHER.ElectroRecord[]>{
+			if(this.CurrentDevice.DeviceID !="null" ){
+				this.CurretCondition.AType ='19DB21FC-0BD7-47A1-D3D7-08D6D1323977';	
+				return this.getElectro(this.CurrentDevice.DeviceID,this.CurretCondition);
+			}else
+				return null;	
+	}
+	
+	getCurrentElectroT(): Observable<DISPATCHER.ElectroRecord[]>{
+			if(this.CurrentDevice.DeviceID !="null" ){
+				this.CurretCondition.AType ='904590BC-87D7-4F70-D3D8-08D6D1323977';	
+				return this.getElectro(this.CurrentDevice.DeviceID,this.CurretCondition);
+			}else
 				return null;	
 	}
 
 	getCurrentChart(Chart:string ): Observable<any>{
-		if(this.CurrentDevice.DeviceID !="null" &&  this.CurretCondition.AType !="null")
-			return this.getChart(Chart,this.CurrentDevice.DeviceID,this.CurretCondition);
+		if(this.CurrentDevice.DeviceID !="null" ){
+			if(Chart =='T'){
+				this.CurretCondition.AType ='904590BC-87D7-4F70-D3D8-08D6D1323977';	
+			}else{
+				this.CurretCondition.AType ='19DB21FC-0BD7-47A1-D3D7-08D6D1323977';	
+			}
+			return this.getChart(Chart,'',this.CurrentDevice.DeviceID,this.CurretCondition);
+		}
 		else
 			return null;	
-}
+ }
+
+ getDayChart(Chart:string ): Observable<any>{
+	if(this.CurrentDevice.DeviceID !="null" ){
+		if(Chart =='T'){
+			this.CurretCondition.AType ='904590BC-87D7-4F70-D3D8-08D6D1323977';	
+		}else{
+			this.CurretCondition.AType ='19DB21FC-0BD7-47A1-D3D7-08D6D1323977';	
+		}
+		return this.getChart(Chart,'D',this.CurrentDevice.DeviceID,this.CurretCondition);
+	}
+	else
+		return null;	
+ }
+
+
+ getWeekChart(Chart:string ): Observable<any>{
+	if(this.CurrentDevice.DeviceID !="null" ){
+		if(Chart =='T'){
+			this.CurretCondition.AType ='904590BC-87D7-4F70-D3D8-08D6D1323977';	
+		}else{
+			this.CurretCondition.AType ='19DB21FC-0BD7-47A1-D3D7-08D6D1323977';	
+		}
+		return this.getChart(Chart,'W',this.CurrentDevice.DeviceID,this.CurretCondition);
+	}
+	else
+		return null;	
+ }
 
   getElectro(id:string, condition:DISPATCHER.FILTER): Observable<DISPATCHER.ElectroRecord[]> {
 		  let cpHeaders = new HttpHeaders({ 'Content-Type': 'application/json','Authorization': 'Bearer '+ sessionStorage.getItem('auth_token') });
 			return this.http.post<DISPATCHER.ElectroRecord[]>(this.serviceURL + '/DISPATCHER/electro/'+id,condition, { headers: cpHeaders })
 	}
 
-	getChart(Chart:string, id:string, condition:DISPATCHER.FILTER): Observable<string> {
+	getChart(Chart:string, Quant:string, id:string, condition:DISPATCHER.FILTER): Observable<string> {
 		let cpHeaders = new HttpHeaders({ 'Content-Type': 'application/json','Authorization': 'Bearer '+ sessionStorage.getItem('auth_token') });
-		return this.http.post<string>(this.serviceURL + '/DISPATCHER/chart_'+Chart+'/'+id,condition, { headers: cpHeaders })
-}
+		return this.http.post<string>(this.serviceURL + '/DISPATCHER/chart'+Quant+'_'+Chart+'/'+id,condition, { headers: cpHeaders })
+  }
 	
+
 
 	refreshElectro() {
 		console.log("refreshing Electro"); 
 		let obs:Observable<DISPATCHER.ElectroRecord[]>;
-		 obs=this.getCurrentElectro();
+		 obs=this.getCurrentElectroHH();
 		 if(obs !=null){
-		 		obs.subscribe(DATAArray => { this.CurrentArchive = DATAArray; }, error => { console.log(error.message); })
+		 		obs.subscribe(DATAArray => { this.CurrentArchiveHH = DATAArray; }, error => { console.log(error.message); })
 		 }
 		 
- }
+		 obs=this.getCurrentElectroM();
+		 if(obs !=null){
+		 		obs.subscribe(DATAArray => { this.CurrentArchiveM = DATAArray; }, error => { console.log(error.message); })
+		 }
+		 
+		 obs=this.getCurrentElectroT();
+		 if(obs !=null){
+		 		obs.subscribe(DATAArray => { this.CurrentArchiveT = DATAArray; }, error => { console.log(error.message); })
+		 }
+		 
+	}
 
  refreshCharts() {
-	console.log("refreshing Chart_I"); 
+
+	if(this.ChartTab=="Недельные"){
+		{
+			let obs:Observable<string>;
+			 obs=this.getWeekChart('T');
+			 if(obs !=null){
+					 obs.subscribe(DATA => { 
+						 this.WeekChart_T = JSON.parse (DATA);  
+						console.log(JSON.stringify(this.CurrentChart_T)); 
+					}, error => { console.log(error.message); })
+			 }
+		}
+			
+		{
+			let obs:Observable<string>;
+			 obs=this.getWeekChart('P');
+			 if(obs !=null){
+					 obs.subscribe(DATA => { 
+						 this.WeekChart_P = JSON.parse (DATA);  
+						console.log(JSON.stringify(this.CurrentChart_P)); 
+					}, error => { console.log(error.message); })
+					
+			}
+		}
+	}
+
+	if(this.ChartTab=="Дневные"){
+		{
+			let obs:Observable<string>;
+			 obs=this.getDayChart('T');
+			 if(obs !=null){
+					 obs.subscribe(DATA => { 
+						 this.DayChart_T = JSON.parse (DATA);  
+						console.log(JSON.stringify(this.CurrentChart_T)); 
+					}, error => { console.log(error.message); })
+					
+			 }
+			}
+
+			
+		{
+			let obs:Observable<string>;
+			 obs=this.getDayChart('P');
+			 if(obs !=null){
+					 obs.subscribe(DATA => { 
+						 this.DayChart_P = JSON.parse (DATA);  
+						console.log(JSON.stringify(this.CurrentChart_P)); 
+					}, error => { console.log(error.message); })
+					
+			}
+		}
+	}
+
+	if(this.ChartTab=="Мгновенные"){
 	{
 	let obs:Observable<string>;
 	 obs=this.getCurrentChart('I');
@@ -118,19 +248,22 @@ export class DISPATCHER_Service {
 					}, error => { console.log(error.message); })
 					
 			 }
-			}
+		}
 
-			{
-				let obs:Observable<string>;
-				 obs=this.getCurrentChart('P');
-				 if(obs !=null){
-						 obs.subscribe(DATA => { 
-							 this.CurrentChart_P = JSON.parse (DATA);  
-							console.log(JSON.stringify(this.CurrentChart_P)); 
-						}, error => { console.log(error.message); })
-						
-				 }
-				}
+
+		{
+			let obs:Observable<string>;
+			 obs=this.getCurrentChart('P');
+			 if(obs !=null){
+					 obs.subscribe(DATA => { 
+						 this.CurrentChart_P = JSON.parse (DATA);  
+						console.log(JSON.stringify(this.CurrentChart_P)); 
+					}, error => { console.log(error.message); })
+					
+			}
+		}
+	 }
+		
 	 
 }
 	

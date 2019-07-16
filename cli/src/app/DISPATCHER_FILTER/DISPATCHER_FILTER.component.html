@@ -4,7 +4,7 @@
 		<amexio-header></amexio-header>
 		<amexio-body>
 	 <amexio-row>
-		 <amexio-column size="3" >
+		<!-- <amexio-column size="3" >
 			<amexio-dropdown 
 			[place-holder] = "'Тип архива'"
 			name ="AType"
@@ -18,23 +18,23 @@
 			>
 		 </amexio-dropdown>
      </amexio-column>
-	
+	-->
 		 <amexio-column size="3" >
 					 <amexio-date-time-picker [place-holder] = "'Начало периода'" [time-picker]="false" [date-picker]="true" 
-							[min-date]="'01-Jan-2019'" [(ngModel)]="condition.dstart"   >
+							[min-date]="'01-Jan-2019'" [(ngModel)]="dstart"   >
 					</amexio-date-time-picker>
 		</amexio-column>
 
 
 	 <amexio-column size="3" >
 			<amexio-date-time-picker  [place-holder] = "'Конец периода'" [time-picker]="false" [date-picker]="true" 
-			[min-date]="'01-Jan-2019'" [(ngModel)]="condition.dend">
+			[min-date]="'01-Jan-2019'" [(ngModel)]="dend">
 	 </amexio-date-time-picker>
 		 </amexio-column>
 		 <amexio-column size="3" >
 		 <amexio-button [label]="'Обновить'" [type]="'primary'"
 		 [tooltip]="'Обновить  данные'"
-		 (click)="refreshList()"></amexio-button>
+		 (click)="refreshData()"></amexio-button>
 		</amexio-column>
 		</amexio-row>
 	</amexio-body>

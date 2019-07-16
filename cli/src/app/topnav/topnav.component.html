@@ -74,14 +74,94 @@
 [icon]= "'fa fa-bar-chart fa-fw'" 
 (onNavItemClick)="onClick('/node')" 
 ></amexio-nav-item>
-	
   </amexio-nav>
   </amexio-column>
-  
-
-
 </amexio-row>
 
+<amexio-row *ngIf="Role()=='Администратор' ">
+    <amexio-column size="12">
+       <amexio-nav [title]="'MONITOR '" [enable-side-nav-position]="false">
+
+   
+   
+   <amexio-nav-item position-right 
+    [type]="'link'" 
+   [title]= "' Схема подключения'" 
+   [icon]= "'fa fa-picture-o fa-fw'" 
+   (onNavItemClick)="onClick('/MONSCH')" 
+   ></amexio-nav-item>
+   
+   <amexio-nav-item position-right 
+    [type]="'link'" 
+   [title]= "' Узел'" 
+   [icon]= "'fa fa-map-marker fa-fw'" 
+   (onNavItemClick)="onClick('/MONNODE')" 
+   ></amexio-nav-item>
+   
+   <amexio-nav-item position-right 
+    [type]="'link'" 
+   [title]= "' Устройства'" 
+   [icon]= "'fa fa-laptop fa-fw'" 
+   (onNavItemClick)="onClick('/MONDEV')" 
+   ></amexio-nav-item>
+   
+   <amexio-nav-item position-right 
+    [type]="'link'" 
+   [title]= "' Сервер опроса'" 
+   [icon]= "' fa fa-television fa-fw'" 
+   (onNavItemClick)="onClick('/MONSRV')" 
+   ></amexio-nav-item>
+   
+   
+
+   
+   <amexio-nav-item position-right 
+    [type]="'link'" 
+   [title]= "' Пользователь'" 
+   [icon]= "'fa fa-user fa-fw'" 
+   (onNavItemClick)="onClick('/MONUSR')" 
+   ></amexio-nav-item>
+   
+   <amexio-nav-item position-right 
+    [type]="'link'" 
+   [title]= "' Диспетчер'" 
+   [icon]= "'fa fa-bar-chart fa-fw'" 
+   (onNavItemClick)="onClick('/node')" 
+   ></amexio-nav-item>
+     </amexio-nav>
+     </amexio-column>
+   </amexio-row>
 
 
-
+   <amexio-row *ngIf="Role()=='Диспетчер' ">
+      <amexio-column size="12">
+         <amexio-nav [title]="'MONITOR '" [enable-side-nav-position]="false">
+  
+     
+     
+     
+     
+     <amexio-nav-item position-right 
+      [type]="'link'" 
+     [title]= "' Узел'" 
+     [icon]= "'fa fa-map-marker fa-fw'" 
+     (onNavItemClick)="onClick('/MONNODE')" 
+     ></amexio-nav-item>
+     
+     <amexio-nav-item position-right 
+      [type]="'link'" 
+     [title]= "' Устройства'" 
+     [icon]= "'fa fa-laptop fa-fw'" 
+     (onNavItemClick)="onClick('/MONDEV')" 
+     ></amexio-nav-item>
+     
+     
+     <amexio-nav-item position-right 
+      [type]="'link'" 
+     [title]= "' Диспетчер'" 
+     [icon]= "'fa fa-bar-chart fa-fw'" 
+     (onNavItemClick)="onClick('/node')" 
+     ></amexio-nav-item>
+       </amexio-nav>
+       </amexio-column>
+     </amexio-row>

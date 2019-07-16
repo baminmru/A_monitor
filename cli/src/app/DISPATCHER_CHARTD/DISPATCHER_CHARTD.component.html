@@ -1,0 +1,44 @@
+<amexio-row>
+        <amexio-column [size]="12">
+          
+                    <amexio-row>
+                        <amexio-column [size]="6" >
+                           
+                                     <amexio-d3-chart-line 
+                                            (onChartClick)="onLineChartClick($event)" 
+                                            [label]="false" 
+                                            [horizontal-scale]="true"
+                                     [vertical-scale]="true"
+                                            [yaxis-interval]=10
+                                            [xaxis-interval]= 12
+                                          
+                                            (onLegendClick)="onLineLegendClick($event)"
+                                            [title]="'Мощность по  фазам'"
+                                            [data] = "disp_Service.DayChart_P"
+                                            [label-color] = "'brown'"
+                                           
+                                            >
+                                         </amexio-d3-chart-line>
+                        </amexio-column>
+                     
+                        <amexio-column [size]="6" >
+                          
+                                     <amexio-d3-chart-line
+                                            (onChartClick)="onLineChartClick($event)" 
+                                            [label]="false" 
+                                            [horizontal-scale]="true"
+                                            [vertical-scale]="true"
+                                            [yaxis-interval]=10
+                                         
+                                            (onLegendClick)="onLineLegendClick($event)"
+                                            [title]="'Энергия по тарифам'"
+                                            [data] = "disp_Service.DayChart_T"
+                                            [label-color] = "'brown'"
+                                            [xaxis-interval]= 12
+                                            >
+                                         </amexio-d3-chart-line> 
+                   
+                        </amexio-column>
+                    </amexio-row>
+        </amexio-column>
+    </amexio-row>

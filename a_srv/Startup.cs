@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.AspNetCore.Identity;
 using a_srv.Services.Users;
+using a_srv.Services;
 using a_srv.Settings;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -23,7 +24,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Swashbuckle.AspNetCore.Swagger;
-using a_srv.Services;
+using a_srv.Service;
 using a_srv.Options;
 using a_srv.models;
 using MySys.Identity.Data;
@@ -109,6 +110,7 @@ namespace a_srv
                .AddDefaultTokenProviders();
 
             services.AddTransient<UserService>();
+            services.AddTransient<LoraInputService>();
 
             services.AddMvc();
         }
@@ -129,12 +131,12 @@ namespace a_srv
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
-            app.UseMvc();
+            //app.UseMvc();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "api",
-                    template: "api/v1/{controller}/{id?}");
+                    template: "api/{controller}");
             });
 
             app.UseMvc(routes =>

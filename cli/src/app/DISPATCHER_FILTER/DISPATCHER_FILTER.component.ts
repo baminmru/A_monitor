@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter,ChangeDetectionStrategy,ChangeDetectorRef } from "@angular/core";
 import { AppService } from "app/app.service";
 import { Observable } from "rxjs";
 
@@ -17,6 +17,9 @@ const MODE_EDIT = 2;
 @Component({
   selector: 'DISPATCHER_FILTER',
   templateUrl: './DISPATCHER_FILTER.component.html'
+  ,
+  changeDetection: ChangeDetectionStrategy.Default
+
 })
 export class DISPATCHER_FILTERComponent implements OnInit {
 	SubtestId:string='';
@@ -25,23 +28,34 @@ export class DISPATCHER_FILTERComponent implements OnInit {
 	openList: boolean = true;
     opened: boolean = false;
 	
-  condition:DISPATCHER.FILTER;
+   
+    dstart:string="06-Jun-2019";  // Начало интервала
+    dend:string="06-Jul-2019";  // Конец интервала
    
 
-    constructor( public disp_Service: DISPATCHER_Service,  public AppService:AppService ) {
-		  this.condition = disp_Service.CurretCondition;
+    constructor( public cdRef:ChangeDetectorRef,public disp_Service: DISPATCHER_Service,  public AppService:AppService ) {
+		this.dstart = disp_Service.CurretCondition.dstart;  
+		this.dend = disp_Service.CurretCondition.dend;  
+
     }
 
     ngOnInit() {
-        this.AppService.refreshComboMOND_ATYPE();
+		//this.cdRef.markForCheck();
+		//this.AppService.refreshComboMOND_ATYPE();
+		
     }
 
-    refreshList() {
-		  console.log("refreshing "); 
-      this.disp_Service.CurretCondition=this.condition;
-      this.disp_Service.refreshElectro();
-      this.disp_Service.refreshCharts();
-      //this.disp_Service.refreshElectro();
+    refreshData() {
+		  
+      this.disp_Service.CurretCondition.dstart=this.dstart;
+	  this.disp_Service.CurretCondition.dend=this.dend;
+	     if(this.disp_Service.DispatcherTab =="Графики"){
+			 console.log("Refreshing charts");
+			 this.disp_Service.refreshCharts();
+		 }else{
+			 console.log("Refreshing grid");
+			this.disp_Service.refreshElectro();
+		 }
     }
 
 

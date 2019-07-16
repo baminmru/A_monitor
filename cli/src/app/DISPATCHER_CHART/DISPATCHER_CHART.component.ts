@@ -21,48 +21,26 @@ export class DISPATCHER_CHARTComponent implements OnInit {
   }
 
   
-  
-  sdate():string{
-    if(this.disp_Service.CurretCondition.dstart !=''){
-    var d:Date;
+  chartTab(tab:any) {
 
-    d=new Date(this.disp_Service.CurretCondition.dstart);
-    return (d.getDate() + "/" + ((d.getMonth() + 1)) + "/" +d.getFullYear() ) ;
-    }else{
-      return '?';
+		this.disp_Service.ChartTab=tab.current.header;
+		console.log("Chart accordion Tab: " + tab.current.header);
+		if (this.disp_Service.CurrentDevice.DeviceID != "null"){
+		 if(this.disp_Service.DispatcherTab == "Графики"){
+       if(tab.current.active){
+			    console.log("Refreshing charts");
+          this.disp_Service.refreshCharts();
+       }else{
+        console.log("Ignore closing chart accordion tab");
+       }
+		 }else{
+			 console.log("Refreshing grid");
+			this.disp_Service.refreshElectro();
+		 }
+	 }
+      
     }
-  }
-
-
-
-
-
- onDefaultLegendClick(event: any) {
-
-   // this.sourceData = event;
-
-  }
-
-  onUserDefineChartClick(event: any) {
-   // this.userDataSource = event; 
-  }
-
-  onUserDefineLegendClick(event: any) {
-
-    //this.userDataSource = event;
-  }
-
-  onDefaultChartClick(event: any) {
-   // this.sourceData = event;
-  }
-
-  onLineLegendClick(event: any) {
-    //this.userDataSource3 = event;
-  }
-
-  onLineChartClick(event: any) {
-    //this.userDataSource3 = event;
-  }
+  
 
 
 }

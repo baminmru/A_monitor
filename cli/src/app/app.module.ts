@@ -23,6 +23,9 @@ import { TopnavComponent } from './topnav/topnav.component';
 import { DISPATCHERComponent } from './DISPATCHER/DISPATCHER.component'; 
 import { DISPATCHER_DATAComponent } from './DISPATCHER_DATA/DISPATCHER_DATA.component'; 
 import { DISPATCHER_CHARTComponent } from './DISPATCHER_CHART/DISPATCHER_CHART.component'; 
+import { DISPATCHER_CHARTMComponent } from './DISPATCHER_CHARTM/DISPATCHER_CHARTM.component'; 
+import { DISPATCHER_CHARTDComponent } from './DISPATCHER_CHARTD/DISPATCHER_CHARTD.component'; 
+import { DISPATCHER_CHARTWComponent } from './DISPATCHER_CHARTW/DISPATCHER_CHARTW.component'; 
 import { DISPATCHER_MSGComponent } from './DISPATCHER_MSG/DISPATCHER_MSG.component'; 
 import { DISPATCHER_FILTERComponent } from './DISPATCHER_FILTER/DISPATCHER_FILTER.component'; 
 import { DISPATCHER_Service } from 'app/DISPATCHER.service'; 
@@ -137,6 +140,9 @@ jwtLoginComponent,
 DISPATCHERComponent,
 DISPATCHER_DATAComponent,
 DISPATCHER_CHARTComponent,
+DISPATCHER_CHARTMComponent,
+DISPATCHER_CHARTDComponent,
+DISPATCHER_CHARTWComponent,
 DISPATCHER_MSGComponent,
 DISPATCHER_FILTERComponent,
 

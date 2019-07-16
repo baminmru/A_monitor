@@ -31,7 +31,7 @@ namespace a_srv.Controllers
 
 
         [HttpGet("nodes")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public List<Dictionary<string, object>> GetNodes()
         {
             string sql = @" SELECT  MONDEV_BDEVICESID DeviceID, MONN_DEF.Addr NodeName, MONDEV_BDEVICES.Name DeviceName  
@@ -44,7 +44,7 @@ namespace a_srv.Controllers
 
 
         [HttpGet("init/{id}")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<string> Init([FromRoute] Guid id)
         {
 
@@ -145,7 +145,7 @@ namespace a_srv.Controllers
         }
 
         [HttpPost("electro/{id}")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public List<Dictionary<string, object>> GetView([FromRoute] Guid id, [FromBody] DispatcherFilter request)
         {
             //var uid = User.GetUserId();
@@ -157,7 +157,7 @@ namespace a_srv.Controllers
 
 
         [HttpPost("chart_i/{id}")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public string GetChart_I([FromRoute] Guid id, [FromBody] DispatcherFilter request)
         {
             //var uid = User.GetUserId();
@@ -168,14 +168,14 @@ namespace a_srv.Controllers
             DataTable dt = _context.DoQuery(sql);
 
             StringBuilder sb = new StringBuilder();
-        sb.Append(@"[[{ ""datatype"":""string"",""label"":""Час""},{ ""datatype"":""number"",""label"":""I1""},{ ""datatype"":""number"",""label"":""I2""},{ ""datatype"":""number"",""label"":""I3""}]");
+        sb.Append(@"[[{ ""datatype"":""string"",""label"":""Время""},{ ""datatype"":""number"",""label"":""I1""},{ ""datatype"":""number"",""label"":""I2""},{ ""datatype"":""number"",""label"":""I3""}]");
 
             for (int i = 0; i < dt.Rows.Count; i++)
             {
 
             sb.Append(@",[");
-            //sb.Append(@"""" + dt.Rows[i]["DCOUNTER"].ToString() +@""",");
-                sb.Append(@"""" + i.ToString() + @""",");
+                //sb.Append(@"""" + dt.Rows[i]["DCOUNTER"].ToString() +@""",");
+                sb.Append(@"""" + dt.Rows[i]["DCOUNTER"].ToString().Substring(11, 5) + @""",");
                 sb.Append(dt.Rows[i]["I1"].ToString().Replace(",",".") + ",");
             sb.Append(dt.Rows[i]["I2"].ToString().Replace(",", ".") + ",");
             sb.Append(dt.Rows[i]["I3"].ToString().Replace(",", "."));
@@ -189,7 +189,7 @@ namespace a_srv.Controllers
         }
 
         [HttpPost("chart_u/{id}")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public string GetChart_U([FromRoute] Guid id, [FromBody] DispatcherFilter request)
         {
             //var uid = User.GetUserId();
@@ -200,14 +200,22 @@ namespace a_srv.Controllers
             DataTable dt = _context.DoQuery(sql);
 
             StringBuilder sb = new StringBuilder();
-            sb.Append(@"[[{ ""datatype"":""string"",""label"":""Час""},{ ""datatype"":""number"",""label"":""U1""},{ ""datatype"":""number"",""label"":""U2""},{ ""datatype"":""number"",""label"":""U3""}]");
+            sb.Append(@"[[{ ""datatype"":""string"",""label"":""Время""},{ ""datatype"":""number"",""label"":""U1""},{ ""datatype"":""number"",""label"":""U2""},{ ""datatype"":""number"",""label"":""U3""}]");
 
             for (int i = 0; i < dt.Rows.Count; i++)
             {
 
                 sb.Append(@",[");
-                //sb.Append(@"""" + dt.Rows[i]["DCOUNTER"].ToString() +@""",");
-                sb.Append(@"""" + i.ToString() + @""",");
+               // if((i % 6) == 0)
+               // {
+                    sb.Append(@"""" + dt.Rows[i]["DCOUNTER"].ToString().Substring(11,5) + @""",");
+                //}
+                //else
+                //{
+                //    sb.Append(@""""",");
+                //}
+                
+                
                 sb.Append(dt.Rows[i]["U1"].ToString().Replace(",", ".") + ",");
                 sb.Append(dt.Rows[i]["U2"].ToString().Replace(",", ".") + ",");
                 sb.Append(dt.Rows[i]["U3"].ToString().Replace(",", "."));
@@ -223,7 +231,7 @@ namespace a_srv.Controllers
 
 
         [HttpPost("chart_p/{id}")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public string GetChart_P([FromRoute] Guid id, [FromBody] DispatcherFilter request)
         {
             //var uid = User.GetUserId();
@@ -234,14 +242,14 @@ namespace a_srv.Controllers
             DataTable dt = _context.DoQuery(sql);
 
             StringBuilder sb = new StringBuilder();
-            sb.Append(@"[[{ ""datatype"":""string"",""label"":""Час""},{ ""datatype"":""number"",""label"":""P1""},{ ""datatype"":""number"",""label"":""P2""},{ ""datatype"":""number"",""label"":""P3""}]");
+            sb.Append(@"[[{ ""datatype"":""string"",""label"":""Время""},{ ""datatype"":""number"",""label"":""P1""},{ ""datatype"":""number"",""label"":""P2""},{ ""datatype"":""number"",""label"":""P3""}]");
 
             for (int i = 0; i < dt.Rows.Count; i++)
             {
 
                 sb.Append(@",[");
                 //sb.Append(@"""" + dt.Rows[i]["DCOUNTER"].ToString() +@""",");
-                sb.Append(@"""" + i.ToString() + @""",");
+                sb.Append(@"""" + dt.Rows[i]["DCOUNTER"].ToString().Substring(11, 5) + @""",");
                 sb.Append(dt.Rows[i]["EP1"].ToString().Replace(",", ".") + ",");
                 sb.Append(dt.Rows[i]["EP2"].ToString().Replace(",", ".") + ",");
                 sb.Append(dt.Rows[i]["EP3"].ToString().Replace(",", "."));
@@ -255,7 +263,7 @@ namespace a_srv.Controllers
         }
 
         [HttpPost("chart_t/{id}")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public string GetChart_T([FromRoute] Guid id, [FromBody] DispatcherFilter request)
         {
             //var uid = User.GetUserId();
@@ -266,7 +274,7 @@ namespace a_srv.Controllers
             DataTable dt = _context.DoQuery(sql);
 
             StringBuilder sb = new StringBuilder();
-            sb.Append(@"[[{ ""datatype"":""string"",""label"":""Час""},{ ""datatype"":""number"",""label"":""T1""},{ ""datatype"":""number"",""label"":""T2""},{ ""datatype"":""number"",""label"":""T3""}]");
+            sb.Append(@"[[{ ""datatype"":""string"",""label"":""Время""},{ ""datatype"":""number"",""label"":""T1""},{ ""datatype"":""number"",""label"":""T2""},{ ""datatype"":""number"",""label"":""T3""}]");
             //sb.Append(@"[[""Час"",""T1"",""T2"",""T3""]");
 
             for (int i = 0; i < dt.Rows.Count; i++)
@@ -274,7 +282,7 @@ namespace a_srv.Controllers
 
                 sb.Append(@",[");
                 //sb.Append(@"""" + dt.Rows[i]["DCOUNTER"].ToString() +@""",");
-                sb.Append(@"""" + i.ToString() + @""",");
+                sb.Append(@"""" + dt.Rows[i]["DCOUNTER"].ToString().Substring(11, 5) + @""",");
                 sb.Append(dt.Rows[i]["E1"].ToString().Replace(",", ".") + ",");
                 sb.Append(dt.Rows[i]["E2"].ToString().Replace(",", ".") + ",");
                 sb.Append(dt.Rows[i]["E3"].ToString().Replace(",", "."));
@@ -290,6 +298,134 @@ namespace a_srv.Controllers
 
 
 
+        [HttpPost("chartd_p/{id}")]
+        //[AllowAnonymous]
+        public string GetChartD_P([FromRoute] Guid id, [FromBody] DispatcherFilter request)
+        {
+            //var uid = User.GetUserId();
+
+
+            string sql = MakeChartDRequest(id, request);
+
+            DataTable dt = _context.DoQuery(sql);
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append(@"[[{ ""datatype"":""string"",""label"":""Дата""},{ ""datatype"":""number"",""label"":""P1""},{ ""datatype"":""number"",""label"":""P2""},{ ""datatype"":""number"",""label"":""P3""}]");
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+
+                sb.Append(@",[");
+                //sb.Append(@"""" + dt.Rows[i]["DCOUNTER"].ToString() +@""",");
+                sb.Append(@"""" + dt.Rows[i]["DCOUNTER"].ToString().Substring(5) + @""",");
+                sb.Append(dt.Rows[i]["EP1"].ToString().Replace(",", ".") + ",");
+                sb.Append(dt.Rows[i]["EP2"].ToString().Replace(",", ".") + ",");
+                sb.Append(dt.Rows[i]["EP3"].ToString().Replace(",", "."));
+
+                sb.Append(@"]");
+
+            }
+            sb.Append(@"]");
+
+            return sb.ToString();
+        }
+
+        [HttpPost("chartd_t/{id}")]
+        //[AllowAnonymous]
+        public string GetChartD_T([FromRoute] Guid id, [FromBody] DispatcherFilter request)
+        {
+            //var uid = User.GetUserId();
+
+
+            string sql = MakeChartDRequest(id, request);
+
+            DataTable dt = _context.DoQuery(sql);
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append(@"[[{ ""datatype"":""string"",""label"":""Дата""},{ ""datatype"":""number"",""label"":""T1""},{ ""datatype"":""number"",""label"":""T2""},{ ""datatype"":""number"",""label"":""T3""}]");
+            //sb.Append(@"[[""Час"",""T1"",""T2"",""T3""]");
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+
+                sb.Append(@",[");
+                sb.Append(@"""" + dt.Rows[i]["DCOUNTER"].ToString().Substring(5) + @""",");
+                sb.Append(dt.Rows[i]["E1"].ToString().Replace(",", ".") + ",");
+                sb.Append(dt.Rows[i]["E2"].ToString().Replace(",", ".") + ",");
+                sb.Append(dt.Rows[i]["E3"].ToString().Replace(",", "."));
+
+                sb.Append(@"]");
+
+            }
+            sb.Append(@"]");
+
+            return sb.ToString();
+        }
+
+        [HttpPost("chartw_p/{id}")]
+        //[AllowAnonymous]
+        public string GetChartW_P([FromRoute] Guid id, [FromBody] DispatcherFilter request)
+        {
+            //var uid = User.GetUserId();
+
+
+            string sql = MakeChartWRequest(id, request);
+
+            DataTable dt = _context.DoQuery(sql);
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append(@"[[{ ""datatype"":""string"",""label"":""Неделя""},{ ""datatype"":""number"",""label"":""P1""},{ ""datatype"":""number"",""label"":""P2""},{ ""datatype"":""number"",""label"":""P3""}]");
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+
+                sb.Append(@",[");
+                sb.Append(@"""" + dt.Rows[i]["Year"].ToString() + "." + dt.Rows[i]["Week"].ToString() + @""",");
+                sb.Append(dt.Rows[i]["EP1"].ToString().Replace(",", ".") + ",");
+                sb.Append(dt.Rows[i]["EP2"].ToString().Replace(",", ".") + ",");
+                sb.Append(dt.Rows[i]["EP3"].ToString().Replace(",", "."));
+
+                sb.Append(@"]");
+
+            }
+            sb.Append(@"]");
+
+            return sb.ToString();
+        }
+
+        [HttpPost("chartw_t/{id}")]
+        //[AllowAnonymous]
+        public string GetChartW_T([FromRoute] Guid id, [FromBody] DispatcherFilter request)
+        {
+            //var uid = User.GetUserId();
+
+
+            string sql = MakeChartWRequest(id, request);
+
+            DataTable dt = _context.DoQuery(sql);
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append(@"[[{ ""datatype"":""string"",""label"":""Неделя""},{ ""datatype"":""number"",""label"":""T1""},{ ""datatype"":""number"",""label"":""T2""},{ ""datatype"":""number"",""label"":""T3""}]");
+         
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+
+                sb.Append(@",[");
+                sb.Append(@"""" + dt.Rows[i]["Year"].ToString() +"."+ dt.Rows[i]["Week"].ToString() + @""",");
+                sb.Append(dt.Rows[i]["E1"].ToString().Replace(",", ".") + ",");
+                sb.Append(dt.Rows[i]["E2"].ToString().Replace(",", ".") + ",");
+                sb.Append(dt.Rows[i]["E3"].ToString().Replace(",", "."));
+
+                sb.Append(@"]");
+
+            }
+            sb.Append(@"]");
+
+            return sb.ToString();
+        }
+
+
         private string MakeRequest(Guid id, DispatcherFilter request)
         {
             string sql = @"SELECT [DATA_RECORDid]
@@ -300,23 +436,23 @@ namespace a_srv.Controllers
       ,substring(convert(varchar,[dstart],120),0,17) dstart
       ,substring(convert(varchar,[dend],120),0,17) dend
       ,[name]
-      ,[U1]
-      ,[U2]
-      ,[U3]
-      ,[I1]
-      ,[I2]
-      ,[I3]
-      ,[EP1]
-      ,[EP2]
-      ,[EP3]
-      ,[E0]
-      ,[E1]
-      ,[E2]
-      ,[E3]
-      ,[AP]
-      ,[AM]
-      ,[RP]
-      ,[RM] FROM V_DISPATCHER_ELECTRO where ID_BD='" + id.ToString() + "' ";
+     ,Format([U1],'N2') as U1
+      ,Format([U2],'N2') as U2
+      ,Format([U3],'N2') as U3
+      ,Format([I1],'N2') as I1
+      ,Format([I2],'N2') as I2
+      ,Format([I3],'N2') as I3
+      ,Format([EP1],'N2') as EP1
+      ,Format([EP2],'N2') as EP2
+      ,Format([EP3],'N2') as EP3
+      ,Format([E0],'N2') as E0
+      ,Format([E1],'N2') as E1
+      ,Format([E2],'N2') as E2
+      ,Format([E3],'N2') as E3
+      ,Format([AP],'N2') as AP
+      ,Format([AM],'N2') as AM
+      ,Format([RP],'N2') as RP
+      ,Format([RM],'N2') as RM  FROM V_DISPATCHER_ELECTRO where ID_BD='" + id.ToString() + "' ";
 
             if (!request.AType.Equals(Guid.Empty))
             {
@@ -380,23 +516,23 @@ namespace a_srv.Controllers
       ,substring(convert(varchar,[dstart],120),0,17) dstart
       ,substring(convert(varchar,[dend],120),0,17) dend
       ,[name]
-      ,[U1]
-      ,[U2]
-      ,[U3]
-      ,[I1]
-      ,[I2]
-      ,[I3]
-      ,[EP1]
-      ,[EP2]
-      ,[EP3]
-      ,[E0]
-      ,[E1]
-      ,[E2]
-      ,[E3]
-      ,[AP]
-      ,[AM]
-      ,[RP]
-      ,[RM] FROM V_DISPATCHER_ELECTRO where ID_BD='" + id.ToString() + "' ";
+          ,Format([U1],'N2') as U1
+      ,Format(isnull([U2],0),'N2') as U2
+      ,Format(isnull([U3],0),'N2') as U3
+      ,Format(isnull([I1],0),'N2') as I1
+      ,Format(isnull([I2],0),'N2') as I2
+      ,Format(isnull([I3],0),'N2') as I3
+      ,Format(isnull([EP1],0),'N2') as EP1
+      ,Format(isnull([EP2],0),'N2') as EP2
+      ,Format(isnull([EP3],0),'N2') as EP3
+      ,Format(isnull([E0],0),'N2') as E0
+      ,Format(isnull([E1],0),'N2') as E1
+      ,Format(isnull([E2],0),'N2') as E2
+      ,Format(isnull([E3],0),'N2') as E3
+      ,Format(isnull([AP],0),'N2') as AP
+      ,Format(isnull([AM],0),'N2') as AM
+      ,Format(isnull([RP],0),'N2') as RP
+      ,Format(isnull([RM],0),'N2') as RM  FROM V_DISPATCHER_ELECTRO where ID_BD='" + id.ToString() + "' ";
 
         if (!request.AType.Equals(Guid.Empty))
         {
@@ -455,7 +591,152 @@ namespace a_srv.Controllers
         return sql;
     }
 
-}
+
+
+        private string MakeChartDRequest(Guid id, DispatcherFilter request)
+        {
+           string sql = @"SELECT 
+      substring(convert(varchar,[DCOUNTER],120),0,11) DCOUNTER
+      ,Format(sum(isnull([EP1],0)),'N2') as EP1
+      ,Format(sum(isnull([EP2],0)),'N2') as EP2
+      ,Format(sum(isnull([EP3],0)),'N2') as EP3
+      ,Format(max(isnull([E0],0)),'N2') as E0
+      ,Format(max(isnull([E1],0)),'N2') as E1
+      ,Format(max(isnull([E2],0)),'N2') as E2
+      ,Format(max(isnull([E3],0)),'N2') as E3
+      ,Format(sum(isnull([AP],0)),'N2') as AP
+      ,Format(sum(isnull([AM],0)),'N2') as AM
+      ,Format(sum(isnull([RP],0)),'N2') as RP
+      ,Format(sum(isnull([RM],0)),'N2') as RM  
+       FROM V_DISPATCHER_ELECTRO where ID_BD='" + id.ToString() + "' ";
+
+            if (!request.AType.Equals(Guid.Empty))
+            {
+                sql = sql + " and ATYPE='" + request.AType.ToString() + "' ";
+            }
+
+
+            DateTime d;
+            if (request.dstart != null && request.dstart != "")
+            {
+
+                if (DateTime.TryParse(request.dstart, out d))
+                {
+                    sql = sql + " and DCOUNTER >=" + Utils.MSSQLDate(d);
+                
+                }
+                else
+                {
+                    d = DateTime.Today.AddDays(-1);
+                    sql = sql + " and DCOUNTER >=" + Utils.MSSQLDate(d);
+                }
+            }
+            else
+            {
+                d = DateTime.Today.AddDays(-1);
+                sql = sql + " and DCOUNTER >=" + Utils.MSSQLDate(d);
+                
+            }
+
+            
+            if (request.dend != null && request.dend != "")
+            {
+
+                if (DateTime.TryParse(request.dend, out d))
+                {
+                    sql = sql + " and DCOUNTER <=" + Utils.MSSQLDate(d);
+                }
+                else
+                {
+                    d = DateTime.Today.AddDays(1);
+                    sql = sql + " and DCOUNTER <=" + Utils.MSSQLDate(d);
+                }
+            }
+            else
+            {
+                d = DateTime.Today.AddDays(1);
+                sql = sql + " and DCOUNTER <=" + Utils.MSSQLDate(d);
+            }
+            
+
+            sql = sql + " group by substring(convert(varchar,[DCOUNTER],120),0,11) order by substring(convert(varchar,[DCOUNTER],120),0,11)";
+            return sql;
+        }
+
+
+
+        private string MakeChartWRequest(Guid id, DispatcherFilter request)
+        {
+            string sql = @"SELECT 
+      datepart(year,dcounter) YEAR, datepart(week,dcounter) WEEK
+      ,Format(sum(isnull([EP1],0)),'N2') as EP1
+      ,Format(sum(isnull([EP2],0)),'N2') as EP2
+      ,Format(sum(isnull([EP3],0)),'N2') as EP3
+      ,Format(max(isnull([E0],0)),'N2') as E0
+      ,Format(max(isnull([E1],0)),'N2') as E1
+      ,Format(max(isnull([E2],0)),'N2') as E2
+      ,Format(max(isnull([E3],0)),'N2') as E3
+      ,Format(sum(isnull([AP],0)),'N2') as AP
+      ,Format(sum(isnull([AM],0)),'N2') as AM
+      ,Format(sum(isnull([RP],0)),'N2') as RP
+      ,Format(sum(isnull([RM],0)),'N2') as RM  
+       FROM V_DISPATCHER_ELECTRO where ID_BD='" + id.ToString() + "' ";
+
+            if (!request.AType.Equals(Guid.Empty))
+            {
+                sql = sql + " and ATYPE='" + request.AType.ToString() + "' ";
+            }
+
+
+            DateTime d;
+            if (request.dstart != null && request.dstart != "")
+            {
+
+                if (DateTime.TryParse(request.dstart, out d))
+                {
+                    sql = sql + " and DCOUNTER >=" + Utils.MSSQLDate(d);
+                   
+                }
+                else
+                {
+                    d = DateTime.Today.AddDays(-1);
+                    sql = sql + " and DCOUNTER >=" + Utils.MSSQLDate(d);
+                   
+                }
+            }
+            else
+            {
+                d = DateTime.Today.AddDays(-1);
+                sql = sql + " and DCOUNTER >=" + Utils.MSSQLDate(d);
+                
+            }
+
+
+            if (request.dend != null && request.dend != "")
+            {
+
+                if (DateTime.TryParse(request.dend, out d))
+                {
+                    sql = sql + " and DCOUNTER <=" + Utils.MSSQLDate(d);
+                }
+                else
+                {
+                    d = DateTime.Today.AddDays(1);
+                    sql = sql + " and DCOUNTER <=" + Utils.MSSQLDate(d);
+                }
+            }
+            else
+            {
+                d = DateTime.Today.AddDays(1);
+                sql = sql + " and DCOUNTER <=" + Utils.MSSQLDate(d);
+            }
+
+
+            sql = sql + " group by datepart(year,dcounter) , datepart(week,dcounter)  order by datepart(year,dcounter), datepart(week,dcounter)";
+            return sql;
+        }
+
+    }
 
 
 

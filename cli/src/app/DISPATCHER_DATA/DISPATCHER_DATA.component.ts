@@ -20,6 +20,6 @@ export class DISPATCHER_DATAComponent implements OnInit {
     this.disp_Service.refreshElectro();
   } 
  
- 
+  
   onSelect($event:any){}
 }

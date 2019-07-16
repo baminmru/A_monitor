@@ -1,0 +1,84 @@
+<amexio-row>
+        <amexio-column [size]="12">
+            <amexio-row>
+                <amexio-column [size]="6" >
+            
+                    <amexio-d3-chart-line 
+                                (onChartClick)="onUserDefineChartClick($event)" 
+                                [label]="false" 
+                                [horizontal-scale]="true"
+                                [vertical-scale]="true"
+                                [yaxis-interval]=10
+                                [xaxis-interval]=12
+                               
+                                (onLegendClick)="onUserDefineLegendClick($event)"
+                                [title]="'Напряжение по фазам: ' + sdate()"
+                            [data] = "disp_Service.CurrentChart_U"
+                            >
+                    </amexio-d3-chart-line>  
+                      
+                </amexio-column>
+                      <amexio-column [size]="6" >
+                          
+                                     <amexio-d3-chart-line 
+                                    (onChartClick)="onDefaultChartClick($event)"
+                                    (onLegendClick)="onDefaultLegendClick($event)"
+                                    [title]="'Токи по фазам: ' + sdate()"
+                                    [label]="false" 
+                                    [horizontal-scale]="true"
+                                     [vertical-scale]="true"
+                                     [yaxis-interval]=10
+                                     [xaxis-interval]=12
+                                    
+                                    [data] = "disp_Service.CurrentChart_I">
+                                 </amexio-d3-chart-line> 
+                                 
+                            
+                        </amexio-column>
+
+            </amexio-row>
+
+          
+                    <amexio-row>
+                        <amexio-column [size]="6" >
+                           
+                                     <amexio-d3-chart-line 
+                                            (onChartClick)="onLineChartClick($event)" 
+                                            [label]="false" 
+                                            [horizontal-scale]="true"
+                                     [vertical-scale]="true"
+                                            [yaxis-interval]=10
+                                            [xaxis-interval]= 12
+                                          
+                                            (onLegendClick)="onLineLegendClick($event)"
+                                            [title]="'Мощность по  фазам: ' + sdate()"
+                                            [data] = "disp_Service.CurrentChart_P"
+                                            [label-color] = "'brown'"
+                                           
+                                            >
+                                         </amexio-d3-chart-line>
+                                    
+                           
+                        </amexio-column>
+                     
+                        <amexio-column [size]="6" >
+                          
+                                     <amexio-d3-chart-line
+                                            (onChartClick)="onLineChartClick($event)" 
+                                            [label]="false" 
+                                            [horizontal-scale]="true"
+                                            [vertical-scale]="true"
+                                            [yaxis-interval]=10
+                                         
+                                            (onLegendClick)="onLineLegendClick($event)"
+                                            [title]="'Энергия по тарифам: ' + sdate()"
+                                            [data] = "disp_Service.CurrentChart_T"
+                                            [label-color] = "'brown'"
+                                            [xaxis-interval]= 12
+                                            >
+                                         </amexio-d3-chart-line> 
+                   
+                        </amexio-column>
+                    </amexio-row>
+        </amexio-column>
+    </amexio-row>

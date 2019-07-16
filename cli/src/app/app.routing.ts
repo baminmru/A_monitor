@@ -13,23 +13,24 @@ import { MONNODEComponent } from './MONNODE/MONNODE.component';
 import { MONDEVComponent } from './MONDEV/MONDEV.component'; 
 import { jwtLoginComponent } from './jwtlogin/jwtlogin.component';
 import { DISPATCHERComponent } from './DISPATCHER/DISPATCHER.component'; 
+import { AppGuard} from 'app/app.guard'; 
 
 
 export const ROUTES: Routes = [ 
-    {path: '', redirectTo: 'home', pathMatch: 'full'}, 
-	 
-	{path: 'DATA', component:  DATAComponent}, 
-	{path: 'MONQ', component:  MONQComponent}, 
-	{path: 'moncli', component:  moncliComponent}, 
-	{path: 'MONSRV', component:  MONSRVComponent}, 
-	{path: 'MONUSR', component:  MONUSRComponent}, 
-	{path: 'MOND', component:  MONDComponent}, 
-	{path: 'MONSCH', component:  MONSCHComponent}, 
-	{path: 'MONNODE', component:  MONNODEComponent}, 
-	{path: 'MONDEV', component:  MONDEVComponent}, 
+	{path: '', redirectTo: 'home', pathMatch: 'full'}, 
 	{path: 'home', component: AboutComponent} ,
 	{path: 'jwtLogin', component: jwtLoginComponent}, 
-	{path: 'node', component: DISPATCHERComponent}
+
+	{path: 'DATA',canActivate: [AppGuard], component:  DATAComponent}, 
+	{path: 'MONQ',canActivate: [AppGuard], component:  MONQComponent}, 
+	{path: 'moncli',canActivate: [AppGuard], component:  moncliComponent}, 
+	{path: 'MONSRV',canActivate: [AppGuard], component:  MONSRVComponent}, 
+	{path: 'MONUSR',canActivate: [AppGuard], component:  MONUSRComponent}, 
+	{path: 'MOND',canActivate: [AppGuard], component:  MONDComponent}, 
+	{path: 'MONSCH', canActivate: [AppGuard],component:  MONSCHComponent}, 
+	{path: 'MONNODE',canActivate: [AppGuard], component:  MONNODEComponent}, 
+	{path: 'MONDEV',canActivate: [AppGuard], component:  MONDEVComponent}, 
+	{path: 'node',canActivate: [AppGuard], component: DISPATCHERComponent}
 ]; 
  
 export const ROUTING: ModuleWithProviders = RouterModule.forRoot(ROUTES);

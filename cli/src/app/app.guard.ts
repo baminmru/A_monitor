@@ -27,6 +27,8 @@ export class AppGuard implements CanActivate, CanActivateChild {
 	if ( this.AppService.isLoggedIn) { 
 	
 		if(this.AppService.Role=="SUPERADMIN"){
+
+			
 			switch(url){
 				
 				
@@ -36,24 +38,36 @@ export class AppGuard implements CanActivate, CanActivateChild {
 				case '/Organization':
 					return true;
 					
-				case '/Users':
+				case '/MONUSR':
 					return true;
 					
-				/*case '/classTest':
-					return true; */
-					
-				case '/classLogin':
-					return true;
-					
-				case '/Certification':
+									
+				case '/DATA':
 					return true;	
 					
-				case '/CheckForm':
-					return true;
-					
-				case '/Dictionary':
+				case '/MONQ':
 					return true;
 
+					case '/moncli':
+					return true;
+
+				case '/MONSRV':
+					return true;
+
+				case '/MONSCH':
+					return true;
+					
+				case '/MOND':
+					return true;
+
+				case '/MONNODE':
+					return true;
+
+					case '/MONDEV':
+						return true;
+
+						case '/node':
+							return true;
 					
 				default:
 				this.router.navigate(['/']);
@@ -64,135 +78,78 @@ export class AppGuard implements CanActivate, CanActivateChild {
 	
 		if(this.AppService.Role=="Администратор"){
 			switch(url){
-				
-				
-				case '/jwtLogin':
-					return true;
-					
-				
-				case '/Exam':
-					return true;	
-					
-				case '/FindExams':
-					return true;	
-				
-					
-				case '/classLogin':
-					return true;
-					
-				default:
-				this.router.navigate(['/']);
-				return false;
-				
-			}
-		}
-		
-		if(this.AppService.Role=="Разработчик Теста"){
-			switch(url){
-				
-				case '/jwtLogin':
-					return true;
-					
-				case '/TestVariant':
-					return true;
-					
-			
-				case '/TestCreator':
-					return true;
-					
-				
-				default:
-					this.router.navigate(['/']);
-					return false;
-			}
-		}
-		
-		if(this.AppService.Role=="Проверяющий"){
-			switch(url){
-				
-				
-				case '/jwtLogin':
-					return true;
-					
-				case '/CheckTests':
-					return true;
-					
-				case '/CheckExams':
-					return true;
 
-
-				default:
-					this.router.navigate(['/']);
-					return false;
-			}
-		}
-		
-		if(this.AppService.Role=="Тестируемый"){
-			switch(url){
+				 case '/jwtLogin':
+					return true;
 				
-				case '/Me':
-					return true;
-					
-				case '/RecordToExam':
-					return true;
-					
-				case '/OnlineTest':
-					return true;
-					
-				case '/OnlineExam':
-					return true;
-					
-					
-				case '/MyTests':
-					return true;
-					
-				case '/MyExams':
-					return true;
-					
-				default:
-				this.router.navigate(['/']);
-				return false;
-				
-			}
-		}
-		
-		
-		if(this.AppService.Role=="Класс"){
-			switch(url){
-				
-				
-				/* case '/jwtLogin':
-					return true; */
-					
-				case '/classExam':
-					return true;
-
-
-				default:
-					//this.router.navigate(['/']);
-					return false;
-			}
-		}
+					case '/MONUSR':
+						return true;
+						
+					case '/DATA':
+						return true;	
+						
+					case '/MONQ':
+						return true;
 	
+					case '/MONSRV':
+						return true;
+	
+					case '/MONSCH':
+						return true;
+						
+					case '/MONNODE':
+						return true;
+	
+					case '/MONDEV':
+						return true;
+	
+					case '/node':
+						return true;
+					
+				default:
+					this.router.navigate(['/']);
+				return false;
+				
+			}
+		}
+		
+		if(this.AppService.Role=="Диспетчер"){
+			switch(url){
+				
+					case '/jwtLogin':
+							return true;
+					
+					case '/node':
+						return true;
+					
+					case '/MONNODE':
+						return true;
+	
+					case '/MONDEV':
+						return true;
+				
+				default:
+					this.router.navigate(['/']);
+					return false;
+			}
+		}
+		
+
 		return false; 
 	}else{
 		
 		switch(url){
 				
 				
-				/* case '/jwtLogin':
-					return true; */
-					
-				case '/classLogin':
-					return true;
-
+				 case '/jwtLogin':
+					return true; 
 
 				default:
 					//this.router.navigate(['/']);
 					return false;
 			}
 		// Navigate to the login page with extras
-		this.router.navigate(['/classLogin']);
+		this.router.navigate(['/jwtLogin']);
 		return false;
 	}
   }

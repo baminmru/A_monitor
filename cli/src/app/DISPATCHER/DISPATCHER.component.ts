@@ -20,7 +20,6 @@ export class DISPATCHERComponent implements OnInit {
 
   gridDesktop: GridConfig;
   NodeArray:Array<DISPATCHER.NodeItem>= [];
-
   gVal:boolean=false;
 
   constructor(public AppService:AppService, public disp_Service:DISPATCHER_Service, private _gridlayoutService : AmexioGridLayoutService) { 
@@ -31,21 +30,56 @@ export class DISPATCHERComponent implements OnInit {
     this.createLayouts();
     this._gridlayoutService.createLayout(this.gridDesktop);
     this.refreshNodes();
+    if(this.NodeArray.length >0){
+      this.onNodeSelect(this.NodeArray[0]);
+    }
    
   } 
  
   refreshNodes():Array<DISPATCHER.NodeItem> {
-    console.log("refreshing Nodes"); 
-     this.disp_Service.getNodes().subscribe(NArray => { this.NodeArray = NArray; console.log(JSON.stringify( this.NodeArray) );   }, error => { console.log(error.message); })
+     console.log("refreshing Nodes"); 
+     this.disp_Service.getNodes().subscribe(NArray => 
+      { 
+        this.NodeArray = NArray; console.log(JSON.stringify( this.NodeArray) );  
+        if(this.NodeArray.length >0){
+          this.onNodeSelect(this.NodeArray[0]);
+        }  
+      }, error => { console.log(error.message); })
      return  this.NodeArray;
  }
 
- onNodeSelect(item:DISPATCHER.NodeItem){
+ onNodeSelect(item:any){
+  item.IsSelected=true;
+	console.log("onNodeSelect:" + JSON.stringify( item)) ;
     this.disp_Service.CurrentDevice=item;
-    this.disp_Service.refreshElectro();
-    this.disp_Service.refreshCharts();
-    console.log("Selectd Node: "+ JSON.stringify( this.disp_Service.CurrentDevice));
+	console.log("Selectd Node: "+ JSON.stringify( this.disp_Service.CurrentDevice));
+	 if(this.disp_Service.DispatcherTab =="Графики"){
+		 console.log("Refreshing charts");
+		 this.disp_Service.refreshCharts();
+	 }else{
+		 console.log("Refreshing grid");
+		this.disp_Service.refreshElectro();
+	 }
+    
  }
+ 
+
+ 
+	refreshList(tab:any) {
+
+		this.disp_Service.DispatcherTab=tab.title;
+		console.log("Tab: " + tab.title);
+		if (this.disp_Service.CurrentDevice.DeviceID != "null"){
+		 if(this.disp_Service.DispatcherTab == "Графики"){
+			 console.log("Refreshing charts");
+			 this.disp_Service.refreshCharts();
+		 }else{
+			 console.log("Refreshing grid");
+			this.disp_Service.refreshElectro();
+		 }
+	 }
+      
+    }
 
 /* Nodes():Array<DISPATCHER.NodeItem>{
   console.log("GetNodes: "+JSON.stringify( this.NodeArray));
