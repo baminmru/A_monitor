@@ -88,11 +88,6 @@ export class MOND_SNABTOPComponent implements OnInit {
 
     save(item: MOND.MOND_SNABTOP) {
         this.valid=true; 
-     if(this.currentMOND_SNABTOP.CNAME == undefined || this.currentMOND_SNABTOP.CNAME=='') this.valid=false;
-     if(this.currentMOND_SNABTOP.CADDRESS == undefined || this.currentMOND_SNABTOP.CADDRESS=='') this.valid=false;
-     if(this.currentMOND_SNABTOP.CFIO == undefined || this.currentMOND_SNABTOP.CFIO=='') this.valid=false;
-     if(this.currentMOND_SNABTOP.CPHONE == undefined || this.currentMOND_SNABTOP.CPHONE=='') this.valid=false;
-     if(this.currentMOND_SNABTOP.CREGION == undefined || this.currentMOND_SNABTOP.CREGION=='') this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

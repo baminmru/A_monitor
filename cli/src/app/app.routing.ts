@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AboutComponent } from './about/about.component'; 
 import { DATAComponent } from './DATA/DATA.component'; 
 import { MONQComponent } from './MONQ/MONQ.component'; 
+import { monlogComponent } from './monlog/monlog.component'; 
 import { moncliComponent } from './moncli/moncli.component'; 
 import { MONSRVComponent } from './MONSRV/MONSRV.component'; 
 import { MONUSRComponent } from './MONUSR/MONUSR.component'; 
@@ -23,6 +24,7 @@ export const ROUTES: Routes = [
 
 	{path: 'DATA',canActivate: [AppGuard], component:  DATAComponent}, 
 	{path: 'MONQ',canActivate: [AppGuard], component:  MONQComponent}, 
+	{path: 'monlog', canActivate: [AppGuard], component:  monlogComponent}, 
 	{path: 'moncli',canActivate: [AppGuard], component:  moncliComponent}, 
 	{path: 'MONSRV',canActivate: [AppGuard], component:  MONSRVComponent}, 
 	{path: 'MONUSR',canActivate: [AppGuard], component:  MONUSRComponent}, 

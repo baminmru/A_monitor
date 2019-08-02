@@ -486,21 +486,22 @@ namespace a_srv.Controllers
 
                 if (DateTime.TryParse(request.dend, out d))
                 {
-                    sql = sql + " and DCOUNTER <=" + Utils.MSSQLDate(d);
+                    d = d.AddDays(1);
+                    sql = sql + " and DCOUNTER <" + Utils.MSSQLDate(d);
                 }
                 else
                 {
                     d = DateTime.Today.AddDays(1);
-                    sql = sql + " and DCOUNTER <=" + Utils.MSSQLDate(d);
+                    sql = sql + " and DCOUNTER <" + Utils.MSSQLDate(d);
                 }
             }
             else
             {
                 d = DateTime.Today.AddDays(1);
-                sql = sql + " and DCOUNTER <=" + Utils.MSSQLDate(d);
+                sql = sql + " and DCOUNTER <" + Utils.MSSQLDate(d);
             }
 
-            sql = sql + " order by DCOUNTER";
+            sql = sql + " order by DCOUNTER desc";
             return sql;
         }
 
@@ -563,31 +564,32 @@ namespace a_srv.Controllers
             d = DateTime.Today.AddDays(-1);
             sql = sql + " and DCOUNTER >=" + Utils.MSSQLDate(d);
                 d = d.AddDays(1);
-                sql = sql + " and DCOUNTER <" + Utils.MSSQLDate(d);
+               sql = sql + " and DCOUNTER <" + Utils.MSSQLDate(d);
             }
 
-        /*
-        if (request.dend != null && request.dend != "")
-        {
+            /*
+            if (request.dend != null && request.dend != "")
+                {
 
-            if (DateTime.TryParse(request.dend, out d))
-            {
-                sql = sql + " and DCOUNTER <=" + Utils.MSSQLDate(d);
-            }
-            else
-            {
-                d = DateTime.Today.AddDays(1);
-                sql = sql + " and DCOUNTER <=" + Utils.MSSQLDate(d);
-            }
-        }
-        else
-        {
-            d = DateTime.Today.AddDays(1);
-            sql = sql + " and DCOUNTER <=" + Utils.MSSQLDate(d);
-        }
-        */
+                    if (DateTime.TryParse(request.dend, out d))
+                    {
+                        d = d.AddDays(1);
+                        sql = sql + " and DCOUNTER <" + Utils.MSSQLDate(d);
+                    }
+                    else
+                    {
+                        d = DateTime.Today.AddDays(1);
+                        sql = sql + " and DCOUNTER <" + Utils.MSSQLDate(d);
+                    }
+                }
+                else
+                {
+                    d = DateTime.Today.AddDays(1);
+                    sql = sql + " and DCOUNTER <" + Utils.MSSQLDate(d);
+                }
+            */
 
-        sql = sql + " order by DCOUNTER";
+            sql = sql + " order by DCOUNTER";
         return sql;
     }
 
@@ -638,26 +640,27 @@ namespace a_srv.Controllers
                 
             }
 
-            
+
             if (request.dend != null && request.dend != "")
             {
 
                 if (DateTime.TryParse(request.dend, out d))
                 {
-                    sql = sql + " and DCOUNTER <=" + Utils.MSSQLDate(d);
+                    d = d.AddDays(1);
+                    sql = sql + " and DCOUNTER <" + Utils.MSSQLDate(d);
                 }
                 else
                 {
                     d = DateTime.Today.AddDays(1);
-                    sql = sql + " and DCOUNTER <=" + Utils.MSSQLDate(d);
+                    sql = sql + " and DCOUNTER <" + Utils.MSSQLDate(d);
                 }
             }
             else
             {
                 d = DateTime.Today.AddDays(1);
-                sql = sql + " and DCOUNTER <=" + Utils.MSSQLDate(d);
+                sql = sql + " and DCOUNTER <" + Utils.MSSQLDate(d);
             }
-            
+
 
             sql = sql + " group by substring(convert(varchar,[DCOUNTER],120),0,11) order by substring(convert(varchar,[DCOUNTER],120),0,11)";
             return sql;
@@ -668,7 +671,8 @@ namespace a_srv.Controllers
         private string MakeChartWRequest(Guid id, DispatcherFilter request)
         {
             string sql = @"SELECT 
-      datepart(year,dcounter) YEAR, datepart(week,dcounter) WEEK
+        datepart(year,dcounter) YEAR
+      , datepart(week,dcounter) WEEK
       ,Format(sum(isnull([EP1],0)),'N2') as EP1
       ,Format(sum(isnull([EP2],0)),'N2') as EP2
       ,Format(sum(isnull([EP3],0)),'N2') as EP3
@@ -717,18 +721,19 @@ namespace a_srv.Controllers
 
                 if (DateTime.TryParse(request.dend, out d))
                 {
-                    sql = sql + " and DCOUNTER <=" + Utils.MSSQLDate(d);
+                    d = d.AddDays(1);
+                    sql = sql + " and DCOUNTER <" + Utils.MSSQLDate(d);
                 }
                 else
                 {
                     d = DateTime.Today.AddDays(1);
-                    sql = sql + " and DCOUNTER <=" + Utils.MSSQLDate(d);
+                    sql = sql + " and DCOUNTER <" + Utils.MSSQLDate(d);
                 }
             }
             else
             {
                 d = DateTime.Today.AddDays(1);
-                sql = sql + " and DCOUNTER <=" + Utils.MSSQLDate(d);
+                sql = sql + " and DCOUNTER <" + Utils.MSSQLDate(d);
             }
 
 

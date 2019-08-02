@@ -114,8 +114,9 @@ export class MONSCH_PARAMComponent implements OnInit {
         this.valid=true; 
      if(this.currentMONSCH_PARAM.ArchType == undefined ) this.valid=false;
      if(this.currentMONSCH_PARAM.Param == undefined ) this.valid=false;
+     if(this.currentMONSCH_PARAM.POS_LEFT == undefined  ) this.valid=false;
+     if(this.currentMONSCH_PARAM.POS_TOP == undefined  ) this.valid=false;
      if(this.currentMONSCH_PARAM.HIDEPARAM == undefined ) this.valid=false;
-     if(this.currentMONSCH_PARAM.HideOnSchema == undefined ) this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

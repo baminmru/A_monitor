@@ -5,6 +5,7 @@ import { environment } from '../environments/environment';
 
 import { DATA } from "app/DATA";
 import { MONQ } from "app/MONQ";
+import { monlog } from "app/monlog";
 import { moncli } from "app/moncli";
 import { MONSRV } from "app/MONSRV";
 import { MONUSR } from "app/MONUSR";
@@ -381,6 +382,18 @@ public SelectedRole = new BehaviorSubject<string>("");
 		 
 	} 
 	public currentMONQ_result = this.SelectedMONQ_result.asObservable(); 
+
+
+	// support for Selected monlog.logcall; 
+	public Lastlogcall:monlog.logcall = {} as monlog.logcall; 
+	public Selectedlogcall = new BehaviorSubject<monlog.logcall>({} as monlog.logcall); 
+	public pushSelectedlogcall(item:monlog.logcall){ 
+		console.log("change Selected logcall"); 
+		this.Lastlogcall=item; 
+		this.Selectedlogcall.next(item); 
+		 
+	} 
+	public currentlogcall = this.Selectedlogcall.asObservable(); 
 
 
 	// support for Selected moncli.moncli_info; 
@@ -801,6 +814,15 @@ public SelectedRole = new BehaviorSubject<string>("");
 	this.getMONQ_result().subscribe(Data => {this.ComboMONQ_result=Data;});
  }
 
+	public Combologcall:Array<ComboInfo> = []; 
+	public getlogcall(): Observable<ComboInfo[]> { 
+     let cpHeaders = new HttpHeaders({ 'Content-Type': 'application/json','Authorization': 'Bearer '+ sessionStorage.getItem('auth_token') });
+		return this.http.get<ComboInfo[]>(this.serviceURL + '/logcall/Combo', { headers: cpHeaders }); 
+ }
+	public refreshCombologcall() { 
+	this.getlogcall().subscribe(Data => {this.Combologcall=Data;});
+ }
+
 	public Combomoncli_info:Array<ComboInfo> = []; 
 	public getmoncli_info(): Observable<ComboInfo[]> { 
      let cpHeaders = new HttpHeaders({ 'Content-Type': 'application/json','Authorization': 'Bearer '+ sessionStorage.getItem('auth_token') });
@@ -1041,6 +1063,8 @@ public RefreshCombo(){
 
 	this.getMONQ_DEF().subscribe(data => {this.ComboMONQ_DEF=data;}); 
 	this.getMONQ_result().subscribe(data => {this.ComboMONQ_result=data;}); 
+
+	this.getlogcall().subscribe(data => {this.Combologcall=data;}); 
 
 	this.getmoncli_info().subscribe(data => {this.Combomoncli_info=data;}); 
 	this.getMOND_F().subscribe(data => {this.ComboMOND_F=data;}); 

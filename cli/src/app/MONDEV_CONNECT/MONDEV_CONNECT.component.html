@@ -1,7 +1,10 @@
 ﻿<!--Error dialogue-->
 <amexio-window [show-window]="errorFlag"
                [header]="true"
-			   [footer]="true"
+			   [footer]="true" 
+			   [draggable]="true" 
+			   [vertical-position]="'center'" 
+			   [horizontal-position]="'center'" 
 			   [closable]="false"
                >
 	<amexio-header>
@@ -219,8 +222,11 @@
 		  (rowSelect)="onSelect($event)"> 
 		  <amexio-data-table-column [data-index]="'ConnectionEnabled_name'" [data-type]="'string'" [hidden]="false" [text]="'Подключение разрешено'"></amexio-data-table-column> 
 		  <amexio-data-table-column [data-index]="'ConnectType_name'" [data-type]="'string'" [hidden]="false" [text]="'Тип подключения'"></amexio-data-table-column> 
+		  <!--
 		  <amexio-data-table-column [data-index]="'CONNECTLIMIT'" [data-type]="'number'" [hidden]="false" [text]="'Время на соединение'"></amexio-data-table-column> 
+		  -->
 		  <amexio-data-table-column [data-index]="'TheServer_name'" [data-type]="'string'" [hidden]="false" [text]="'Сервер опроса'"></amexio-data-table-column> 
+		  <!--
 		  <amexio-data-table-column [data-index]="'netaddr'" [data-type]="'number'" [hidden]="false" [text]="'Сетевой адрес'"></amexio-data-table-column> 
 		  <amexio-data-table-column [data-index]="'CSPEED'" [data-type]="'string'" [hidden]="false" [text]="'Скорость бод'"> 
  		  <ng-template #amexioBodyTmpl let-column let-row="row">
@@ -275,6 +281,7 @@
              {{  ((row.ATCommand) ? ((row.ATCommand.length>100) ? row.ATCommand.substr(0,100)+'...' : row.ATCommand ) : '-') | removehtmltag }} 
            </ng-template>
 		  </amexio-data-table-column> 
+		  -->
 		  <amexio-data-table-column [data-index]="'callerID'" [data-type]="'string'" [hidden]="false" [text]="'Идентификатор промеж. устройства'"> 
  		  <ng-template #amexioBodyTmpl let-column let-row="row">
              {{  ((row.callerID) ? ((row.callerID.length>100) ? row.callerID.substr(0,100)+'...' : row.callerID ) : '-') | removehtmltag }} 

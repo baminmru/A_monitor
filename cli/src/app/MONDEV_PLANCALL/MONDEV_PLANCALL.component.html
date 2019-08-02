@@ -1,7 +1,10 @@
 ﻿<!--Error dialogue-->
 <amexio-window [show-window]="errorFlag"
                [header]="true"
-			   [footer]="true"
+			   [footer]="true" 
+			   [draggable]="true" 
+			   [vertical-position]="'center'" 
+			   [horizontal-position]="'center'" 
 			   [closable]="false"
                >
 	<amexio-header>
@@ -43,6 +46,7 @@
 	 >
 </amexio-dropdown>
      </amexio-column></amexio-row>
+ 
      <amexio-row><amexio-column size="12" >
  <amexio-number-input  [enable-popover]= "false" [field-label]="'Max число попыток дозвона'" name ="NMAXCALL" 
                     [place-holder]="'Max число попыток дозвона'" 
@@ -73,6 +77,7 @@
         [(ngModel)]="currentMONDEV_PLANCALL.DLASTCALL"> 
  </amexio-date-time-picker> 
      </amexio-column></amexio-row>
+ 
      <amexio-row><amexio-column size="12" >
 <amexio-dropdown 
 	 [field-label]="'Опрашивать текущие'" name ="CCURR" 
@@ -85,6 +90,7 @@
 	 >
 </amexio-dropdown>
      </amexio-column></amexio-row>
+	 
      <amexio-row><amexio-column size="12" >
  <amexio-number-input  [enable-popover]= "false" [field-label]="'Интервал (минут) '" name ="ICALLCURR" 
                     [place-holder]="'Интервал (минут) '" 
@@ -93,6 +99,7 @@
                     > 
  </amexio-number-input>
      </amexio-column></amexio-row>
+	 
      <amexio-row><amexio-column size="12" >
   <amexio-date-time-picker   [field-label]="'Следующий опрос'" 
         [time-picker]="true"  
@@ -100,9 +107,10 @@
         [(ngModel)]="currentMONDEV_PLANCALL.DNEXTCURR"> 
  </amexio-date-time-picker> 
      </amexio-column></amexio-row>
+	 
      <amexio-row><amexio-column size="12" >
 <amexio-dropdown 
-	 [field-label]="'Опрашивать ч.'" name ="CHOUR" 
+	 [field-label]="'Опрашивать час.'" name ="CHOUR" 
                     [place-holder]="'Опрашивать ч.'" 
 	 [(ngModel)]="currentMONDEV_PLANCALL.CHOUR"
             [allow-blank]="false" [error-msg] ="'Не задано: Опрашивать ч.'" 
@@ -142,9 +150,10 @@
         [(ngModel)]="currentMONDEV_PLANCALL.DLASTHOUR"> 
  </amexio-date-time-picker> 
      </amexio-column></amexio-row>
+ 
      <amexio-row><amexio-column size="12" >
 <amexio-dropdown 
-	 [field-label]="'Опрашивать С.'" name ="C24" 
+	 [field-label]="'Опрашивать Сут.'" name ="C24" 
                     [place-holder]="'Опрашивать С.'" 
 	 [(ngModel)]="currentMONDEV_PLANCALL.C24"
             [allow-blank]="false" [error-msg] ="'Не задано: Опрашивать С.'" 
@@ -154,6 +163,7 @@
 	 >
 </amexio-dropdown>
      </amexio-column></amexio-row>
+	 
      <amexio-row><amexio-column size="12" >
  <amexio-number-input  [enable-popover]= "false" [field-label]="'Интервал (часов)'" name ="ICALL24" 
                     [place-holder]="'Интервал (часов)'" 
@@ -184,10 +194,11 @@
         [(ngModel)]="currentMONDEV_PLANCALL.DLASTDAY"> 
  </amexio-date-time-picker> 
      </amexio-column></amexio-row>
+
      <amexio-row><amexio-column size="12" >
 <amexio-dropdown 
 	 [field-label]="'Опрашивать Ит.'" name ="CSUM" 
-                    [place-holder]="'Опрашивать Ит.'" 
+                    [place-holder]="'Опрашивать Итог.'" 
 	 [(ngModel)]="currentMONDEV_PLANCALL.CSUM"
             [allow-blank]="false" [error-msg] ="'Не задано: Опрашивать Ит.'" 
 	 [display-field]="'name'"
@@ -196,6 +207,7 @@
 	 >
 </amexio-dropdown>
      </amexio-column></amexio-row>
+	 
      <amexio-row><amexio-column size="12" >
  <amexio-number-input  [enable-popover]= "false" [field-label]="'Интервал  (минут) '" name ="ICALLSUM" 
                     [place-holder]="'Интервал  (минут) '" 
@@ -211,6 +223,7 @@
         [(ngModel)]="currentMONDEV_PLANCALL.DNEXTSUM"> 
  </amexio-date-time-picker> 
      </amexio-column></amexio-row>
+
      <amexio-row><amexio-column size="12" >
 <amexio-dropdown 
 	 [field-label]="'Опрашивать Эл.'" name ="CEL" 
@@ -223,6 +236,7 @@
 	 >
 </amexio-dropdown>
      </amexio-column></amexio-row>
+	 
      <amexio-row><amexio-column size="12" >
  <amexio-number-input  [enable-popover]= "false" [field-label]="'Интервал (мин.)'" name ="IEL" 
                     [place-holder]="'Интервал (мин.)'" 
@@ -238,6 +252,7 @@
         [(ngModel)]="currentMONDEV_PLANCALL.DNEXTEL"> 
  </amexio-date-time-picker> 
      </amexio-column></amexio-row>
+	 
 	</amexio-body> 
 	<amexio-action> 
 	<amexio-row> 
@@ -271,29 +286,39 @@
 		  (selectedRowData)="onSelect($event)" 
 		  (rowSelect)="onSelect($event)"> 
 		  <amexio-data-table-column [data-index]="'CSTATUS_name'" [data-type]="'string'" [hidden]="false" [text]="'Исключить из опроса'"></amexio-data-table-column> 
-		  <amexio-data-table-column [data-index]="'NMAXCALL'" [data-type]="'number'" [hidden]="false" [text]="'Max число попыток дозвона'"></amexio-data-table-column> 
+		 <!-- <amexio-data-table-column [data-index]="'NMAXCALL'" [data-type]="'number'" [hidden]="false" [text]="'Max число попыток дозвона'"></amexio-data-table-column> 
 		  <amexio-data-table-column [data-index]="'MINREPEAT'" [data-type]="'number'" [hidden]="false" [text]="'Повторить через (минут)'"></amexio-data-table-column> 
 		  <amexio-data-table-column [data-index]="'DLOCK'" [data-type]="'string'" [hidden]="false" [text]="'Когда заблокирован'"></amexio-data-table-column> 
 		  <amexio-data-table-column [data-index]="'DLASTCALL'" [data-type]="'string'" [hidden]="false" [text]="'Последний опрос'"></amexio-data-table-column> 
+		  -->
 		  <amexio-data-table-column [data-index]="'CCURR_name'" [data-type]="'string'" [hidden]="false" [text]="'Опрашивать текущие'"></amexio-data-table-column> 
-		  <amexio-data-table-column [data-index]="'ICALLCURR'" [data-type]="'number'" [hidden]="false" [text]="'Интервал (минут) '"></amexio-data-table-column> 
+		  <!-- <amexio-data-table-column [data-index]="'ICALLCURR'" [data-type]="'number'" [hidden]="false" [text]="'Интервал (минут) '"></amexio-data-table-column> 
 		  <amexio-data-table-column [data-index]="'DNEXTCURR'" [data-type]="'string'" [hidden]="false" [text]="'Следующий опрос'"></amexio-data-table-column> 
+		  -->
 		  <amexio-data-table-column [data-index]="'CHOUR_name'" [data-type]="'string'" [hidden]="false" [text]="'Опрашивать ч.'"></amexio-data-table-column> 
+		  <!--
 		  <amexio-data-table-column [data-index]="'ICALL'" [data-type]="'number'" [hidden]="false" [text]="'Интервал опроса (минут)'"></amexio-data-table-column> 
 		  <amexio-data-table-column [data-index]="'NUMHOUR'" [data-type]="'number'" [hidden]="false" [text]="'За сколько часов'"></amexio-data-table-column> 
 		  <amexio-data-table-column [data-index]="'DNEXTHOUR'" [data-type]="'string'" [hidden]="false" [text]="'Следующий опрос'"></amexio-data-table-column> 
 		  <amexio-data-table-column [data-index]="'DLASTHOUR'" [data-type]="'string'" [hidden]="false" [text]="'Последний опрос'"></amexio-data-table-column> 
+		  -->
 		  <amexio-data-table-column [data-index]="'C24_name'" [data-type]="'string'" [hidden]="false" [text]="'Опрашивать С.'"></amexio-data-table-column> 
+		  <!--
 		  <amexio-data-table-column [data-index]="'ICALL24'" [data-type]="'number'" [hidden]="false" [text]="'Интервал (часов)'"></amexio-data-table-column> 
 		  <amexio-data-table-column [data-index]="'NUM24'" [data-type]="'number'" [hidden]="false" [text]="'За сколько суток'"></amexio-data-table-column> 
 		  <amexio-data-table-column [data-index]="'DNEXT24'" [data-type]="'string'" [hidden]="false" [text]="'Следующий опрос'"></amexio-data-table-column> 
 		  <amexio-data-table-column [data-index]="'DLASTDAY'" [data-type]="'string'" [hidden]="false" [text]="'Последний опрос'"></amexio-data-table-column> 
+		  -->
 		  <amexio-data-table-column [data-index]="'CSUM_name'" [data-type]="'string'" [hidden]="false" [text]="'Опрашивать Ит.'"></amexio-data-table-column> 
+		  <!--
 		  <amexio-data-table-column [data-index]="'ICALLSUM'" [data-type]="'number'" [hidden]="false" [text]="'Интервал  (минут) '"></amexio-data-table-column> 
 		  <amexio-data-table-column [data-index]="'DNEXTSUM'" [data-type]="'string'" [hidden]="false" [text]="'Следующий опрос'"></amexio-data-table-column> 
+		  -->
 		  <amexio-data-table-column [data-index]="'CEL_name'" [data-type]="'string'" [hidden]="false" [text]="'Опрашивать Эл.'"></amexio-data-table-column> 
+		  <!--
 		  <amexio-data-table-column [data-index]="'IEL'" [data-type]="'number'" [hidden]="false" [text]="'Интервал (мин.)'"></amexio-data-table-column> 
 		  <amexio-data-table-column [data-index]="'DNEXTEL'" [data-type]="'string'" [hidden]="false" [text]="'Дата следующего опроса'"></amexio-data-table-column> 
+		  -->
 		</amexio-datagrid> 
 	</amexio-body> 
 </amexio-card> 
@@ -305,7 +330,7 @@
 Удалить строку:  Устройство::План опроса устройств ?
     </amexio-header> 
     <amexio-body> 
-            Удалить запись: {{   (currentMONDEV_PLANCALL.ICALL||'') | removehtmltag }}?  
+            Удалить запись: {{ (  (currentMONDEV_PLANCALL.ICALL||'')) | removehtmltag }}?  
 	</amexio-body> 
 	<amexio-action> 
 	<amexio-row> 

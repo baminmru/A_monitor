@@ -110,16 +110,6 @@ export class DATA_PComponent implements OnInit {
 
     save(item: DATA.DATA_P) {
         this.valid=true; 
-     if(this.currentDATA_P.P1 == undefined  ) this.valid=false;
-     if(this.currentDATA_P.P2 == undefined  ) this.valid=false;
-     if(this.currentDATA_P.P3 == undefined  ) this.valid=false;
-     if(this.currentDATA_P.P4 == undefined  ) this.valid=false;
-     if(this.currentDATA_P.P5 == undefined  ) this.valid=false;
-     if(this.currentDATA_P.P6 == undefined  ) this.valid=false;
-     if(this.currentDATA_P.PATM == undefined  ) this.valid=false;
-     if(this.currentDATA_P.PXB == undefined  ) this.valid=false;
-     if(this.currentDATA_P.DP12 == undefined  ) this.valid=false;
-     if(this.currentDATA_P.DP45 == undefined  ) this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

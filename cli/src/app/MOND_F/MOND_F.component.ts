@@ -110,6 +110,7 @@ export class MOND_FComponent implements OnInit {
 
     save(item: moncli.MOND_F) {
         this.valid=true; 
+     if(this.currentMOND_F.Name == undefined || this.currentMOND_F.Name=='') this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

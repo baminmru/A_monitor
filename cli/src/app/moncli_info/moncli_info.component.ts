@@ -91,6 +91,7 @@ export class moncli_infoComponent implements OnInit {
 
     save(item: moncli.moncli_info) {
         this.valid=true; 
+     if(this.currentmoncli_info.Name == undefined || this.currentmoncli_info.Name=='') this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

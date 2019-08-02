@@ -6,7 +6,6 @@ import {  Validators } from "@angular/forms";
 
 import { RemoveHTMLtagPipe } from 'app/pipes';
 import { DATA } from "app/DATA";
-import { DISPATCHER } from "app/DISPATCHER";
 
 
 const MODE_LIST = 0;
@@ -45,7 +44,7 @@ export class DATA_RECORDComponent implements OnInit {
 
     refreshDATA_RECORD() {
 		   console.log("refreshing DATA_RECORD"); 
-        this.DATA_RECORD_Service.getAll_DATA_RECORDs({} as DISPATCHER.FILTER).subscribe(DATA_RECORDArray => { this.DATA_RECORDArray = DATA_RECORDArray; }, error => { this.ShowError(error.message); })
+        this.DATA_RECORD_Service.getAll_DATA_RECORDs().subscribe(DATA_RECORDArray => { this.DATA_RECORDArray = DATA_RECORDArray; }, error => { this.ShowError(error.message); })
         this.currentDATA_RECORD = {} as DATA.DATA_RECORD;
         console.log("clear selection for DATA_RECORD on refresh");
         this.AppService.pushSelectedDATA_RECORD(this.currentDATA_RECORD);
@@ -95,11 +94,8 @@ export class DATA_RECORDComponent implements OnInit {
     save(item: DATA.DATA_RECORD) {
         this.valid=true; 
      if(this.currentDATA_RECORD.ID_BD == undefined ) this.valid=false;
+     if(this.currentDATA_RECORD.DCALL == undefined ) this.valid=false;
      if(this.currentDATA_RECORD.AType == undefined ) this.valid=false;
-     if(this.currentDATA_RECORD.CHECK_A == undefined  ) this.valid=false;
-     if(this.currentDATA_RECORD.DCOUNTER == undefined ) this.valid=false;
-     if(this.currentDATA_RECORD.dstart == undefined ) this.valid=false;
-     if(this.currentDATA_RECORD.dend == undefined ) this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

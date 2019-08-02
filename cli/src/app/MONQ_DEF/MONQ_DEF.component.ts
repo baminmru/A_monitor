@@ -97,10 +97,7 @@ export class MONQ_DEFComponent implements OnInit {
      if(this.currentMONQ_DEF.theUser == undefined ) this.valid=false;
      if(this.currentMONQ_DEF.TheDevice == undefined ) this.valid=false;
      if(this.currentMONQ_DEF.ArchType == undefined ) this.valid=false;
-     if(this.currentMONQ_DEF.ArchTime == undefined ) this.valid=false;
-     if(this.currentMONQ_DEF.IsUrgent == undefined ) this.valid=false;
-     if(this.currentMONQ_DEF.RepeatTimes == undefined  ) this.valid=false;
-     if(this.currentMONQ_DEF.RepeatInterval == undefined  ) this.valid=false;
+     if(this.currentMONQ_DEF.QueryTime == undefined ) this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

@@ -112,25 +112,7 @@ export class MONDEV_CONNECTComponent implements OnInit {
 
     save(item: MONDEV.MONDEV_CONNECT) {
         this.valid=true; 
-     if(this.currentMONDEV_CONNECT.ConnectionEnabled == undefined ) this.valid=false;
      if(this.currentMONDEV_CONNECT.ConnectType == undefined ) this.valid=false;
-     if(this.currentMONDEV_CONNECT.CONNECTLIMIT == undefined  ) this.valid=false;
-     if(this.currentMONDEV_CONNECT.TheServer == undefined ) this.valid=false;
-     if(this.currentMONDEV_CONNECT.netaddr == undefined  ) this.valid=false;
-     if(this.currentMONDEV_CONNECT.CSPEED == undefined || this.currentMONDEV_CONNECT.CSPEED=='') this.valid=false;
-     if(this.currentMONDEV_CONNECT.CDATABIT == undefined || this.currentMONDEV_CONNECT.CDATABIT=='') this.valid=false;
-     if(this.currentMONDEV_CONNECT.CPARITY == undefined ) this.valid=false;
-     if(this.currentMONDEV_CONNECT.CSTOPBITS == undefined  ) this.valid=false;
-     if(this.currentMONDEV_CONNECT.FlowControl == undefined || this.currentMONDEV_CONNECT.FlowControl=='') this.valid=false;
-     if(this.currentMONDEV_CONNECT.ComPortNum == undefined || this.currentMONDEV_CONNECT.ComPortNum=='') this.valid=false;
-     if(this.currentMONDEV_CONNECT.IPAddr == undefined || this.currentMONDEV_CONNECT.IPAddr=='') this.valid=false;
-     if(this.currentMONDEV_CONNECT.PortNum == undefined  ) this.valid=false;
-     if(this.currentMONDEV_CONNECT.UserName == undefined || this.currentMONDEV_CONNECT.UserName=='') this.valid=false;
-     if(this.currentMONDEV_CONNECT.Password == undefined || this.currentMONDEV_CONNECT.Password=='') this.valid=false;
-     if(this.currentMONDEV_CONNECT.CTOWNCODE == undefined || this.currentMONDEV_CONNECT.CTOWNCODE=='') this.valid=false;
-     if(this.currentMONDEV_CONNECT.CPHONE == undefined || this.currentMONDEV_CONNECT.CPHONE=='') this.valid=false;
-     if(this.currentMONDEV_CONNECT.ATCommand == undefined || this.currentMONDEV_CONNECT.ATCommand=='') this.valid=false;
-     if(this.currentMONDEV_CONNECT.callerID == undefined || this.currentMONDEV_CONNECT.callerID=='') this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

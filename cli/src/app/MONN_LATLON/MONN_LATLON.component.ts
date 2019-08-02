@@ -110,6 +110,9 @@ export class MONN_LATLONComponent implements OnInit {
 
     save(item: MONNODE.MONN_LATLON) {
         this.valid=true; 
+     if(this.currentMONN_LATLON.theDate == undefined ) this.valid=false;
+     if(this.currentMONN_LATLON.Latitude == undefined  ) this.valid=false;
+     if(this.currentMONN_LATLON.Longitude == undefined  ) this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

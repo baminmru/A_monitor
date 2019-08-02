@@ -88,6 +88,8 @@ export class MOND_PARAMComponent implements OnInit {
 
     save(item: MOND.MOND_PARAM) {
         this.valid=true; 
+     if(this.currentMOND_PARAM.Name == undefined || this.currentMOND_PARAM.Name=='') this.valid=false;
+     if(this.currentMOND_PARAM.ParamField == undefined || this.currentMOND_PARAM.ParamField=='') this.valid=false;
      if(this.currentMOND_PARAM.ShowAs == undefined ) this.valid=false;
         if (this.valid) {
             switch (this.mode) {

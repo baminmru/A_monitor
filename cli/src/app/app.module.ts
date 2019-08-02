@@ -63,6 +63,10 @@ import { MONQ_DEF_Service } from 'app/MONQ_DEF.service';
 import { MONQ_resultComponent } from './MONQ_result/MONQ_result.component'; // Результат обработки
 import { MONQ_result_Service } from 'app/MONQ_result.service'; 
  
+import { monlogComponent } from './monlog/monlog.component'; // Логирование
+import { logcallComponent } from './logcall/logcall.component'; // Сообщения
+import { logcall_Service } from 'app/logcall.service'; 
+ 
 import { moncliComponent } from './moncli/moncli.component'; // Организация
 import { moncli_infoComponent } from './moncli_info/moncli_info.component'; // Описание
 import { moncli_info_Service } from 'app/moncli_info.service'; 
@@ -165,6 +169,9 @@ DISPATCHER_FILTERComponent,
   MONQ_DEFComponent, // Описание
   MONQ_resultComponent, // Результат обработки
  
+ monlogComponent ,  // Логирование
+  logcallComponent, // Сообщения
+ 
  moncliComponent ,  // Организация
   moncli_infoComponent, // Описание
 MOND_FComponent, // Филиал организации
@@ -242,6 +249,7 @@ MOND_FComponent, // Филиал организации
   ,DATA_TIME_Service
   ,MONQ_DEF_Service
   ,MONQ_result_Service
+  ,logcall_Service
   ,moncli_info_Service
   ,MOND_F_Service
   ,MOND_GRP_Service

@@ -110,20 +110,6 @@ export class DATA_TComponent implements OnInit {
 
     save(item: DATA.DATA_T) {
         this.valid=true; 
-     if(this.currentDATA_T.T1 == undefined  ) this.valid=false;
-     if(this.currentDATA_T.T2 == undefined  ) this.valid=false;
-     if(this.currentDATA_T.T3 == undefined  ) this.valid=false;
-     if(this.currentDATA_T.T4 == undefined  ) this.valid=false;
-     if(this.currentDATA_T.T5 == undefined  ) this.valid=false;
-     if(this.currentDATA_T.T6 == undefined  ) this.valid=false;
-     if(this.currentDATA_T.DT12 == undefined  ) this.valid=false;
-     if(this.currentDATA_T.DT45 == undefined  ) this.valid=false;
-     if(this.currentDATA_T.THOT == undefined  ) this.valid=false;
-     if(this.currentDATA_T.TCOOL == undefined  ) this.valid=false;
-     if(this.currentDATA_T.TCE1 == undefined  ) this.valid=false;
-     if(this.currentDATA_T.TCE2 == undefined  ) this.valid=false;
-     if(this.currentDATA_T.TAIR1 == undefined  ) this.valid=false;
-     if(this.currentDATA_T.TAIR2 == undefined  ) this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

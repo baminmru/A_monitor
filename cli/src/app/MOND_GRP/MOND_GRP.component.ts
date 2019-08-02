@@ -110,8 +110,6 @@ export class MOND_GRPComponent implements OnInit {
 
     save(item: moncli.MOND_GRP) {
         this.valid=true; 
-     if(this.currentMOND_GRP.CGRPNM == undefined || this.currentMOND_GRP.CGRPNM=='') this.valid=false;
-     if(this.currentMOND_GRP.CTXT == undefined || this.currentMOND_GRP.CTXT=='') this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

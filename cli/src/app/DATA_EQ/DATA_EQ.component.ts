@@ -110,15 +110,6 @@ export class DATA_EQComponent implements OnInit {
 
     save(item: DATA.DATA_EQ) {
         this.valid=true; 
-     if(this.currentDATA_EQ.E0 == undefined  ) this.valid=false;
-     if(this.currentDATA_EQ.E1 == undefined  ) this.valid=false;
-     if(this.currentDATA_EQ.E2 == undefined  ) this.valid=false;
-     if(this.currentDATA_EQ.E3 == undefined  ) this.valid=false;
-     if(this.currentDATA_EQ.E4 == undefined  ) this.valid=false;
-     if(this.currentDATA_EQ.AP == undefined  ) this.valid=false;
-     if(this.currentDATA_EQ.AM == undefined  ) this.valid=false;
-     if(this.currentDATA_EQ.RP == undefined  ) this.valid=false;
-     if(this.currentDATA_EQ.RM == undefined  ) this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

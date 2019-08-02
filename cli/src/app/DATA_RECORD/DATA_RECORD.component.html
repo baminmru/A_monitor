@@ -1,7 +1,10 @@
 ﻿<!--Error dialogue-->
 <amexio-window [show-window]="errorFlag"
                [header]="true"
-			   [footer]="true"
+			   [footer]="true" 
+			   [draggable]="true" 
+			   [vertical-position]="'center'" 
+			   [horizontal-position]="'center'" 
 			   [closable]="false"
                >
 	<amexio-header>
@@ -97,6 +100,12 @@
         [(ngModel)]="currentDATA_RECORD.dend"> 
  </amexio-date-time-picker> 
      </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Сообщение'" name ="MSG"  
+                    [place-holder] = "'Сообщение'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentDATA_RECORD.MSG" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
 	</amexio-body> 
 	<amexio-action> 
 	<amexio-row> 
@@ -136,6 +145,11 @@
 		  <amexio-data-table-column [data-index]="'DCOUNTER'" [data-type]="'string'" [hidden]="false" [text]="'Дата счетчика'"></amexio-data-table-column> 
 		  <amexio-data-table-column [data-index]="'dstart'" [data-type]="'string'" [hidden]="false" [text]="'Начало интервала'"></amexio-data-table-column> 
 		  <amexio-data-table-column [data-index]="'dend'" [data-type]="'string'" [hidden]="false" [text]="'Конец интервала'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'MSG'" [data-type]="'string'" [hidden]="false" [text]="'Сообщение'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.MSG) ? ((row.MSG.length>100) ? row.MSG.substr(0,100)+'...' : row.MSG ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
 		</amexio-datagrid> 
 	</amexio-body> 
 </amexio-card> 

@@ -110,11 +110,6 @@ export class DATA_TIMEComponent implements OnInit {
 
     save(item: DATA.DATA_TIME) {
         this.valid=true; 
-     if(this.currentDATA_TIME.TSUM1 == undefined  ) this.valid=false;
-     if(this.currentDATA_TIME.TSUM2 == undefined  ) this.valid=false;
-     if(this.currentDATA_TIME.ERRTIME == undefined  ) this.valid=false;
-     if(this.currentDATA_TIME.OKTIME == undefined  ) this.valid=false;
-     if(this.currentDATA_TIME.WORKTIME == undefined  ) this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

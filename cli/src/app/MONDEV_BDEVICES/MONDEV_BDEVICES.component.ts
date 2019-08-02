@@ -97,14 +97,8 @@ export class MONDEV_BDEVICESComponent implements OnInit {
     save(item: MONDEV.MONDEV_BDEVICES) {
         this.valid=true; 
      if(this.currentMONDEV_BDEVICES.TheNode == undefined ) this.valid=false;
-     if(this.currentMONDEV_BDEVICES.ThePhone == undefined || this.currentMONDEV_BDEVICES.ThePhone=='') this.valid=false;
-     if(this.currentMONDEV_BDEVICES.Addr == undefined || this.currentMONDEV_BDEVICES.Addr=='') this.valid=false;
-     if(this.currentMONDEV_BDEVICES.DEVType == undefined ) this.valid=false;
-     if(this.currentMONDEV_BDEVICES.Shab == undefined ) this.valid=false;
+     if(this.currentMONDEV_BDEVICES.Name == undefined || this.currentMONDEV_BDEVICES.Name=='') this.valid=false;
      if(this.currentMONDEV_BDEVICES.DevGrp == undefined ) this.valid=false;
-     if(this.currentMONDEV_BDEVICES.THESCHEMA == undefined ) this.valid=false;
-     if(this.currentMONDEV_BDEVICES.NPLOCK == undefined ) this.valid=false;
-     if(this.currentMONDEV_BDEVICES.CONNECTED == undefined ) this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

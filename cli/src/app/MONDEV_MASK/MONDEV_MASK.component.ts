@@ -113,10 +113,7 @@ export class MONDEV_MASKComponent implements OnInit {
     save(item: MONDEV.MONDEV_MASK) {
         this.valid=true; 
      if(this.currentMONDEV_MASK.PTYPE == undefined ) this.valid=false;
-     if(this.currentMONDEV_MASK.PNAME == undefined ) this.valid=false;
-     if(this.currentMONDEV_MASK.paramFormat == undefined || this.currentMONDEV_MASK.paramFormat=='') this.valid=false;
-     if(this.currentMONDEV_MASK.colWidth == undefined  ) this.valid=false;
-     if(this.currentMONDEV_MASK.phide == undefined ) this.valid=false;
+     if(this.currentMONDEV_MASK.sequence == undefined  ) this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

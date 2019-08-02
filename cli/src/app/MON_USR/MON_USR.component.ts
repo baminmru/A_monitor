@@ -91,10 +91,10 @@ export class MON_USRComponent implements OnInit {
     save(item: MONUSR.MON_USR) {
         this.valid=true; 
      if(this.currentMON_USR.theClient == undefined ) this.valid=false;
-     if(this.currentMON_USR.surname == undefined || this.currentMON_USR.surname=='') this.valid=false;
+     if(this.currentMON_USR.lastname == undefined || this.currentMON_USR.lastname=='') this.valid=false;
+     if(this.currentMON_USR.name == undefined || this.currentMON_USR.name=='') this.valid=false;
      if(this.currentMON_USR.curRole == undefined ) this.valid=false;
-     if(this.currentMON_USR.email == undefined || this.currentMON_USR.email=='') this.valid=false;
-     if(this.currentMON_USR.thephone == undefined || this.currentMON_USR.thephone=='') this.valid=false;
+     if(this.currentMON_USR.login == undefined || this.currentMON_USR.login=='') this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

@@ -88,6 +88,7 @@ export class MOND_ROLEComponent implements OnInit {
 
     save(item: MOND.MOND_ROLE) {
         this.valid=true; 
+     if(this.currentMOND_ROLE.Name == undefined || this.currentMOND_ROLE.Name=='') this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

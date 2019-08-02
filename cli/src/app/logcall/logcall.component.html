@@ -1,0 +1,162 @@
+﻿<!--Error dialogue-->
+<amexio-window [show-window]="errorFlag"
+               [header]="true"
+			   [footer]="true" 
+			   [draggable]="true" 
+			   [vertical-position]="'center'" 
+			   [horizontal-position]="'center'" 
+			   [closable]="false"
+               >
+	<amexio-header>
+        <i class="fa fa-exclamation-triangle"></i> Ошибка
+      </amexio-header>
+	   <amexio-body>
+        <amexio-row>
+          <amexio-column [size]="11">
+		  <span style="color:red">{{errorMessage}}</span>
+		  </amexio-column>
+        </amexio-row>
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="11"> 
+     <amexio-button  [label]="'Ok'" (onClick)="errorFlag=false" [type]="'red'" [tooltip]="'Ok'" [icon]="'fa fa-exclamation-triangle'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window>
+<!-- edit row pane -->	 
+ <amexio-window [closable]="false" [maximize]="true" [vertical-position]="'center'"    [horizontal-position]="'center'"  [draggable]="true" [remember-window-position]="true" [show-window]="opened" [header]="true" [footer]="true" > 
+	  <amexio-header> 
+        {{formMsg}} Логирование::Сообщения 
+<amexio-box *ngIf="valid==false" border-color ="red" border="all" padding="true" background-color="yellow">
+	<amexio-label font-color="red"  border="bottom">Ошибка заполнения формы</amexio-label>
+</amexio-box>
+      </amexio-header> 
+     <amexio-body> 
+     <amexio-row><amexio-column size="12" >
+	 <amexio-dropdown 
+	 [place-holder] = "'Устройство'"
+	 name ="ID_BD"
+	 [field-label]= "'Устройство'"
+            [allow-blank]="false" [error-msg] ="'Не задано: Устройство'" 
+	 
+	 [display-field]="'name'"
+	 [value-field]="'id'"
+	 [data]="AppService.ComboMONDEV_BDEVICES"
+	 
+	 [(ngModel)]="currentlogcall.ID_BD"
+	 >
+  </amexio-dropdown>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+  <amexio-date-time-picker   [field-label]="'Дата опроса'" 
+        [time-picker]="true"  
+        [date-picker]="true"  
+        [(ngModel)]="currentlogcall.DCALL"> 
+ </amexio-date-time-picker> 
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+	 <amexio-dropdown 
+	 [place-holder] = "'Тип архива'"
+	 name ="AType"
+	 [field-label]= "'Тип архива'"
+            [allow-blank]="false" [error-msg] ="'Не задано: Тип архива'" 
+	 
+	 [display-field]="'name'"
+	 [value-field]="'id'"
+	 [data]="AppService.ComboMOND_ATYPE"
+	 
+	 [(ngModel)]="currentlogcall.AType"
+	 >
+  </amexio-dropdown>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Порт'" name ="CPORT"  
+                    [place-holder] = "'Порт'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentlogcall.CPORT" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+ <amexio-number-input  [enable-popover]= "false" [field-label]="'Длительность'" name ="DURATION" 
+                    [place-holder]="'Длительность'" 
+            [allow-blank]="true" 
+	 [(ngModel)]="currentlogcall.DURATION"
+                    > 
+ </amexio-number-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Результат'" name ="CRESULT"  
+                    [place-holder] = "'Результат'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentlogcall.CRESULT" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="12"> 
+     <amexio-button  [label]="'Отмена'" (onClick)="opened = false;  refreshlogcall();" [type]="'secondary'" [tooltip]="'Отмена'" [icon]="'fa fa-times'"></amexio-button>
+     <amexio-button  [label]="'Сохранить'" (onClick)="save(currentlogcall)" [type]="'success'" [tooltip]="'Сохранить'" [icon]="'fa fa-save'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window> 
+   
+<!-- list Of row pane --> 
+<amexio-card [show]="true" [header] ="true" [footer] ="false" > 
+    <amexio-header> 
+	<amexio-row> 
+		<amexio-column size="12" > 
+		<amexio-button [label]="'Создать'" [type]="'secondary'" [tooltip]="'Создать новую запись'" [icon]="'fa fa-plus'" (onClick)="onNew()"></amexio-button>
+		<amexio-button [disabled]="currentlogcall.logcallId==null" [label]="'Изменить'" (onClick)="onEdit(currentlogcall)" [type]="'secondary'" [tooltip]="'Изменить запись'" [icon]="'fa fa-edit'"></amexio-button>
+     <amexio-button [disabled]="currentlogcall.logcallId==null" [label]="'Удалить'" (onClick)="onDelete(currentlogcall)" [type]="'secondary'" [tooltip]="'Удалить запись'" [icon]="'fa fa-trash'"></amexio-button>
+     <amexio-button  [label]="'Обновить'" (onClick)="refreshlogcall()" [type]="'secondary'" [tooltip]="'Обновить данные'" [icon]="'fa fa-refresh'"></amexio-button>
+		</amexio-column>
+	</amexio-row> 
+	</amexio-header> 
+	<amexio-body> 
+		<amexio-datagrid 
+		  [title]="'Логирование::Сообщения'" 
+		  [page-size] = "10" 
+		  [enable-data-filter]="false" 
+		  [enable-checkbox]="false" 
+		  [data]="logcallArray" 
+		  (selectedRowData)="onSelect($event)" 
+		  (rowSelect)="onSelect($event)"> 
+		  <amexio-data-table-column [data-index]="'ID_BD_name'" [data-type]="'string'" [hidden]="false" [text]="'Устройство'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'DCALL'" [data-type]="'string'" [hidden]="false" [text]="'Дата опроса'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'AType_name'" [data-type]="'string'" [hidden]="false" [text]="'Тип архива'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'CPORT'" [data-type]="'string'" [hidden]="false" [text]="'Порт'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.CPORT) ? ((row.CPORT.length>100) ? row.CPORT.substr(0,100)+'...' : row.CPORT ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'DURATION'" [data-type]="'number'" [hidden]="false" [text]="'Длительность'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'CRESULT'" [data-type]="'string'" [hidden]="false" [text]="'Результат'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.CRESULT) ? ((row.CRESULT.length>100) ? row.CRESULT.substr(0,100)+'...' : row.CRESULT ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		</amexio-datagrid> 
+	</amexio-body> 
+</amexio-card> 
+ 
+<!-- confirm delete  dialog -->  
+<amexio-window  [(show-window)]="confirmOpened" [closable]="false" [header]="true" [footer]="true" >  
+     
+    <amexio-header>
+Удалить строку:  Логирование::Сообщения ?
+    </amexio-header> 
+    <amexio-body> 
+            Удалить запись: {{ ( (currentlogcall.ID_BD_name +'; '+  currentlogcall.DCALL +'; '+  currentlogcall.AType_name||'').length >100 ? (currentlogcall.ID_BD_name +'; '+  currentlogcall.DCALL +'; '+  currentlogcall.AType_name||'').substr(0,100)+'...' : (currentlogcall.ID_BD_name +'; '+  currentlogcall.DCALL +'; '+  currentlogcall.AType_name||'')) | removehtmltag }}?  
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="12"> 
+     <amexio-button  [label]="'Отмена'" (onClick)="confirmOpened = false" [type]="'secondary'" [tooltip]="'Отмена'" [icon]="'fa fa-times'"></amexio-button>
+     <amexio-button  [label]="'Удалить'" (onClick)="onConfirmDeletion()" [type]="'danger'" [tooltip]="'Удалить'" [icon]="'fa fa-trash'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window> 
+ 

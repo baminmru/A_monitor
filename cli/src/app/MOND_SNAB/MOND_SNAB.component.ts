@@ -89,12 +89,6 @@ export class MOND_SNABComponent implements OnInit {
 
     save(item: MOND.MOND_SNAB) {
         this.valid=true; 
-     if(this.currentMOND_SNAB.CNAME == undefined || this.currentMOND_SNAB.CNAME=='') this.valid=false;
-     if(this.currentMOND_SNAB.CADDRESS == undefined || this.currentMOND_SNAB.CADDRESS=='') this.valid=false;
-     if(this.currentMOND_SNAB.CFIO == undefined || this.currentMOND_SNAB.CFIO=='') this.valid=false;
-     if(this.currentMOND_SNAB.CPHONE == undefined || this.currentMOND_SNAB.CPHONE=='') this.valid=false;
-     if(this.currentMOND_SNAB.CREGION == undefined || this.currentMOND_SNAB.CREGION=='') this.valid=false;
-     if(this.currentMOND_SNAB.Supplier == undefined ) this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

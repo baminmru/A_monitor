@@ -112,12 +112,7 @@ export class MONDEV_VALUEBOUNDSComponent implements OnInit {
 
     save(item: MONDEV.MONDEV_VALUEBOUNDS) {
         this.valid=true; 
-     if(this.currentMONDEV_VALUEBOUNDS.PNAME == undefined ) this.valid=false;
      if(this.currentMONDEV_VALUEBOUNDS.PTYPE == undefined ) this.valid=false;
-     if(this.currentMONDEV_VALUEBOUNDS.PMIN == undefined  ) this.valid=false;
-     if(this.currentMONDEV_VALUEBOUNDS.PMAX == undefined  ) this.valid=false;
-     if(this.currentMONDEV_VALUEBOUNDS.ISMIN == undefined ) this.valid=false;
-     if(this.currentMONDEV_VALUEBOUNDS.ISMAX == undefined ) this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

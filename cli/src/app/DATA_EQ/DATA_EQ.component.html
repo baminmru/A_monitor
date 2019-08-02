@@ -1,7 +1,10 @@
 ﻿<!--Error dialogue-->
 <amexio-window [show-window]="errorFlag"
                [header]="true"
-			   [footer]="true"
+			   [footer]="true" 
+			   [draggable]="true" 
+			   [vertical-position]="'center'" 
+			   [horizontal-position]="'center'" 
 			   [closable]="false"
                >
 	<amexio-header>
@@ -155,7 +158,7 @@
 Удалить строку:  Данные::Эл. Энергия ?
     </amexio-header> 
     <amexio-body> 
-            Удалить запись: {{ ( currentDATA_EQ.AP||'') | removehtmltag }}?  
+            Удалить запись: {{ (currentDATA_EQ.AP||'') | removehtmltag }}?  
 	</amexio-body> 
 	<amexio-action> 
 	<amexio-row> 

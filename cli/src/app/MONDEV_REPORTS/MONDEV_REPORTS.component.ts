@@ -112,6 +112,8 @@ export class MONDEV_REPORTSComponent implements OnInit {
     save(item: MONDEV.MONDEV_REPORTS) {
         this.valid=true; 
      if(this.currentMONDEV_REPORTS.repType == undefined ) this.valid=false;
+     if(this.currentMONDEV_REPORTS.Name == undefined || this.currentMONDEV_REPORTS.Name=='') this.valid=false;
+     if(this.currentMONDEV_REPORTS.theFile == undefined || this.currentMONDEV_REPORTS.theFile=='') this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

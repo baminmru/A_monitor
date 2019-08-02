@@ -15,6 +15,8 @@ export class MONSRV_MODEMS_Service {
 	
 	PortNum:string = '';
 	UsedUntil:string = '';
+	CallType:string = '';
+	INITSTRING:string = '';
 	PageSize:number=10;
 	PageUrl:string='';
     
@@ -30,6 +32,14 @@ export class MONSRV_MODEMS_Service {
 		if(this.UsedUntil!=''){
 			if(qry !='') qry=qry +'&';
 			qry='UsedUntil='+encodeURIComponent(this.UsedUntil)
+		}
+		if(this.CallType!=''){
+			if(qry !='') qry=qry +'&';
+			qry='CallType='+encodeURIComponent(this.CallType)
+		}
+		if(this.INITSTRING!=''){
+			if(qry !='') qry=qry +'&';
+			qry='INITSTRING='+encodeURIComponent(this.INITSTRING)
 		}
 		/*
 		if(this.PageNo!=null){
@@ -52,6 +62,8 @@ export class MONSRV_MODEMS_Service {
 	clearSearch():void{
 	this.PortNum = '';
 	this.UsedUntil = '';
+	this.CallType = '';
+	this.INITSTRING = '';
 		
 	}
  

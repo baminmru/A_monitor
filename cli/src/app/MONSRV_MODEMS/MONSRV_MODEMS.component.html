@@ -1,7 +1,10 @@
 ﻿<!--Error dialogue-->
 <amexio-window [show-window]="errorFlag"
                [header]="true"
-			   [footer]="true"
+			   [footer]="true" 
+			   [draggable]="true" 
+			   [vertical-position]="'center'" 
+			   [horizontal-position]="'center'" 
 			   [closable]="false"
                >
 	<amexio-header>
@@ -68,6 +71,18 @@
         [(ngModel)]="currentMONSRV_MODEMS.UsedUntil"> 
  </amexio-date-time-picker> 
      </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Тип вызова'" name ="CallType"  
+                    [place-holder] = "'Тип вызова'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONSRV_MODEMS.CallType" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Строка инициализации'" name ="INITSTRING"  
+                    [place-holder] = "'Строка инициализации'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentMONSRV_MODEMS.INITSTRING" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
 	</amexio-body> 
 	<amexio-action> 
 	<amexio-row> 
@@ -108,6 +123,16 @@
 		  <amexio-data-table-column [data-index]="'IsUsable_name'" [data-type]="'string'" [hidden]="false" [text]="'Может использоваться сервером'"></amexio-data-table-column> 
 		  <amexio-data-table-column [data-index]="'IsUsed_name'" [data-type]="'string'" [hidden]="false" [text]="'Занят'"></amexio-data-table-column> 
 		  <amexio-data-table-column [data-index]="'UsedUntil'" [data-type]="'string'" [hidden]="false" [text]="'Занят до'"></amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'CallType'" [data-type]="'string'" [hidden]="false" [text]="'Тип вызова'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.CallType) ? ((row.CallType.length>100) ? row.CallType.substr(0,100)+'...' : row.CallType ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  <amexio-data-table-column [data-index]="'INITSTRING'" [data-type]="'string'" [hidden]="false" [text]="'Строка инициализации'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.INITSTRING) ? ((row.INITSTRING.length>100) ? row.INITSTRING.substr(0,100)+'...' : row.INITSTRING ) : '-') | removehtmltag }} 
+           </ng-template>
+		  </amexio-data-table-column> 
 		</amexio-datagrid> 
 	</amexio-body> 
 </amexio-card> 

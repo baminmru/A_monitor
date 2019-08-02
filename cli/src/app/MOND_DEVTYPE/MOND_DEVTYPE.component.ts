@@ -90,7 +90,7 @@ export class MOND_DEVTYPEComponent implements OnInit {
     save(item: MOND.MOND_DEVTYPE) {
         this.valid=true; 
      if(this.currentMOND_DEVTYPE.DevClass == undefined ) this.valid=false;
-     if(this.currentMOND_DEVTYPE.DriverLibName == undefined || this.currentMOND_DEVTYPE.DriverLibName=='') this.valid=false;
+     if(this.currentMOND_DEVTYPE.Name == undefined || this.currentMOND_DEVTYPE.Name=='') this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

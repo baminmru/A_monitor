@@ -22,6 +22,7 @@ namespace A300Loader
             ob.UseSqlServer(Connection);
 
 
+
             using (MyContext context = new MyContext(ob.Options))
             {
                 List<Dictionary<string, object>> rows = context.GetRaw("select distinct devEui  from LoraInput");
@@ -34,15 +35,21 @@ namespace A300Loader
                     if (devdata != null)
                     {
                         Console.WriteLine(devdata.MONDEV_BDEVICESId.ToString());
-                        List<Dictionary<string, object>> packets = context.GetRaw("select *  from LoraInput where devEui='" + dev + "' order by recvTime,fcntup");
+                        List<Dictionary<string, object>> packets = context.GetRaw("select *  from LoraInput where (processed=0 or processed is null) and  devEui='" + dev + "' order by recvTime,fcntup");
                         string payload = "";
                         string[] payloads = new string[4];
+                        string ids = "";
                         Byte[] b = null;
                         bool payloadsReady = false;
                         foreach (Dictionary<string, object> packet in packets)
                         {
                             if (packet["payload"].ToString().Length > 2)
                             {
+                                if (ids != "")
+                                {
+                                    ids = ids + ",";
+                                }
+                                ids = ids + "'" + packet["id"].ToString() +"'";
                                 string data;
 
                                 string p = packet["payload"].ToString();
@@ -66,6 +73,7 @@ namespace A300Loader
                                     payloads[2] = "";
                                     payloads[3] = "";
                                     payloadsReady = true;
+                                   
                                 }
 
                                 if (((b[0] & 0x38) >> 3) >= 1)
@@ -93,6 +101,9 @@ namespace A300Loader
                                             System.Diagnostics.Debug.Print("\r\n" + payload.Length.ToString() + " " + payload);
 
                                             ProcessPacket(context, b, devdata.MONDEV_BDEVICESId);
+                                            context.DoExec("update LoraInput set processed=1 where id in (" + ids +")");
+                                            Console.WriteLine("Processed packets: " + ids);
+                                            ids = "";
                                             payloadsReady = false;
                                         }
 
@@ -105,6 +116,8 @@ namespace A300Loader
 
 
                         }
+                        
+
                     }
 
 

@@ -111,11 +111,7 @@ export class MONQ_resultComponent implements OnInit {
 
     save(item: MONQ.MONQ_result) {
         this.valid=true; 
-     if(this.currentMONQ_result.RecArch == undefined ) this.valid=false;
-     if(this.currentMONQ_result.IsError == undefined ) this.valid=false;
-     if(this.currentMONQ_result.LogMessage == undefined || this.currentMONQ_result.LogMessage=='') this.valid=false;
-     if(this.currentMONQ_result.StartTime == undefined ) this.valid=false;
-     if(this.currentMONQ_result.EndTime == undefined ) this.valid=false;
+     if(this.currentMONQ_result.TextResult == undefined || this.currentMONQ_result.TextResult=='') this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

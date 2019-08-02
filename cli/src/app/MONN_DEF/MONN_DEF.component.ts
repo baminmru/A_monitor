@@ -93,10 +93,10 @@ export class MONN_DEFComponent implements OnInit {
 
     save(item: MONNODE.MONN_DEF) {
         this.valid=true; 
-     if(this.currentMONN_DEF.Addr == undefined || this.currentMONN_DEF.Addr=='') this.valid=false;
-     if(this.currentMONN_DEF.ThePhone == undefined || this.currentMONN_DEF.ThePhone=='') this.valid=false;
      if(this.currentMONN_DEF.OrgUnit == undefined ) this.valid=false;
      if(this.currentMONN_DEF.isMovable == undefined ) this.valid=false;
+     if(this.currentMONN_DEF.Latitude == undefined  ) this.valid=false;
+     if(this.currentMONN_DEF.Longitude == undefined  ) this.valid=false;
      if(this.currentMONN_DEF.theClient == undefined ) this.valid=false;
         if (this.valid) {
             switch (this.mode) {

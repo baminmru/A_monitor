@@ -91,7 +91,7 @@ export class MONSRV_INFOComponent implements OnInit {
 
     save(item: MONSRV.MONSRV_INFO) {
         this.valid=true; 
-     if(this.currentMONSRV_INFO.IpAddr == undefined || this.currentMONSRV_INFO.IpAddr=='') this.valid=false;
+     if(this.currentMONSRV_INFO.name == undefined || this.currentMONSRV_INFO.name=='') this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

@@ -12,6 +12,7 @@ export namespace DATA {
 	DCOUNTER:string;  // Дата счетчика
 	dstart:string;  // Начало интервала
 	dend:string;  // Конец интервала
+	MSG:string; // Сообщение
 	// add dereference fields 
 	ID_BD_name :string; // dereference for MONDEV_BDEVICES
 	AType_name :string; // dereference for MOND_ATYPE

@@ -88,6 +88,7 @@ export class MOND_CONNECTTYPEComponent implements OnInit {
 
     save(item: MOND.MOND_CONNECTTYPE) {
         this.valid=true; 
+     if(this.currentMOND_CONNECTTYPE.Name == undefined || this.currentMOND_CONNECTTYPE.Name=='') this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

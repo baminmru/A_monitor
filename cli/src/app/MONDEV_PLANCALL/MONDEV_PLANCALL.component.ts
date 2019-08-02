@@ -110,30 +110,6 @@ export class MONDEV_PLANCALLComponent implements OnInit {
 
     save(item: MONDEV.MONDEV_PLANCALL) {
         this.valid=true; 
-     if(this.currentMONDEV_PLANCALL.CSTATUS == undefined ) this.valid=false;
-     if(this.currentMONDEV_PLANCALL.NMAXCALL == undefined  ) this.valid=false;
-     if(this.currentMONDEV_PLANCALL.MINREPEAT == undefined  ) this.valid=false;
-     if(this.currentMONDEV_PLANCALL.DLOCK == undefined ) this.valid=false;
-     if(this.currentMONDEV_PLANCALL.DLASTCALL == undefined ) this.valid=false;
-     if(this.currentMONDEV_PLANCALL.CCURR == undefined ) this.valid=false;
-     if(this.currentMONDEV_PLANCALL.ICALLCURR == undefined  ) this.valid=false;
-     if(this.currentMONDEV_PLANCALL.DNEXTCURR == undefined ) this.valid=false;
-     if(this.currentMONDEV_PLANCALL.CHOUR == undefined ) this.valid=false;
-     if(this.currentMONDEV_PLANCALL.ICALL == undefined  ) this.valid=false;
-     if(this.currentMONDEV_PLANCALL.NUMHOUR == undefined  ) this.valid=false;
-     if(this.currentMONDEV_PLANCALL.DNEXTHOUR == undefined ) this.valid=false;
-     if(this.currentMONDEV_PLANCALL.DLASTHOUR == undefined ) this.valid=false;
-     if(this.currentMONDEV_PLANCALL.C24 == undefined ) this.valid=false;
-     if(this.currentMONDEV_PLANCALL.ICALL24 == undefined  ) this.valid=false;
-     if(this.currentMONDEV_PLANCALL.NUM24 == undefined  ) this.valid=false;
-     if(this.currentMONDEV_PLANCALL.DNEXT24 == undefined ) this.valid=false;
-     if(this.currentMONDEV_PLANCALL.DLASTDAY == undefined ) this.valid=false;
-     if(this.currentMONDEV_PLANCALL.CSUM == undefined ) this.valid=false;
-     if(this.currentMONDEV_PLANCALL.ICALLSUM == undefined  ) this.valid=false;
-     if(this.currentMONDEV_PLANCALL.DNEXTSUM == undefined ) this.valid=false;
-     if(this.currentMONDEV_PLANCALL.CEL == undefined ) this.valid=false;
-     if(this.currentMONDEV_PLANCALL.IEL == undefined  ) this.valid=false;
-     if(this.currentMONDEV_PLANCALL.DNEXTEL == undefined ) this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

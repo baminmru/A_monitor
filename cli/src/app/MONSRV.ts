@@ -18,6 +18,8 @@ export namespace MONSRV {
 	 IsUsed:enums.enum_Boolean; // Занят
 	 IsUsed_name :string; // enum to text for Занят
 	UsedUntil:string;  // Занят до
+	CallType:string; // Тип вызова
+	INITSTRING:string; // Строка инициализации
  }
 
  export interface   MONSRV_PORTS { // Ком порты

@@ -91,7 +91,7 @@ export class MONSCH_INFOComponent implements OnInit {
 
     save(item: MONSCH.MONSCH_INFO) {
         this.valid=true; 
-     if(this.currentMONSCH_INFO.SCHEMA_IMAGEfile == undefined || this.currentMONSCH_INFO.SCHEMA_IMAGEfile=='') this.valid=false;
+     if(this.currentMONSCH_INFO.NAME == undefined || this.currentMONSCH_INFO.NAME=='') this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

@@ -110,9 +110,6 @@ export class DATA_UComponent implements OnInit {
 
     save(item: DATA.DATA_U) {
         this.valid=true; 
-     if(this.currentDATA_U.U1 == undefined  ) this.valid=false;
-     if(this.currentDATA_U.U2 == undefined  ) this.valid=false;
-     if(this.currentDATA_U.U3 == undefined  ) this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

@@ -110,14 +110,6 @@ export class DATA_VComponent implements OnInit {
 
     save(item: DATA.DATA_V) {
         this.valid=true; 
-     if(this.currentDATA_V.V1 == undefined  ) this.valid=false;
-     if(this.currentDATA_V.V2 == undefined  ) this.valid=false;
-     if(this.currentDATA_V.V3 == undefined  ) this.valid=false;
-     if(this.currentDATA_V.V4 == undefined  ) this.valid=false;
-     if(this.currentDATA_V.V5 == undefined  ) this.valid=false;
-     if(this.currentDATA_V.V6 == undefined  ) this.valid=false;
-     if(this.currentDATA_V.DV12 == undefined  ) this.valid=false;
-     if(this.currentDATA_V.DV45 == undefined  ) this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

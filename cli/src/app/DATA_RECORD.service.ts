@@ -21,11 +21,12 @@ export class DATA_RECORD_Service {
 	DCOUNTER:string = '';
 	dstart:string = '';
 	dend:string = '';
+	MSG:string = '';
 	PageSize:number=10;
 	PageUrl:string='';
     
 	//Fetch all DATA_RECORDs
-    getAll_DATA_RECORDs(condition:DISPATCHER.FILTER): Observable<DATA.DATA_RECORD[]> {
+    getAll_DATA_RECORDs(): Observable<DATA.DATA_RECORD[]> {
 		var qry:string;
 		qry='';
 		
@@ -48,6 +49,10 @@ export class DATA_RECORD_Service {
 		if(this.dend!=''){
 			if(qry !='') qry=qry +'&';
 			qry='dend='+encodeURIComponent(this.dend)
+		}
+		if(this.MSG!=''){
+			if(qry !='') qry=qry +'&';
+			qry='MSG='+encodeURIComponent(this.MSG)
 		}
 		/*
 		if(this.PageNo!=null){
@@ -73,6 +78,7 @@ export class DATA_RECORD_Service {
 	this.DCOUNTER = '';
 	this.dstart = '';
 	this.dend = '';
+	this.MSG = '';
 		
 	}
  

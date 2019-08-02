@@ -110,11 +110,6 @@ export class DATA_MSGComponent implements OnInit {
 
     save(item: DATA.DATA_MSG) {
         this.valid=true; 
-     if(this.currentDATA_MSG.HC_1 == undefined || this.currentDATA_MSG.HC_1=='') this.valid=false;
-     if(this.currentDATA_MSG.HC_2 == undefined || this.currentDATA_MSG.HC_2=='') this.valid=false;
-     if(this.currentDATA_MSG.errInfo == undefined || this.currentDATA_MSG.errInfo=='') this.valid=false;
-     if(this.currentDATA_MSG.HC_CODE == undefined || this.currentDATA_MSG.HC_CODE=='') this.valid=false;
-     if(this.currentDATA_MSG.HC == undefined || this.currentDATA_MSG.HC=='') this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

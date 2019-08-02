@@ -110,9 +110,9 @@ export class MONSRV_PORTSComponent implements OnInit {
 
     save(item: MONSRV.MONSRV_PORTS) {
         this.valid=true; 
+     if(this.currentMONSRV_PORTS.PortName == undefined || this.currentMONSRV_PORTS.PortName=='') this.valid=false;
      if(this.currentMONSRV_PORTS.IsUsable == undefined ) this.valid=false;
      if(this.currentMONSRV_PORTS.IsUsed == undefined ) this.valid=false;
-     if(this.currentMONSRV_PORTS.UsedUntil == undefined ) this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

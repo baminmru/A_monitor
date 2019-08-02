@@ -110,14 +110,6 @@ export class DATA_QComponent implements OnInit {
 
     save(item: DATA.DATA_Q) {
         this.valid=true; 
-     if(this.currentDATA_Q.Q1 == undefined  ) this.valid=false;
-     if(this.currentDATA_Q.Q2 == undefined  ) this.valid=false;
-     if(this.currentDATA_Q.Q3 == undefined  ) this.valid=false;
-     if(this.currentDATA_Q.Q4 == undefined  ) this.valid=false;
-     if(this.currentDATA_Q.Q5 == undefined  ) this.valid=false;
-     if(this.currentDATA_Q.DQ12 == undefined  ) this.valid=false;
-     if(this.currentDATA_Q.DQ45 == undefined  ) this.valid=false;
-     if(this.currentDATA_Q.DQ == undefined  ) this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

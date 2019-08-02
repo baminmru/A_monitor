@@ -110,14 +110,6 @@ export class DATA_MComponent implements OnInit {
 
     save(item: DATA.DATA_M) {
         this.valid=true; 
-     if(this.currentDATA_M.M1 == undefined  ) this.valid=false;
-     if(this.currentDATA_M.M2 == undefined  ) this.valid=false;
-     if(this.currentDATA_M.M3 == undefined  ) this.valid=false;
-     if(this.currentDATA_M.M4 == undefined  ) this.valid=false;
-     if(this.currentDATA_M.M5 == undefined  ) this.valid=false;
-     if(this.currentDATA_M.M6 == undefined  ) this.valid=false;
-     if(this.currentDATA_M.DM45 == undefined  ) this.valid=false;
-     if(this.currentDATA_M.DM12 == undefined  ) this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

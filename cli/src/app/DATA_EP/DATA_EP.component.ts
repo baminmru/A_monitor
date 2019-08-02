@@ -110,9 +110,6 @@ export class DATA_EPComponent implements OnInit {
 
     save(item: DATA.DATA_EP) {
         this.valid=true; 
-     if(this.currentDATA_EP.EP1 == undefined  ) this.valid=false;
-     if(this.currentDATA_EP.EP2 == undefined  ) this.valid=false;
-     if(this.currentDATA_EP.EP3 == undefined  ) this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

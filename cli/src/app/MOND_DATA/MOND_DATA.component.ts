@@ -88,6 +88,7 @@ export class MOND_DATAComponent implements OnInit {
 
     save(item: MOND.MOND_DATA) {
         this.valid=true; 
+     if(this.currentMOND_DATA.name == undefined || this.currentMOND_DATA.name=='') this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

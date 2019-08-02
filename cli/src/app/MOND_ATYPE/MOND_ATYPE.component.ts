@@ -88,7 +88,7 @@ export class MOND_ATYPEComponent implements OnInit {
 
     save(item: MOND.MOND_ATYPE) {
         this.valid=true; 
-     if(this.currentMOND_ATYPE.name == undefined || this.currentMOND_ATYPE.name=='') this.valid=false;
+     if(this.currentMOND_ATYPE.TheCode == undefined || this.currentMOND_ATYPE.TheCode=='') this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {

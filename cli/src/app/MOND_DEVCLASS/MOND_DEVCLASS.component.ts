@@ -88,6 +88,7 @@ export class MOND_DEVCLASSComponent implements OnInit {
 
     save(item: MOND.MOND_DEVCLASS) {
         this.valid=true; 
+     if(this.currentMOND_DEVCLASS.Name == undefined || this.currentMOND_DEVCLASS.Name=='') this.valid=false;
         if (this.valid) {
             switch (this.mode) {
                 case MODE_NEW: {
