@@ -66,7 +66,8 @@
 		<amexio-button [disabled]="currentMOND_ATYPE.MOND_ATYPEId==null" [label]="'Изменить'" (onClick)="onEdit(currentMOND_ATYPE)" [type]="'secondary'" [tooltip]="'Изменить запись'" [icon]="'fa fa-edit'"></amexio-button>
      <amexio-button [disabled]="currentMOND_ATYPE.MOND_ATYPEId==null" [label]="'Удалить'" (onClick)="onDelete(currentMOND_ATYPE)" [type]="'secondary'" [tooltip]="'Удалить запись'" [icon]="'fa fa-trash'"></amexio-button>
      <amexio-button  [label]="'Обновить'" (onClick)="refreshMOND_ATYPE()" [type]="'secondary'" [tooltip]="'Обновить данные'" [icon]="'fa fa-refresh'"></amexio-button>
-     <amexio-button  [label]="'Экспорт'" (onClick)="exportXSLX()" [type]="'secondary'" [tooltip]="'Экспорт данных'" [icon]="'fa fa-cloud'"></amexio-button>
+	 <amexio-button  [label]="'Экспорт'" (onClick)="exportXSLX()" [type]="'secondary'" [tooltip]="'Экспорт данных'" [icon]="'fa fa-cloud'"></amexio-button>
+	 <amexio-button  [label]="'PDF'" (onClick)="exportPDF()" [type]="'secondary'" [tooltip]="'Экспорт PDF'" [icon]="'fa fa-cloud'"></amexio-button>
 		</amexio-column>
 	</amexio-row> 
 	</amexio-header> 
