@@ -6,7 +6,7 @@ import {  Validators } from "@angular/forms";
 
 import { RemoveHTMLtagPipe } from 'app/pipes';
 import { DATA } from "app/DATA";
-
+import * as XLSX from 'xlsx';
 
 const MODE_LIST = 0;
 const MODE_NEW = 1;
@@ -117,6 +117,67 @@ export class DATA_RECORDComponent implements OnInit {
         }
     }
 
+ exportXSLX(): void {
+        var aoa = [];
+/* set column headers at first line */
+        if(!aoa[0]) aoa[0] = [];
+            aoa[0][0]='Устройство';
+            aoa[0][1]='Дата опроса';
+            aoa[0][2]='Тип архива';
+            aoa[0][3]='Проверка архивных данных на НС (0 - не производилась, 1 - произведена)';
+            aoa[0][4]='Дата счетчика';
+            aoa[0][5]='Начало интервала';
+            aoa[0][6]='Конец интервала';
+            aoa[0][7]='Сообщение';
+/* fill data to array */
+        for(var i = 0; i < this.DATA_RECORDArray.length; ++i) {
+            if(!aoa[i+1]) aoa[i+1] = [];
+            aoa[i+1][0]=this.DATA_RECORDArray[i].ID_BD_name;
+            aoa[i+1][1]=this.DATA_RECORDArray[i].DCALL;
+            aoa[i+1][2]=this.DATA_RECORDArray[i].AType_name;
+            aoa[i+1][3]=this.DATA_RECORDArray[i].CHECK_A;
+            aoa[i+1][4]=this.DATA_RECORDArray[i].DCOUNTER;
+            aoa[i+1][5]=this.DATA_RECORDArray[i].dstart;
+            aoa[i+1][6]=this.DATA_RECORDArray[i].dend;
+            aoa[i+1][7]=this.DATA_RECORDArray[i].MSG;
+        }
+		/* generate worksheet */
+		const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(aoa);
+
+        var wscols = [
+            {wch: 50}
+,            {wch: 18}
+,            {wch: 50}
+,            {wch: 20}
+,            {wch: 18}
+,            {wch: 18}
+,            {wch: 18}
+,            {wch: 64}
+        ];
+
+        ws['!cols'] = wscols;
+
+		/* generate workbook and add the worksheet */
+		const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'DATA_RECORD');
+        
+
+        wb.Props = {
+            Title: "Данные::Запись",
+            Subject: "Данные::Запись",
+            Company: "master.bami",
+            Category: "Experimentation",
+            Keywords: "Export service",
+            Author: "master.bami",
+	           Manager: "master.bami",
+	           Comments: "Raw data export",
+	           LastAuthor: "master.bami",
+            CreatedDate: new Date(Date.now())
+        }
+
+		/* save to file */
+		XLSX.writeFile(wb, 'DATA_RECORD.xlsx');
+	}
     backToList() {
         this.opened = false;
         this.confirmOpened = false;

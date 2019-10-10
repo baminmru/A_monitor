@@ -6,7 +6,7 @@ import {  Validators } from "@angular/forms";
 
 import { RemoveHTMLtagPipe } from 'app/pipes';
 import { MONSCH } from "app/MONSCH";
-
+import * as XLSX from 'xlsx';
 
 const MODE_LIST = 0;
 const MODE_NEW = 1;
@@ -138,6 +138,61 @@ export class MONSCH_PARAMComponent implements OnInit {
         }
     }
 
+ exportXSLX(): void {
+        var aoa = [];
+/* set column headers at first line */
+        if(!aoa[0]) aoa[0] = [];
+            aoa[0][0]='Тип архива';
+            aoa[0][1]='Параметр';
+            aoa[0][2]='X';
+            aoa[0][3]='Y';
+            aoa[0][4]='Скрыть';
+            aoa[0][5]='Не отображать на схеме';
+/* fill data to array */
+        for(var i = 0; i < this.MONSCH_PARAMArray.length; ++i) {
+            if(!aoa[i+1]) aoa[i+1] = [];
+            aoa[i+1][0]=this.MONSCH_PARAMArray[i].ArchType_name;
+            aoa[i+1][1]=this.MONSCH_PARAMArray[i].Param_name;
+            aoa[i+1][2]=this.MONSCH_PARAMArray[i].POS_LEFT;
+            aoa[i+1][3]=this.MONSCH_PARAMArray[i].POS_TOP;
+            aoa[i+1][4]=this.MONSCH_PARAMArray[i].HIDEPARAM_name;
+            aoa[i+1][5]=this.MONSCH_PARAMArray[i].HideOnSchema_name;
+        }
+		/* generate worksheet */
+		const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(aoa);
+
+        var wscols = [
+            {wch: 50}
+,            {wch: 50}
+,            {wch: 20}
+,            {wch: 20}
+,            {wch: 30}
+,            {wch: 30}
+        ];
+
+        ws['!cols'] = wscols;
+
+		/* generate workbook and add the worksheet */
+		const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'MONSCH_PARAM');
+        
+
+        wb.Props = {
+            Title: "Схема подключения::Параметры на схеме",
+            Subject: "Схема подключения::Параметры на схеме",
+            Company: "master.bami",
+            Category: "Experimentation",
+            Keywords: "Export service",
+            Author: "master.bami",
+	           Manager: "master.bami",
+	           Comments: "Raw data export",
+	           LastAuthor: "master.bami",
+            CreatedDate: new Date(Date.now())
+        }
+
+		/* save to file */
+		XLSX.writeFile(wb, 'MONSCH_PARAM.xlsx');
+	}
     backToList() {
         this.opened = false;
         this.confirmOpened = false;

@@ -6,7 +6,7 @@ import {  Validators } from "@angular/forms";
 
 import { RemoveHTMLtagPipe } from 'app/pipes';
 import { MONDEV } from "app/MONDEV";
-
+import * as XLSX from 'xlsx';
 
 const MODE_LIST = 0;
 const MODE_NEW = 1;
@@ -134,6 +134,100 @@ export class MONDEV_CONNECTComponent implements OnInit {
         }
     }
 
+ exportXSLX(): void {
+        var aoa = [];
+/* set column headers at first line */
+        if(!aoa[0]) aoa[0] = [];
+            aoa[0][0]='Подключение разрешено';
+            aoa[0][1]='Тип подключения';
+            aoa[0][2]='Время на соединение';
+            aoa[0][3]='Сервер опроса';
+            aoa[0][4]='Сетевой адрес';
+            aoa[0][5]='Скорость бод';
+            aoa[0][6]='Биты данных';
+            aoa[0][7]='Четность';
+            aoa[0][8]='Стоповые биты';
+            aoa[0][9]='FlowControl';
+            aoa[0][10]='Com Port';
+            aoa[0][11]='IP адрес';
+            aoa[0][12]='TCP Порт';
+            aoa[0][13]='Пользователь';
+            aoa[0][14]='Пароль';
+            aoa[0][15]='Код города';
+            aoa[0][16]='Телефон';
+            aoa[0][17]='AT команда';
+            aoa[0][18]='Идентификатор промеж. устройства';
+/* fill data to array */
+        for(var i = 0; i < this.MONDEV_CONNECTArray.length; ++i) {
+            if(!aoa[i+1]) aoa[i+1] = [];
+            aoa[i+1][0]=this.MONDEV_CONNECTArray[i].ConnectionEnabled_name;
+            aoa[i+1][1]=this.MONDEV_CONNECTArray[i].ConnectType_name;
+            aoa[i+1][2]=this.MONDEV_CONNECTArray[i].CONNECTLIMIT;
+            aoa[i+1][3]=this.MONDEV_CONNECTArray[i].TheServer_name;
+            aoa[i+1][4]=this.MONDEV_CONNECTArray[i].netaddr;
+            aoa[i+1][5]=this.MONDEV_CONNECTArray[i].CSPEED;
+            aoa[i+1][6]=this.MONDEV_CONNECTArray[i].CDATABIT;
+            aoa[i+1][7]=this.MONDEV_CONNECTArray[i].CPARITY_name;
+            aoa[i+1][8]=this.MONDEV_CONNECTArray[i].CSTOPBITS;
+            aoa[i+1][9]=this.MONDEV_CONNECTArray[i].FlowControl;
+            aoa[i+1][10]=this.MONDEV_CONNECTArray[i].ComPortNum;
+            aoa[i+1][11]=this.MONDEV_CONNECTArray[i].IPAddr;
+            aoa[i+1][12]=this.MONDEV_CONNECTArray[i].PortNum;
+            aoa[i+1][13]=this.MONDEV_CONNECTArray[i].UserName;
+            aoa[i+1][14]=this.MONDEV_CONNECTArray[i].Password;
+            aoa[i+1][15]=this.MONDEV_CONNECTArray[i].CTOWNCODE;
+            aoa[i+1][16]=this.MONDEV_CONNECTArray[i].CPHONE;
+            aoa[i+1][17]=this.MONDEV_CONNECTArray[i].ATCommand;
+            aoa[i+1][18]=this.MONDEV_CONNECTArray[i].callerID;
+        }
+		/* generate worksheet */
+		const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(aoa);
+
+        var wscols = [
+            {wch: 30}
+,            {wch: 50}
+,            {wch: 20}
+,            {wch: 50}
+,            {wch: 20}
+,            {wch: 64}
+,            {wch: 64}
+,            {wch: 30}
+,            {wch: 20}
+,            {wch: 64}
+,            {wch: 64}
+,            {wch: 64}
+,            {wch: 20}
+,            {wch: 64}
+,            {wch: 64}
+,            {wch: 64}
+,            {wch: 64}
+,            {wch: 80}
+,            {wch: 64}
+        ];
+
+        ws['!cols'] = wscols;
+
+		/* generate workbook and add the worksheet */
+		const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'MONDEV_CONNECT');
+        
+
+        wb.Props = {
+            Title: "Устройство::Параметры соединения",
+            Subject: "Устройство::Параметры соединения",
+            Company: "master.bami",
+            Category: "Experimentation",
+            Keywords: "Export service",
+            Author: "master.bami",
+	           Manager: "master.bami",
+	           Comments: "Raw data export",
+	           LastAuthor: "master.bami",
+            CreatedDate: new Date(Date.now())
+        }
+
+		/* save to file */
+		XLSX.writeFile(wb, 'MONDEV_CONNECT.xlsx');
+	}
     backToList() {
         this.opened = false;
         this.confirmOpened = false;

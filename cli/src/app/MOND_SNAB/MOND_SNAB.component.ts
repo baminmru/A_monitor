@@ -6,7 +6,7 @@ import {  Validators } from "@angular/forms";
 
 import { RemoveHTMLtagPipe } from 'app/pipes';
 import { MOND } from "app/MOND";
-
+import * as XLSX from 'xlsx';
 
 const MODE_LIST = 0;
 const MODE_NEW = 1;
@@ -110,6 +110,61 @@ export class MOND_SNABComponent implements OnInit {
         }
     }
 
+ exportXSLX(): void {
+        var aoa = [];
+/* set column headers at first line */
+        if(!aoa[0]) aoa[0] = [];
+            aoa[0][0]='Название';
+            aoa[0][1]='Адрес';
+            aoa[0][2]='Контактное лицо';
+            aoa[0][3]='Телефон';
+            aoa[0][4]='Регион';
+            aoa[0][5]='Поставщик';
+/* fill data to array */
+        for(var i = 0; i < this.MOND_SNABArray.length; ++i) {
+            if(!aoa[i+1]) aoa[i+1] = [];
+            aoa[i+1][0]=this.MOND_SNABArray[i].CNAME;
+            aoa[i+1][1]=this.MOND_SNABArray[i].CADDRESS;
+            aoa[i+1][2]=this.MOND_SNABArray[i].CFIO;
+            aoa[i+1][3]=this.MOND_SNABArray[i].CPHONE;
+            aoa[i+1][4]=this.MOND_SNABArray[i].CREGION;
+            aoa[i+1][5]=this.MOND_SNABArray[i].Supplier_name;
+        }
+		/* generate worksheet */
+		const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(aoa);
+
+        var wscols = [
+            {wch: 64}
+,            {wch: 64}
+,            {wch: 64}
+,            {wch: 64}
+,            {wch: 64}
+,            {wch: 50}
+        ];
+
+        ws['!cols'] = wscols;
+
+		/* generate workbook and add the worksheet */
+		const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'MOND_SNAB');
+        
+
+        wb.Props = {
+            Title: "Справочник::Снабжающая организация",
+            Subject: "Справочник::Снабжающая организация",
+            Company: "master.bami",
+            Category: "Experimentation",
+            Keywords: "Export service",
+            Author: "master.bami",
+	           Manager: "master.bami",
+	           Comments: "Raw data export",
+	           LastAuthor: "master.bami",
+            CreatedDate: new Date(Date.now())
+        }
+
+		/* save to file */
+		XLSX.writeFile(wb, 'MOND_SNAB.xlsx');
+	}
     backToList() {
         this.opened = false;
         this.confirmOpened = false;

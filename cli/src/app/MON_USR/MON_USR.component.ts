@@ -6,7 +6,7 @@ import {  Validators } from "@angular/forms";
 
 import { RemoveHTMLtagPipe } from 'app/pipes';
 import { MONUSR } from "app/MONUSR";
-
+import * as XLSX from 'xlsx';
 
 const MODE_LIST = 0;
 const MODE_NEW = 1;
@@ -116,6 +116,67 @@ export class MON_USRComponent implements OnInit {
         }
     }
 
+ exportXSLX(): void {
+        var aoa = [];
+/* set column headers at first line */
+        if(!aoa[0]) aoa[0] = [];
+            aoa[0][0]='Клиент';
+            aoa[0][1]='Фамилия';
+            aoa[0][2]='Имя';
+            aoa[0][3]='Отчество';
+            aoa[0][4]='Роль';
+            aoa[0][5]='e-mail';
+            aoa[0][6]='Телефон';
+            aoa[0][7]='Имя для входа';
+/* fill data to array */
+        for(var i = 0; i < this.MON_USRArray.length; ++i) {
+            if(!aoa[i+1]) aoa[i+1] = [];
+            aoa[i+1][0]=this.MON_USRArray[i].theClient_name;
+            aoa[i+1][1]=this.MON_USRArray[i].lastname;
+            aoa[i+1][2]=this.MON_USRArray[i].name;
+            aoa[i+1][3]=this.MON_USRArray[i].surname;
+            aoa[i+1][4]=this.MON_USRArray[i].curRole_name;
+            aoa[i+1][5]=this.MON_USRArray[i].email;
+            aoa[i+1][6]=this.MON_USRArray[i].thephone;
+            aoa[i+1][7]=this.MON_USRArray[i].login;
+        }
+		/* generate worksheet */
+		const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(aoa);
+
+        var wscols = [
+            {wch: 50}
+,            {wch: 64}
+,            {wch: 64}
+,            {wch: 64}
+,            {wch: 50}
+,            {wch: 64}
+,            {wch: 64}
+,            {wch: 64}
+        ];
+
+        ws['!cols'] = wscols;
+
+		/* generate workbook and add the worksheet */
+		const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'MON_USR');
+        
+
+        wb.Props = {
+            Title: "Сотрудник::Данные сотрудника",
+            Subject: "Сотрудник::Данные сотрудника",
+            Company: "master.bami",
+            Category: "Experimentation",
+            Keywords: "Export service",
+            Author: "master.bami",
+	           Manager: "master.bami",
+	           Comments: "Raw data export",
+	           LastAuthor: "master.bami",
+            CreatedDate: new Date(Date.now())
+        }
+
+		/* save to file */
+		XLSX.writeFile(wb, 'MON_USR.xlsx');
+	}
     backToList() {
         this.opened = false;
         this.confirmOpened = false;

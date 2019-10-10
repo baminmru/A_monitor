@@ -6,7 +6,7 @@ import {  Validators } from "@angular/forms";
 
 import { RemoveHTMLtagPipe } from 'app/pipes';
 import { DATA } from "app/DATA";
-
+import * as XLSX from 'xlsx';
 
 const MODE_LIST = 0;
 const MODE_NEW = 1;
@@ -131,6 +131,67 @@ export class DATA_QComponent implements OnInit {
         }
     }
 
+ exportXSLX(): void {
+        var aoa = [];
+/* set column headers at first line */
+        if(!aoa[0]) aoa[0] = [];
+            aoa[0][0]='Тепловая энергия канал 1';
+            aoa[0][1]='Тепловая энергия канал 2';
+            aoa[0][2]='Тепловая энергия канал 3';
+            aoa[0][3]='Тепловая энергия канал 4';
+            aoa[0][4]='Тепловая энергия канал 5';
+            aoa[0][5]='Тепловая энергия потребитель 1';
+            aoa[0][6]='Тепловая энергия потребитель 2';
+            aoa[0][7]='Расход энергии потребитель 1';
+/* fill data to array */
+        for(var i = 0; i < this.DATA_QArray.length; ++i) {
+            if(!aoa[i+1]) aoa[i+1] = [];
+            aoa[i+1][0]=this.DATA_QArray[i].Q1;
+            aoa[i+1][1]=this.DATA_QArray[i].Q2;
+            aoa[i+1][2]=this.DATA_QArray[i].Q3;
+            aoa[i+1][3]=this.DATA_QArray[i].Q4;
+            aoa[i+1][4]=this.DATA_QArray[i].Q5;
+            aoa[i+1][5]=this.DATA_QArray[i].DQ12;
+            aoa[i+1][6]=this.DATA_QArray[i].DQ45;
+            aoa[i+1][7]=this.DATA_QArray[i].DQ;
+        }
+		/* generate worksheet */
+		const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(aoa);
+
+        var wscols = [
+            {wch: 20}
+,            {wch: 20}
+,            {wch: 20}
+,            {wch: 20}
+,            {wch: 20}
+,            {wch: 20}
+,            {wch: 20}
+,            {wch: 20}
+        ];
+
+        ws['!cols'] = wscols;
+
+		/* generate workbook and add the worksheet */
+		const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'DATA_Q');
+        
+
+        wb.Props = {
+            Title: "Данные::Энергия",
+            Subject: "Данные::Энергия",
+            Company: "master.bami",
+            Category: "Experimentation",
+            Keywords: "Export service",
+            Author: "master.bami",
+	           Manager: "master.bami",
+	           Comments: "Raw data export",
+	           LastAuthor: "master.bami",
+            CreatedDate: new Date(Date.now())
+        }
+
+		/* save to file */
+		XLSX.writeFile(wb, 'DATA_Q.xlsx');
+	}
     backToList() {
         this.opened = false;
         this.confirmOpened = false;

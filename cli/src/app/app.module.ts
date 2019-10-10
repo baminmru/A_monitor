@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http'; 
 import { AmexioWidgetModule, CommonDataService, AmexioChartsModule,  AmexioDashBoardModule } from 'amexio-ng-extensions';
 import { AmexioChartD3Module } from 'amexio-chart-d3';
-
+//import { TelechartComponent} from 'app/telechart/telechart.component';
 
 import {CookieService} from 'ngx-cookie-service'; 
 import { NgxWigModule} from 'ngx-wig';
@@ -134,7 +134,9 @@ import { MONDEV_REPORTSComponent } from './MONDEV_REPORTS/MONDEV_REPORTS.compone
 import { MONDEV_REPORTS_Service } from 'app/MONDEV_REPORTS.service'; 
 import { MONDEV_MASKComponent } from './MONDEV_MASK/MONDEV_MASK.component'; // Параметры для вывода
 import { MONDEV_MASK_Service } from 'app/MONDEV_MASK.service'; 
- import { jwtLoginComponent } from './jwtlogin/jwtlogin.component';
+
+import { UserProfileComponent } from './UserProfile/UserProfile.component';
+import { jwtLoginComponent } from './jwtlogin/jwtlogin.component';
 
 @NgModule({ 
     declarations: [ 
@@ -213,6 +215,8 @@ MOND_FComponent, // Филиал организации
   MONDEV_REPORTSComponent, // Отчеты
   MONDEV_MASKComponent, // Параметры для вывода
 		 
+		UserProfileComponent,
+		//TelechartComponent,		
         AboutComponent, 
         TopnavComponent 
 		 

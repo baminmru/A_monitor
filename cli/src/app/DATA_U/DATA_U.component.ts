@@ -6,7 +6,7 @@ import {  Validators } from "@angular/forms";
 
 import { RemoveHTMLtagPipe } from 'app/pipes';
 import { DATA } from "app/DATA";
-
+import * as XLSX from 'xlsx';
 
 const MODE_LIST = 0;
 const MODE_NEW = 1;
@@ -131,6 +131,52 @@ export class DATA_UComponent implements OnInit {
         }
     }
 
+ exportXSLX(): void {
+        var aoa = [];
+/* set column headers at first line */
+        if(!aoa[0]) aoa[0] = [];
+            aoa[0][0]='Напряжение Ф1';
+            aoa[0][1]='Напряжение Ф2';
+            aoa[0][2]='Напряжение Ф3';
+/* fill data to array */
+        for(var i = 0; i < this.DATA_UArray.length; ++i) {
+            if(!aoa[i+1]) aoa[i+1] = [];
+            aoa[i+1][0]=this.DATA_UArray[i].U1;
+            aoa[i+1][1]=this.DATA_UArray[i].U2;
+            aoa[i+1][2]=this.DATA_UArray[i].U3;
+        }
+		/* generate worksheet */
+		const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(aoa);
+
+        var wscols = [
+            {wch: 20}
+,            {wch: 20}
+,            {wch: 20}
+        ];
+
+        ws['!cols'] = wscols;
+
+		/* generate workbook and add the worksheet */
+		const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'DATA_U');
+        
+
+        wb.Props = {
+            Title: "Данные::Напряжение",
+            Subject: "Данные::Напряжение",
+            Company: "master.bami",
+            Category: "Experimentation",
+            Keywords: "Export service",
+            Author: "master.bami",
+	           Manager: "master.bami",
+	           Comments: "Raw data export",
+	           LastAuthor: "master.bami",
+            CreatedDate: new Date(Date.now())
+        }
+
+		/* save to file */
+		XLSX.writeFile(wb, 'DATA_U.xlsx');
+	}
     backToList() {
         this.opened = false;
         this.confirmOpened = false;

@@ -6,7 +6,7 @@ import {  Validators } from "@angular/forms";
 
 import { RemoveHTMLtagPipe } from 'app/pipes';
 import { MONQ } from "app/MONQ";
-
+import * as XLSX from 'xlsx';
 
 const MODE_LIST = 0;
 const MODE_NEW = 1;
@@ -133,6 +133,61 @@ export class MONQ_resultComponent implements OnInit {
         }
     }
 
+ exportXSLX(): void {
+        var aoa = [];
+/* set column headers at first line */
+        if(!aoa[0]) aoa[0] = [];
+            aoa[0][0]='Текстовый результат';
+            aoa[0][1]='Запись ';
+            aoa[0][2]='Обработан с ошибкой';
+            aoa[0][3]='Протокол';
+            aoa[0][4]='Время начала обработки';
+            aoa[0][5]='Время завершения обработки';
+/* fill data to array */
+        for(var i = 0; i < this.MONQ_resultArray.length; ++i) {
+            if(!aoa[i+1]) aoa[i+1] = [];
+            aoa[i+1][0]=this.MONQ_resultArray[i].TextResult;
+            aoa[i+1][1]=this.MONQ_resultArray[i].RecArch_name;
+            aoa[i+1][2]=this.MONQ_resultArray[i].IsError_name;
+            aoa[i+1][3]=this.MONQ_resultArray[i].LogMessage;
+            aoa[i+1][4]=this.MONQ_resultArray[i].StartTime;
+            aoa[i+1][5]=this.MONQ_resultArray[i].EndTime;
+        }
+		/* generate worksheet */
+		const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(aoa);
+
+        var wscols = [
+            {wch: 64}
+,            {wch: 50}
+,            {wch: 30}
+,            {wch: 80}
+,            {wch: 18}
+,            {wch: 18}
+        ];
+
+        ws['!cols'] = wscols;
+
+		/* generate workbook and add the worksheet */
+		const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'MONQ_result');
+        
+
+        wb.Props = {
+            Title: "Запрос на обработку::Результат обработки",
+            Subject: "Запрос на обработку::Результат обработки",
+            Company: "master.bami",
+            Category: "Experimentation",
+            Keywords: "Export service",
+            Author: "master.bami",
+	           Manager: "master.bami",
+	           Comments: "Raw data export",
+	           LastAuthor: "master.bami",
+            CreatedDate: new Date(Date.now())
+        }
+
+		/* save to file */
+		XLSX.writeFile(wb, 'MONQ_result.xlsx');
+	}
     backToList() {
         this.opened = false;
         this.confirmOpened = false;

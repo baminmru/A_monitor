@@ -26,7 +26,7 @@
 	</amexio-action> 
 </amexio-window>
 <!-- edit row pane -->	 
- <amexio-window [closable]="false" [maximize]="true" [vertical-position]="'center'"    [horizontal-position]="'center'"  [draggable]="true" [remember-window-position]="true" [show-window]="opened" [header]="true" [footer]="true" > 
+ <amexio-window [closable]="false" [maximize]="true" [vertical-position]="'center'"    [horizontal-position]="'center'"  [draggable]="true" [remember-window-position]="true" [width]="'auto'"  amexioThemeStyle  [theme-style]="'round-edge'"  [show-window]="opened" [header]="true" [footer]="true" > 
 	  <amexio-header> 
         {{formMsg}} Справочник::Параметры 
 <amexio-box *ngIf="valid==false" border-color ="red" border="all" padding="true" background-color="yellow">
@@ -78,6 +78,7 @@
 		<amexio-button [disabled]="currentMOND_PARAM.MOND_PARAMId==null" [label]="'Изменить'" (onClick)="onEdit(currentMOND_PARAM)" [type]="'secondary'" [tooltip]="'Изменить запись'" [icon]="'fa fa-edit'"></amexio-button>
      <amexio-button [disabled]="currentMOND_PARAM.MOND_PARAMId==null" [label]="'Удалить'" (onClick)="onDelete(currentMOND_PARAM)" [type]="'secondary'" [tooltip]="'Удалить запись'" [icon]="'fa fa-trash'"></amexio-button>
      <amexio-button  [label]="'Обновить'" (onClick)="refreshMOND_PARAM()" [type]="'secondary'" [tooltip]="'Обновить данные'" [icon]="'fa fa-refresh'"></amexio-button>
+     <amexio-button  [label]="'Экспорт'" (onClick)="exportXSLX()" [type]="'secondary'" [tooltip]="'Экспорт данных'" [icon]="'fa fa-cloud'"></amexio-button>
 		</amexio-column>
 	</amexio-row> 
 	</amexio-header> 

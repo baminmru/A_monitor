@@ -6,7 +6,7 @@ import {  Validators } from "@angular/forms";
 
 import { RemoveHTMLtagPipe } from 'app/pipes';
 import { DATA } from "app/DATA";
-
+import * as XLSX from 'xlsx';
 
 const MODE_LIST = 0;
 const MODE_NEW = 1;
@@ -131,6 +131,70 @@ export class DATA_EQComponent implements OnInit {
         }
     }
 
+ exportXSLX(): void {
+        var aoa = [];
+/* set column headers at first line */
+        if(!aoa[0]) aoa[0] = [];
+            aoa[0][0]='Энергия общ.';
+            aoa[0][1]='Энергия тариф 1';
+            aoa[0][2]='Энергия тариф 2';
+            aoa[0][3]='Энергия тариф 3';
+            aoa[0][4]='Энергия тариф 4';
+            aoa[0][5]='Активная +';
+            aoa[0][6]='Активная - ';
+            aoa[0][7]='Реактивная +';
+            aoa[0][8]='Реактивная -';
+/* fill data to array */
+        for(var i = 0; i < this.DATA_EQArray.length; ++i) {
+            if(!aoa[i+1]) aoa[i+1] = [];
+            aoa[i+1][0]=this.DATA_EQArray[i].E0;
+            aoa[i+1][1]=this.DATA_EQArray[i].E1;
+            aoa[i+1][2]=this.DATA_EQArray[i].E2;
+            aoa[i+1][3]=this.DATA_EQArray[i].E3;
+            aoa[i+1][4]=this.DATA_EQArray[i].E4;
+            aoa[i+1][5]=this.DATA_EQArray[i].AP;
+            aoa[i+1][6]=this.DATA_EQArray[i].AM;
+            aoa[i+1][7]=this.DATA_EQArray[i].RP;
+            aoa[i+1][8]=this.DATA_EQArray[i].RM;
+        }
+		/* generate worksheet */
+		const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(aoa);
+
+        var wscols = [
+            {wch: 20}
+,            {wch: 20}
+,            {wch: 20}
+,            {wch: 20}
+,            {wch: 20}
+,            {wch: 20}
+,            {wch: 20}
+,            {wch: 20}
+,            {wch: 20}
+        ];
+
+        ws['!cols'] = wscols;
+
+		/* generate workbook and add the worksheet */
+		const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'DATA_EQ');
+        
+
+        wb.Props = {
+            Title: "Данные::Эл. Энергия",
+            Subject: "Данные::Эл. Энергия",
+            Company: "master.bami",
+            Category: "Experimentation",
+            Keywords: "Export service",
+            Author: "master.bami",
+	           Manager: "master.bami",
+	           Comments: "Raw data export",
+	           LastAuthor: "master.bami",
+            CreatedDate: new Date(Date.now())
+        }
+
+		/* save to file */
+		XLSX.writeFile(wb, 'DATA_EQ.xlsx');
+	}
     backToList() {
         this.opened = false;
         this.confirmOpened = false;
