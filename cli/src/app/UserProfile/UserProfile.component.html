@@ -1,0 +1,218 @@
+﻿<!--Error dialogue-->
+<amexio-window [show-window]="errorFlag"
+               [header]="true"
+			   [footer]="true"
+			   [closable]="false"
+               >
+	<amexio-header>
+        <i class="fa fa-exclamation-triangle"></i> Ошибка
+      </amexio-header>
+	   <amexio-body>
+        <amexio-row>
+          <amexio-column [size]="11">
+		  <span style="color:red">{{errorMessage}}</span>
+		  </amexio-column>
+        </amexio-row>
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="11"> 
+     <amexio-button  [label]="'Ok'" (onClick)="errorFlag=false" [type]="'red'" [tooltip]="'Ok'" [icon]="'fa fa-exclamation-triangle'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window>
+<!-- edit row pane -->	 
+ <amexio-window [closable]="false"  [vertical-position]="'top'"  [horizontal-position]="'right'" [body-height]="90" [show-window]="opened" [header]="true" [footer]="true" > 
+	  <amexio-header> 
+        {{formMsg}} Пользователь 
+      </amexio-header> 
+     <amexio-body> 
+	 <div *ngIf="mode==1 || mode==2">
+     <amexio-row   ><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Фамилия'" name ="lastName"  
+                    [place-holder] = "'Фамилия'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentUserProfile.lastName" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+	   <amexio-row ><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Имя'" name ="firstName"  
+                    [place-holder] = "'Имя'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentUserProfile.firstName" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+	   <amexio-row ><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Отчество'" name ="middleName"  
+                    [place-holder] = "'Отчество'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentUserProfile.middleName" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+	 
+	  <amexio-row ><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'e-Mail'" name ="email"  
+                    [place-holder] = "'e-Mail'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentUserProfile.email" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+	 
+     <amexio-row ><amexio-column size="12" >
+                    <amexio-text-input [field-label]= "'Телефон'" name ="phone"  
+                    [place-holder] = "'Телефон'" 
+                    [icon-feedback] = "true" [(ngModel)]="currentUserProfile.Phone" >
+                    </amexio-text-input>
+     </amexio-column></amexio-row>
+     <amexio-row ><amexio-column size="12" >
+	 <amexio-dropdown 
+	 [place-holder] = "'Организация'"
+	 name ="OrganizationId"
+	 [field-label]= "'Организация'"
+	 
+	 [display-field]="'name'"
+	 [value-field]="'id'"
+	 [data]="AppService.Combomoncli_info"
+	 
+	 [(ngModel)]="currentUserProfile.OrganizationId"
+	 >
+	 </amexio-dropdown>
+     </amexio-column></amexio-row>
+	 </div>
+	 <!-- 
+	 <div *ngIf=" mode==3">
+	 
+	   <amexio-row ><amexio-column size="12" >
+	   <amexio-password-input field-label="Старый пароль"
+                   name="password"
+				   [(ngModel)]="sOldPassword"
+                   place-holder="Старый пароль"
+                   icon-feedback="true">
+		</amexio-password-input>
+	   </amexio-column></amexio-row>
+	
+	 </div>
+	 -->
+	 <div *ngIf="mode==1 || mode==3">
+	 
+	   <amexio-row ><amexio-column size="12" >
+	   <amexio-password-input field-label="Пароль"
+                   name="password"
+				   [(ngModel)]="sPassword"
+                   place-holder="Пароль"
+                   icon-feedback="true">
+		</amexio-password-input>
+	   </amexio-column></amexio-row>
+	
+	 </div>
+	  
+	 
+	 <div *ngIf="mode==1 || mode==4">
+	 <amexio-row ><amexio-column size="12" >
+	 <amexio-dropdown 
+		 [place-holder] = "'Роль'"
+		 name ="sRole"
+		 [field-label]= "'Роль'"
+		 
+		 [display-field]="'name'"
+		 [value-field]="'id'"
+		 [data]="AppService.enumRoleCombo()"
+		 
+		 [(ngModel)]="sRole"
+	 >
+	 
+     </amexio-dropdown>
+     </amexio-column></amexio-row>
+	 </div>
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="12"> 
+     <amexio-button  [label]="'Отмена'" (onClick)="opened = false" [type]="'secondary'" [tooltip]="'Отмена'" [icon]="'fa fa-times'"></amexio-button>
+     <amexio-button  [label]="'Сохранить'" (onClick)="save(currentUserProfile, true)" [type]="'success'" [tooltip]="'Сохранить'" [icon]="'fa fa-save'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window> 
+   
+<!-- list Of row pane --> 
+<amexio-card [show]="true" [header] ="true" [footer] ="false" > 
+    <amexio-header> 
+	<amexio-row> 
+		<amexio-column size="12" > 
+		<amexio-button [label]="'Создать'" [type]="'secondary'" [tooltip]="'Создать новую запись'" [icon]="'fa fa-plus'" (onClick)="onNew()"></amexio-button>
+		<amexio-button [disabled]="currentUserProfile.id==null" [label]="'Изменить'" (onClick)="onEdit(currentUserProfile)" [type]="'secondary'" [tooltip]="'Изменить запись'" [icon]="'fa fa-edit'"></amexio-button>
+		<amexio-button [disabled]="currentUserProfile.id==null" [label]="'Изменить пароль'" (onClick)="onPassword(currentUserProfile)" [type]="'secondary'" [tooltip]="'Изменить пароль'" [icon]="'fa fa-key'"></amexio-button>
+		<amexio-button [disabled]="currentUserProfile.id==null" [label]="'Изменить роль'" (onClick)="onRole(currentUserProfile)" [type]="'secondary'" [tooltip]="'Изменить роль'" [icon]="'fa fa-id'"></amexio-button>
+     <amexio-button [disabled]="currentUserProfile.id==null" [label]="'Удалить'" (onClick)="onDelete(currentUserProfile)" [type]="'secondary'" [tooltip]="'Удалить запись'" [icon]="'fa fa-trash'"></amexio-button>
+     <amexio-button  [label]="'Обновить'" (onClick)="refreshUserProfile(undefined)" [type]="'secondary'" [tooltip]="'Обновить данные'" [icon]="'fa fa-refresh'"></amexio-button>
+		</amexio-column>
+	</amexio-row> 
+	</amexio-header> 
+	<amexio-body> 
+		<amexio-datagrid 
+		  [title]="'Пользователи'" 
+		  [page-size] = "10" 
+		  [enable-data-filter]="true" 
+		  [enable-checkbox]="false" 
+		  [data]="UserProfileArray" 
+		  (selectedRowData)="onSelect($event)" 
+		  (rowSelect)="onSelect($event)"> 
+		  
+		  <amexio-data-table-column [data-index]="'lastName'" [data-type]="'string'" [hidden]="false" [text]="'Фамилия'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.lastName) ? ((row.lastName.length>100) ? row.lastName.substr(0,100)+'...' : row.lastName ) : '-') }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  
+		  <amexio-data-table-column [data-index]="'firstName'" [data-type]="'string'" [hidden]="false" [text]="'Имя'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.firstName) ? ((row.firstName.length>100) ? row.firstName.substr(0,100)+'...' : row.firstName ) : '-') }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  
+		  <amexio-data-table-column [data-index]="'middleName'" [data-type]="'string'" [hidden]="false" [text]="'Отчество'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.middleName) ? ((row.middleName.length>100) ? row.middleName.substr(0,100)+'...' : row.middleName ) : '-') }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  
+		   <amexio-data-table-column [data-index]="'email'" [data-type]="'string'" [hidden]="false" [text]="'E-Mail'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.email) ? ((row.email.length>100) ? row.email.substr(0,100)+'...' : row.email ) : '-') }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  
+		  <amexio-data-table-column [data-index]="'Organization'" [data-type]="'string'" [hidden]="false" [text]="'Организация'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.Organization) ? ((row.Organization.length>100) ? row.Organization.substr(0,100)+'...' : row.Organization ) : '-') }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  
+		  <amexio-data-table-column [data-index]="'Phone'" [data-type]="'string'" [hidden]="false" [text]="'Телефон'"> 
+ 		  <ng-template #amexioBodyTmpl let-column let-row="row">
+             {{  ((row.Phone) ? ((row.Phone.length>100) ? row.Phone.substr(0,100)+'...' : row.Phone ) : '-') }} 
+           </ng-template>
+		  </amexio-data-table-column> 
+		  
+		  
+		</amexio-datagrid> 
+	</amexio-body> 
+</amexio-card> 
+ 
+<!-- confirm delete  dialog -->  
+<amexio-window  [(show-window)]="confirmOpened" [closable]="true" [header]="true" [footer]="true" >  
+     
+    <amexio-header>
+Удалить строку:  Пользователя ?
+    </amexio-header> 
+    <amexio-body> 
+            Удалить запись: {{currentUserProfile.lastName + " " + currentUserProfile.firstName+ " " + currentUserProfile.middleName+ " (" + currentUserProfile.email +")"}}?  
+	</amexio-body> 
+	<amexio-action> 
+	<amexio-row> 
+	<amexio-column size="12"> 
+     <amexio-button  [label]="'Отмена'" (onClick)="confirmOpened = false" [type]="'secondary'" [tooltip]="'Отмена'" [icon]="'fa fa-times'"></amexio-button>
+     <amexio-button  [label]="'Удалить'" (onClick)="onConfirmDeletion()" [type]="'danger'" [tooltip]="'Удалить'" [icon]="'fa fa-trash'"></amexio-button>
+	</amexio-column> 
+	</amexio-row> 
+	</amexio-action> 
+</amexio-window> 
+ 
