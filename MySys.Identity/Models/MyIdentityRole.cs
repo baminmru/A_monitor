@@ -11,7 +11,7 @@ namespace MySys.Identity.Models
         public const string ROLE_MOBILEAPP = "MOBILEAPP";
 
         public const string ROLE_ADMIN = "Администратор";
-        public const string ROLE_CLIENT = "Клинет";
+        public const string ROLE_CLIENT = "Клиент";
         public const string ROLE_DISPATCHER = "Диспетчер";
         
         public static List<string> ALL_ROLES = new List<string>

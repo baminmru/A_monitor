@@ -436,23 +436,23 @@ namespace a_srv.Controllers
       ,substring(convert(varchar,[dstart],120),0,17) dstart
       ,substring(convert(varchar,[dend],120),0,17) dend
       ,[name]
-     ,Format([U1],'N2') as U1
-      ,Format([U2],'N2') as U2
-      ,Format([U3],'N2') as U3
-      ,Format([I1],'N2') as I1
-      ,Format([I2],'N2') as I2
-      ,Format([I3],'N2') as I3
-      ,Format([EP1],'N2') as EP1
-      ,Format([EP2],'N2') as EP2
-      ,Format([EP3],'N2') as EP3
-      ,Format([E0],'N2') as E0
-      ,Format([E1],'N2') as E1
-      ,Format([E2],'N2') as E2
-      ,Format([E3],'N2') as E3
-      ,Format([AP],'N2') as AP
-      ,Format([AM],'N2') as AM
-      ,Format([RP],'N2') as RP
-      ,Format([RM],'N2') as RM  FROM V_DISPATCHER_ELECTRO where ID_BD='" + id.ToString() + "' ";
+    ,Round(isnull([U1],0),2) as U1
+      ,Round(isnull([U2],0),2) as U2
+      ,Round(isnull([U3],0),2) as U3
+      ,Round(isnull([I1],0),2) as I1
+      ,Round(isnull([I2],0),2) as I2
+      ,Round(isnull([I3],0),2) as I3
+      ,Round(isnull([EP1],0),2) as EP1
+      ,Round(isnull([EP2],0),2) as EP2
+      ,Round(isnull([EP3],0),2) as EP3
+      ,Round(isnull([E0],0),2) as E0
+      ,Round(isnull([E1],0),2) as E1
+      ,Round(isnull([E2],0),2) as E2
+      ,Round(isnull([E3],0),2) as E3
+      ,Round(isnull([AP],0),2) as AP
+      ,Round(isnull([AM],0),2) as AM
+      ,Round(isnull([RP],0),2) as RP
+      ,Round(isnull([RM],0),2) as RM  FROM V_DISPATCHER_ELECTRO where ID_BD='" + id.ToString() + "' ";
 
             if (!request.AType.Equals(Guid.Empty))
             {
@@ -517,23 +517,23 @@ namespace a_srv.Controllers
       ,substring(convert(varchar,[dstart],120),0,17) dstart
       ,substring(convert(varchar,[dend],120),0,17) dend
       ,[name]
-          ,Format([U1],'N2') as U1
-      ,Format(isnull([U2],0),'N2') as U2
-      ,Format(isnull([U3],0),'N2') as U3
-      ,Format(isnull([I1],0),'N2') as I1
-      ,Format(isnull([I2],0),'N2') as I2
-      ,Format(isnull([I3],0),'N2') as I3
-      ,Format(isnull([EP1],0),'N2') as EP1
-      ,Format(isnull([EP2],0),'N2') as EP2
-      ,Format(isnull([EP3],0),'N2') as EP3
-      ,Format(isnull([E0],0),'N2') as E0
-      ,Format(isnull([E1],0),'N2') as E1
-      ,Format(isnull([E2],0),'N2') as E2
-      ,Format(isnull([E3],0),'N2') as E3
-      ,Format(isnull([AP],0),'N2') as AP
-      ,Format(isnull([AM],0),'N2') as AM
-      ,Format(isnull([RP],0),'N2') as RP
-      ,Format(isnull([RM],0),'N2') as RM  FROM V_DISPATCHER_ELECTRO where ID_BD='" + id.ToString() + "' ";
+          ,Round(isnull([U1],0),2) as U1
+      ,Round(isnull([U2],0),2) as U2
+      ,Round(isnull([U3],0),2) as U3
+      ,Round(isnull([I1],0),2) as I1
+      ,Round(isnull([I2],0),2) as I2
+      ,Round(isnull([I3],0),2) as I3
+      ,Round(isnull([EP1],0),2) as EP1
+      ,Round(isnull([EP2],0),2) as EP2
+      ,Round(isnull([EP3],0),2) as EP3
+      ,Round(isnull([E0],0),2) as E0
+      ,Round(isnull([E1],0),2) as E1
+      ,Round(isnull([E2],0),2) as E2
+      ,Round(isnull([E3],0),2) as E3
+      ,Round(isnull([AP],0),2) as AP
+      ,Round(isnull([AM],0),2) as AM
+      ,Round(isnull([RP],0),2) as RP
+      ,Round(isnull([RM],0),2) as RM  FROM V_DISPATCHER_ELECTRO where ID_BD='" + id.ToString() + "' ";
 
         if (!request.AType.Equals(Guid.Empty))
         {
@@ -599,17 +599,17 @@ namespace a_srv.Controllers
         {
            string sql = @"SELECT 
       substring(convert(varchar,[DCOUNTER],120),0,11) DCOUNTER
-      ,Format(sum(isnull([EP1],0)),'N2') as EP1
-      ,Format(sum(isnull([EP2],0)),'N2') as EP2
-      ,Format(sum(isnull([EP3],0)),'N2') as EP3
-      ,Format(max(isnull([E0],0)),'N2') as E0
-      ,Format(max(isnull([E1],0)),'N2') as E1
-      ,Format(max(isnull([E2],0)),'N2') as E2
-      ,Format(max(isnull([E3],0)),'N2') as E3
-      ,Format(sum(isnull([AP],0)),'N2') as AP
-      ,Format(sum(isnull([AM],0)),'N2') as AM
-      ,Format(sum(isnull([RP],0)),'N2') as RP
-      ,Format(sum(isnull([RM],0)),'N2') as RM  
+      ,Round(sum(isnull([EP1],0)),2) as EP1
+      ,Round(sum(isnull([EP2],0)),2) as EP2
+      ,Round(sum(isnull([EP3],0)),2) as EP3
+      ,Round(max(isnull([E0],0)),2) as E0
+      ,Round(max(isnull([E1],0)),2) as E1
+      ,Round(max(isnull([E2],0)),2) as E2
+      ,Round(max(isnull([E3],0)),2) as E3
+      ,Round(sum(isnull([AP],0)),2) as AP
+      ,Round(sum(isnull([AM],0)),2) as AM
+      ,Round(sum(isnull([RP],0)),2) as RP
+      ,Round(sum(isnull([RM],0)),2) as RM  
        FROM V_DISPATCHER_ELECTRO where ID_BD='" + id.ToString() + "' ";
 
             if (!request.AType.Equals(Guid.Empty))
@@ -673,17 +673,17 @@ namespace a_srv.Controllers
             string sql = @"SELECT 
         datepart(year,dcounter) YEAR
       , datepart(week,dcounter) WEEK
-      ,Format(sum(isnull([EP1],0)),'N2') as EP1
-      ,Format(sum(isnull([EP2],0)),'N2') as EP2
-      ,Format(sum(isnull([EP3],0)),'N2') as EP3
-      ,Format(max(isnull([E0],0)),'N2') as E0
-      ,Format(max(isnull([E1],0)),'N2') as E1
-      ,Format(max(isnull([E2],0)),'N2') as E2
-      ,Format(max(isnull([E3],0)),'N2') as E3
-      ,Format(sum(isnull([AP],0)),'N2') as AP
-      ,Format(sum(isnull([AM],0)),'N2') as AM
-      ,Format(sum(isnull([RP],0)),'N2') as RP
-      ,Format(sum(isnull([RM],0)),'N2') as RM  
+      ,Round(sum(isnull([EP1],0)),2) as EP1
+      ,Round(sum(isnull([EP2],0)),2) as EP2
+      ,Round(sum(isnull([EP3],0)),2) as EP3
+      ,Round(max(isnull([E0],0)),2) as E0
+      ,Round(max(isnull([E1],0)),2) as E1
+      ,Round(max(isnull([E2],0)),2) as E2
+      ,Round(max(isnull([E3],0)),2) as E3
+      ,Round(sum(isnull([AP],0)),2) as AP
+      ,Round(sum(isnull([AM],0)),2) as AM
+      ,Round(sum(isnull([RP],0)),2) as RP
+      ,Round(sum(isnull([RM],0)),2) as RM  
        FROM V_DISPATCHER_ELECTRO where ID_BD='" + id.ToString() + "' ";
 
             if (!request.AType.Equals(Guid.Empty))
