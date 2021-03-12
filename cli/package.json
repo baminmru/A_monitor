@@ -35,7 +35,7 @@
     "font-awesome": "^4.7.0",
     "install": "^0.12.2",
     "jquery": "^3.4.1",
-    "jspdf": "^1.5.3",
+    "jspdf": "^2.3.1",
     "jspdf-autotable": "^3.2.5",
     "ngx-cookie-service": "^1.0.10",
     "ngx-wig": "^1.6.0",
